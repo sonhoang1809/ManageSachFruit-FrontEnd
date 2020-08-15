@@ -1,62 +1,437 @@
 
-<!-- Toolbar -->
-<div class="toolbar" role="banner">
-  <img
-    width="40"
-    alt="Angular Logo"
-    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
-  />
-  <span><h3>{{ title }}</h3></span>
-    <div class="spacer"></div>
+  
+  <!-- Preloader End Here -->
+  <div id="wrapper" class="wrapper bg-ash">
+     <!-- Header Menu Area Start Here -->
+      <div class="navbar navbar-expand-md header-menu-one bg-light">
+          <div class="nav-bar-header-one">
+              <div class="header-logo">
+                  <a href="index.html">
+                      <img src="../assets/img/logo.png" alt="logo">
+                  </a>
+              </div>
+               <div class="toggle-button sidebar-toggle">
+                  <button type="button" class="item-link">
+                      <span class="btn-icon-wrap">
+                          <span></span>
+                          <span></span>
+                          <span></span>
+                      </span>
+                  </button>
+              </div>
+          </div>
+          <div class="d-md-none mobile-nav-bar">
+             <button class="navbar-toggler pulse-animation" type="button" data-toggle="collapse" data-target="#mobile-navbar" aria-expanded="false">
+                  <i class="far fa-arrow-alt-circle-down"></i>
+              </button>
+              <button type="button" class="navbar-toggler sidebar-toggle-mobile">
+                  <i class="fas fa-bars"></i>
+              </button>
+          </div>
+          <div class="header-main-menu collapse navbar-collapse" id="mobile-navbar">
+              <ul class="navbar-nav">
+                  <li class="navbar-item header-search-bar">
+                      <div class="input-group stylish-input-group">
+                          <span class="input-group-addon">
+                              <button type="submit">
+                                  <span class="flaticon-search" aria-hidden="true"></span>
+                              </button>
+                          </span>
+                          <input type="text" class="form-control" placeholder="Find Something . . .">
+                      </div>
+                  </li>
+              </ul>
+              <ul class="navbar-nav">
+                  <li class="navbar-item dropdown header-admin">
+                      <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                          aria-expanded="false">
+                          <div class="admin-title">
+                              <h5 class="item-title">Stevne Zone</h5>
+                              <span>Admin</span>
+                          </div>
+                          <div class="admin-img">
+                              <img src="../assets/img/figure/admin.jpg" alt="Admin">
+                          </div>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right">
+                          <div class="item-header">
+                              <h6 class="item-title">Steven Zone</h6>
+                          </div>
+                          <div class="item-content">
+                              <ul class="settings-list">
+                                  <li><a href="#"><i class="flaticon-user"></i>My Profile</a></li>
+                                  <li><a href="#"><i class="flaticon-list"></i>Task</a></li>
+                                  <li><a href="#"><i class="flaticon-chat-comment-oval-speech-bubble-with-text-lines"></i>Message</a></li>
+                                  <li><a href="#"><i class="flaticon-gear-loading"></i>Account Settings</a></li>
+                                  <li><a href="login.html"><i class="flaticon-turn-off"></i>Log Out</a></li>
+                              </ul>
+                          </div>
+                      </div>
+                  </li>
+                  <li class="navbar-item dropdown header-message">
+                      <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                          aria-expanded="false">
+                          <i class="far fa-envelope"></i>
+                          <div class="item-title d-md-none text-16 mg-l-10">Message</div>
+                          <span>5</span>
+                      </a>
 
-</div>
+                      <div class="dropdown-menu dropdown-menu-right">
+                          <div class="item-header">
+                              <h6 class="item-title">05 Message</h6>
+                          </div>
+                          <div class="item-content">
+                              <div class="media">
+                                  <div class="item-img bg-skyblue author-online">
+                                      <img src="../assets/img/figure/student11.png" alt="img">
+                                  </div>
+                                  <div class="media-body space-sm">
+                                      <div class="item-title">
+                                          <a href="#">
+                                              <span class="item-name">Maria Zaman</span> 
+                                              <span class="item-time">18:30</span> 
+                                          </a>  
+                                      </div>
+                                      <p>What is the reason of buy this item. 
+                                      Is it usefull for me.....</p>
+                                  </div>
+                              </div>
+                              <div class="media">
+                                  <div class="item-img bg-yellow author-online">
+                                      <img src="../assets/img/figure/student12.png" alt="img">
+                                  </div>
+                                  <div class="media-body space-sm">
+                                      <div class="item-title">
+                                          <a href="#">
+                                              <span class="item-name">Benny Roy</span> 
+                                              <span class="item-time">10:35</span> 
+                                          </a>  
+                                      </div>
+                                      <p>What is the reason of buy this item. 
+                                      Is it usefull for me.....</p>
+                                  </div>
+                              </div>
+                              <div class="media">
+                                  <div class="item-img bg-pink">
+                                      <img src="../assets/img/figure/student13.png" alt="img">
+                                  </div>
+                                  <div class="media-body space-sm">
+                                      <div class="item-title">
+                                          <a href="#">
+                                              <span class="item-name">Steven</span> 
+                                              <span class="item-time">02:35</span> 
+                                          </a>  
+                                      </div>
+                                      <p>What is the reason of buy this item. 
+                                      Is it usefull for me.....</p>
+                                  </div>
+                              </div>
+                              <div class="media">
+                                  <div class="item-img bg-violet-blue">
+                                      <img src="../assets/img/figure/student11.png" alt="img">
+                                  </div>
+                                  <div class="media-body space-sm">
+                                      <div class="item-title">
+                                          <a href="#">
+                                              <span class="item-name">Joshep Joe</span> 
+                                              <span class="item-time">12:35</span> 
+                                          </a>  
+                                      </div>
+                                      <p>What is the reason of buy this item. 
+                                      Is it usefull for me.....</p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </li>
+                  <li class="navbar-item dropdown header-notification">
+                      <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                          aria-expanded="false">
+                          <i class="far fa-bell"></i>
+                          <div class="item-title d-md-none text-16 mg-l-10">Notification</div>
+                          <span>8</span>
+                      </a>
 
-<div class="content" role="main">
-  <input type="hidden" #manageActionId>
-  <!-- Manage actions -->
-  <h2>Manage Actions</h2>
-  <p>Here are some action to help you get started:</p>
-  <app-manage-action [manageActionId] = manageActionId ></app-manage-action>
+                      <div class="dropdown-menu dropdown-menu-right">
+                          <div class="item-header">
+                              <h6 class="item-title">03 Notifiacations</h6>
+                          </div>
+                          <div class="item-content">
+                              <div class="media">
+                                  <div class="item-icon bg-skyblue">
+                                      <i class="fas fa-check"></i>
+                                  </div>
+                                  <div class="media-body space-sm">
+                                      <div class="post-title">Complete Today Task</div>
+                                      <span>1 Mins ago</span>
+                                  </div>
+                              </div>
+                              <div class="media">
+                                  <div class="item-icon bg-orange">
+                                      <i class="fas fa-calendar-alt"></i>
+                                  </div>
+                                  <div class="media-body space-sm">
+                                      <div class="post-title">Director Metting</div>
+                                      <span>20 Mins ago</span>
+                                  </div>
+                              </div>
+                              <div class="media">
+                                  <div class="item-icon bg-violet-blue">
+                                      <i class="fas fa-cogs"></i>
+                                  </div>
+                                  <div class="media-body space-sm">
+                                      <div class="post-title">Update Password</div>
+                                      <span>45 Mins ago</span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </li>
+                   <li class="navbar-item dropdown header-language">
+                      <a class="navbar-nav-link dropdown-toggle" href="#" role="button"  data-toggle="dropdown" aria-expanded="false"><i class="fas fa-globe-americas"></i>VI</a>
+                      <div class="dropdown-menu dropdown-menu-right">
+                          <a class="dropdown-item" href="#">English</a>
+                          <a class="dropdown-item" href="#">Tiếng Việt</a>
+                      </div>
+                  </li>
+              </ul>
+          </div>
+      </div>
+      <!-- Header Menu Area End Here -->
+      <!-- Page Area Start Here -->
+      <div class="dashboard-page-one">
+          
+    <!-- Sidebar Area Start Here -->
+          <div class="sidebar-main sidebar-menu-one sidebar-expand-md sidebar-color">
+              <div class="mobile-sidebar-header d-md-none">
+                  <div class="header-logo">
+                      <a href="index.html"><img src="../assets/img/logo1.png" alt="logo"></a>
+                  </div>
+              </div>
+              <div class="sidebar-menu-content">
+                  <ul class="nav nav-sidebar-menu sidebar-toggle-view">
+                      <li class="nav-item">
+                          <a href="index.html" class="nav-link">
+                              <i class="flaticon-dashboard"></i><span>Trang chủ</span>
+                          </a>
+                      </li>
+                      
+                      <li class="nav-item sidebar-nav-item">
+                          <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Học viên</span></a>
+                          <ul class="nav sub-group-menu">
+                              <li class="nav-item">
+                                  <a href="all-student.html" class="nav-link"><i class="fas fa-angle-right"></i>Danh sách học viên</a>
+                              </li>
+                              <li class="nav-item">
+                                  <a href="admit-form-student.html" class="nav-link"><i class="fas fa-angle-right"></i>Thêm học viên mới</a>
+                              </li>
+                          </ul>
+                      </li>
+                      <li class="nav-item sidebar-nav-item">
+                          <a href="#" class="nav-link"><i
+                                  class="flaticon-multiple-users-silhouette"></i><span>Giảng viên</span></a>
+                          <ul class="nav sub-group-menu">
+                              <li class="nav-item">
+                                  <a href="all-teacher.html" class="nav-link"><i class="fas fa-angle-right"></i>Danh sách giảng viên</a>
+                              </li>
+                              <li class="nav-item">
+                                  <a href="admit-form-teacher.html" class="nav-link"><i class="fas fa-angle-right"></i>Thêm giảng viên</a>
+                              </li>
+                              
+                          </ul>
+                      </li>
+                      
+                      <li class="nav-item sidebar-nav-item">
+                          <a href="#" class="nav-link"><i class="flaticon-books"></i><span>Quản lý đào tạo</span></a>
+                          <ul class="nav sub-group-menu">
+                              <li class="nav-item">
+                                  <a href="course.html" class="nav-link"><i class="fas fa-angle-right"></i>Niên khóa</a>
+                              </li>
+                              <li class="nav-item">
+                                  <a href="department.html" class="nav-link"><i class="fas fa-angle-right"></i>Khoa/Khối</a>
+                              </li>
+                              <li class="nav-item">
+                                  <a href="section.html" class="nav-link"><i class="fas fa-angle-right"></i>Tổ - Môn học</a>
+                              </li>
+                              <li class="nav-item">
+                                  <a href="class.html" class="nav-link"><i class="fas fa-angle-right"></i>Lớp</a>
+                              </li>
+                              <li class="nav-item">
+                                  <a href="assigment-teacher.html" class="nav-link"><i class="fas fa-angle-right"></i>Phân công giảng dạy</a>
+                              </li>
+                          </ul>
+                      </li>
+                      
+                       <li class="nav-item sidebar-nav-item">
+                          <a href="#" class="nav-link"><i class="flaticon-books"></i><span>Lịch học trực tuyến</span></a>
+                          <ul class="nav sub-group-menu">
+                              <li class="nav-item">
+                                  <a href="round-time.html" class="nav-link"><i class="fas fa-angle-right"></i><span>Tất cả các buổi học</span></a>
+                              </li>
+                              <li class="nav-item">
+                                  <a href="round-time.html" class="nav-link"><i class="fas fa-angle-right"></i><span>Thêm buổi học trực tuyến</span></a>
+                              </li>
+                          </ul>
+                      </li>
+                      
+                      <li class="nav-item">
+                          <a href="all-class.html" class="nav-link"><i class="flaticon-calendar"></i><span>Lịch thi</span></a>
+                      </li>
+                     
+                      <li class="nav-item sidebar-nav-item">
+                          <a href="#" class="nav-link"><i class="flaticon-shopping-list"></i><span>Thông báo</span></a>
+                          <ul class="nav sub-group-menu">
+                              <li class="nav-item">
+                                  <a href="exam-schedule.html" class="nav-link"><i class="fas fa-angle-right"></i>Dành cho giảng viên</a>
+                              </li>
+                              <li class="nav-item">
+                                  <a href="exam-grade.html" class="nav-link"><i class="fas fa-angle-right"></i>Dành cho học viên</a>
+                              </li>
+                          </ul>
+                      </li>
+                      
+                      <li class="nav-item sidebar-nav-item">
+                          <a href="#" class="nav-link"><i class="flaticon-shopping-list"></i><span>Tài khoản người dùng</span></a>
+                          <ul class="nav sub-group-menu">
+                              <li class="nav-item">
+                                  <a href="exam-schedule.html" class="nav-link"><i class="fas fa-angle-right"></i>Danh sách phòng ban</a>
+                              </li>
+                              <li class="nav-item">
+                                  <a href="exam-grade.html" class="nav-link"><i class="fas fa-angle-right"></i>Vị trí/ chức vụ</a>
+                              </li>
+                              <li class="nav-item">
+                                  <a href="exam-grade.html" class="nav-link"><i class="fas fa-angle-right"></i>Danh sách người dùng</a>
+                              </li>
+                          </ul>
+                      </li>
+          <li class="nav-item sidebar-nav-item">
+                          <a href="#" class="nav-link"><i class="flaticon-shopping-list"></i><span>Cài đặt</span></a>
+                          
+                      </li>
+                  </ul>
+              </div>
+          </div>
+          <!-- Sidebar Area End Here -->
+          <div class="dashboard-content-one">
+              <!-- Breadcubs Area Start Here -->
+              <div class="breadcrumbs-area">
+                  <h3>Trang chủ</h3>
+                  <ul>
+                      <li>
+                          <a href="index.html">Trang chủ</a>
+                      </li>
+                      <li>Admin</li>
+                  </ul>
+              </div>
+              <!-- Breadcubs Area End Here -->
+              <!-- Dashboard summery Start Here -->
+              <div class="row gutters-20">
+                  <div class="col-xl-6 col-sm-6 col-12">
+                      <div class="dashboard-summery-one mg-b-20">
+                          <div class="row align-items-center">
+                              <div class="col-6">
+                                  <div class="item-icon bg-light-green ">
+                                      <i class="flaticon-classmates text-green"></i>
+                                  </div>
+                              </div>
+                              <div class="col-6">
+                                  <div class="item-content">
+                                      <div class="item-title">Học viên</div>
+                                      <div class="item-number"><span class="counter" data-num="150000">1,50,000</span></div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-xl-6 col-sm-6 col-12">
+                      <div class="dashboard-summery-one mg-b-20">
+                          <div class="row align-items-center">
+                              <div class="col-6">
+                                  <div class="item-icon bg-light-blue">
+                                      <i class="flaticon-multiple-users-silhouette text-blue"></i>
+                                  </div>
+                              </div>
+                              <div class="col-6">
+                                  <div class="item-content">
+                                      <div class="item-title">Giảng viên</div>
+                                      <div class="item-number"><span class="counter" data-num="2250">2,250</span></div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                                      
+              </div>
+              <!-- Dashboard summery End Here -->
+              <!-- Dashboard Content Start Here -->
+              <div class="row gutters-20">
+        <div class="col-lg-12 col-xl-12 col-12-xxxl">
+                      <div class="card dashboard-card-six pd-b-20">
+                          <div class="card-body">
+                              <div class="heading-layout1 mg-b-17">
+                                  <div class="item-title">
+                                      <h3>Notice Board</h3>
+                                  </div>
+                                  <div class="dropdown">
+                                      <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                                          aria-expanded="false">...</a>
 
-  <!-- Next Steps -->
-  <h2>Next Steps</h2>
-  <p>What do you want to do next ?</p>
-
-  <input type="hidden" #actionId>
-
-  <app-action></app-action>
-
-  <!-- Terminal -->
-  <div class="terminal" [ngSwitch]="actionId.value">
-      <pre *ngSwitchDefault>
-        <table border="1">
-          <thead>a</thead>
-        </table>
-
-      </pre>
-      <pre *ngSwitchCase="'material'">ng add @angular/material</pre>
-      <pre *ngSwitchCase="'pwa'">ng add @angular/pwa</pre>
-      <pre *ngSwitchCase="'dependency'">ng add _____</pre>
-      <pre *ngSwitchCase="'test'">ng test</pre>
-      <pre *ngSwitchCase="'build'">ng build --prod</pre>
+                                      <div class="dropdown-menu dropdown-menu-right">
+                                          <a class="dropdown-item" href="#"><i
+                                                  class="fas fa-times text-orange-red"></i>Close</a>
+                                          <a class="dropdown-item" href="#"><i
+                                                  class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                                          <a class="dropdown-item" href="#"><i
+                                                  class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="notice-box-wrap">
+                                  <div class="notice-list">
+                                      <div class="post-date bg-skyblue">16 June, 2019</div>
+                                      <h6 class="notice-title"><a href="#">Great School manag mene esom text of the
+                                              printing.</a></h6>
+                                      <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
+                                  </div>
+                                  <div class="notice-list">
+                                      <div class="post-date bg-yellow">16 June, 2019</div>
+                                      <h6 class="notice-title"><a href="#">Great School manag printing.</a></h6>
+                                      <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
+                                  </div>
+                                  <div class="notice-list">
+                                      <div class="post-date bg-pink">16 June, 2019</div>
+                                      <h6 class="notice-title"><a href="#">Great School manag meneesom.</a></h6>
+                                      <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
+                                  </div>
+                                  <div class="notice-list">
+                                      <div class="post-date bg-skyblue">16 June, 2019</div>
+                                      <h6 class="notice-title"><a href="#">Great School manag mene esom text of the
+                                              printing.</a></h6>
+                                      <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
+                                  </div>
+                                  <div class="notice-list">
+                                      <div class="post-date bg-yellow">16 June, 2019</div>
+                                      <h6 class="notice-title"><a href="#">Great School manag printing.</a></h6>
+                                      <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
+                                  </div>
+                                  <div class="notice-list">
+                                      <div class="post-date bg-pink">16 June, 2019</div>
+                                      <h6 class="notice-title"><a href="#">Great School manag meneesom.</a></h6>
+                                      <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!-- Dashboard Content End Here -->
+              
+      <!-- Footer Area Start Here -->
+              <footer class="footer-wrap-layout1">
+                  <div class="copyright">© Copyrights <a href="#">Alta Media</a> 2020. All rights reserved. </div>
+              </footer>
+              <!-- Footer Area End Here -->
+          </div>
+      </div>
+      <!-- Page Area End Here -->
   </div>
-
-  <!-- Footer -->
-  <footer>
-      This website is belong to Sạch Fruits.
-      Powered by Sơn Hoàng.
-  </footer>
-
-</div>
-
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-
-
-<router-outlet></router-outlet>
