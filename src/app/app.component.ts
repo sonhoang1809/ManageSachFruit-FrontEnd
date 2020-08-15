@@ -8,6 +8,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Manage Sạch Fruits';
-  manageActionId: number = 1;
-  actionId: number = 1;
 }
+

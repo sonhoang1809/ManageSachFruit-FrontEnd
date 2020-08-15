@@ -5,14 +5,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { ManageActionComponent } from './manage-action/manage-action.component';
-import { ActionComponent } from './action/action.component';
+import { LoginComponent } from './login/login.component';
+import { SideBarComponent } from './side-bar/side-bar.component';
+import { HeaderComponent } from './header/header.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ManageActionComponent,
-    ActionComponent
+    LoginComponent,
+    SideBarComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
