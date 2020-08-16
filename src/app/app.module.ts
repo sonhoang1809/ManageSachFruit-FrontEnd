@@ -8,6 +8,8 @@ import { environment } from '../environments/environment';
 import { LoginComponent } from './login/login.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { HeaderComponent } from './header/header.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { HeaderComponent } from './header/header.component';
     AppComponent,
     LoginComponent,
     SideBarComponent,
-    HeaderComponent
+    HeaderComponent,
+    DashboardComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

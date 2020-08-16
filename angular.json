@@ -25,10 +25,10 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
-              "src/assets/libs/css/style.css"
+                            
             ],
             "scripts": [
-              
+              "node_modules/jquery/dist/jquery.min.js"              
             ]
           },
           "configurations": {
