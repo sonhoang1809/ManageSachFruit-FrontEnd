@@ -10,6 +10,18 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FooterComponent } from './footer/footer.component';
+import { PageHeaderContentComponent } from './dashboard/page-header-content/page-header-content.component';
+import { SummaryRevenueComponent } from './dashboard/summary-revenue/summary-revenue.component';
+import { RecentOrderComponent } from './dashboard/recent-order/recent-order.component';
+import { CustomerAcquisitionComponent } from './dashboard/customer-acquisition/customer-acquisition.component';
+import { ProductCategoryComponent } from './dashboard/product-category/product-category.component';
+import { ProductSalesComponent } from './dashboard/product-sales/product-sales.component';
+import { TopPerformingComponent } from './dashboard/top-performing/top-performing.component';
+import { SummarySalesComponent } from './dashboard/summary-sales/summary-sales.component';
+import { SummarySalesByComponent } from './dashboard/summary-sales-by/summary-sales-by.component';
+
+
+
 
 
 @NgModule({
@@ -19,7 +31,16 @@ import { FooterComponent } from './footer/footer.component';
     SideBarComponent,
     HeaderComponent,
     DashboardComponent,
-    FooterComponent
+    FooterComponent,
+    PageHeaderContentComponent,
+    SummaryRevenueComponent,
+    RecentOrderComponent,
+    CustomerAcquisitionComponent,
+    ProductCategoryComponent,
+    ProductSalesComponent,
+    TopPerformingComponent,
+    SummarySalesComponent,
+    SummarySalesByComponent
   ],
   imports: [
     BrowserModule,
