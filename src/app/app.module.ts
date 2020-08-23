@@ -19,6 +19,7 @@ import { ProductSalesComponent } from './dashboard/product-sales/product-sales.c
 import { TopPerformingComponent } from './dashboard/top-performing/top-performing.component';
 import { SummarySalesComponent } from './dashboard/summary-sales/summary-sales.component';
 import { SummarySalesByComponent } from './dashboard/summary-sales-by/summary-sales-by.component';
+import { RecentCostComponent } from './dashboard/recent-cost/recent-cost.component';
 
 
 
@@ -40,7 +41,8 @@ import { SummarySalesByComponent } from './dashboard/summary-sales-by/summary-sa
     ProductSalesComponent,
     TopPerformingComponent,
     SummarySalesComponent,
-    SummarySalesByComponent
+    SummarySalesByComponent,
+    RecentCostComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-export interface SearchOrdersRequest {
+export interface SearchRequest {
     Limit: number;
     Page: number;
     Search: string;

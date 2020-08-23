@@ -1,0 +1,21 @@
+<div class="card">
+    <h5 class="card-header">Recent Costs</h5>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table no-wrap p-table">
+                <thead class="bg-light">
+                    <tr class="border-0">
+                        <th class="border-0">Description</th>
+                        <th class="border-0">Total</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="recentCosts!=null">
+                    <tr *ngFor="let recentCost of recentCosts">
+                        <td>{{recentCost.costDescription}}</td>
+                        <td>{{recentCost.total | currency:'VND'}}</td>
+                    </tr>                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

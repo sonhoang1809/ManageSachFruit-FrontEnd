@@ -1,4 +1,13 @@
-import { UrlServerAPISummaryRevenueInMonth, UrlServerAPISummaryCostInMonth, UrlServerAPISummaryProfitInMonth, UrlServerAPISummaryRevenuePerOrderInMonth } from './../models/url-api';
+import { SearchRequest } from './../Requests/search-orders-request';
+import { UrlServerAPISummaryRevenueInMonth,
+   UrlServerAPISummaryCostInMonth, 
+   UrlServerAPISummaryProfitInMonth, 
+   UrlServerAPISummaryRevenuePerOrderInMonth, 
+   UrlServerAPISummaryNumberOrderInMonth, 
+   UrlServerAPISummaryNumberCostInMonth,
+   UrlServerAPISearchOrder,
+   UrlServerAPISearchCost
+  } from './../models/url-api';
 import { ResponseServer } from './../models/response-server';
 
 import { SummaryFrame } from './../models/summary-frame';
@@ -32,4 +41,27 @@ export class SummaryService {
   public getSummaryRevenuePerOrderInMonth(): Observable<ResponseServer>{
     return this.http.get<ResponseServer>(UrlServerAPISummaryRevenuePerOrderInMonth);
   }
+
+  public getSummaryNumberNewCustomerInMonth(): Observable<ResponseServer>{
+    return this.http.get<ResponseServer>(UrlServerAPISummaryNumberOrderInMonth);
+  }
+
+  public getSummaryNumberOrderInMonth(): Observable<ResponseServer>{
+    return this.http.get<ResponseServer>(UrlServerAPISummaryNumberOrderInMonth);
+  }
+
+  public getSummaryNumberCostInMonth(): Observable<ResponseServer>{
+    return this.http.get<ResponseServer>(UrlServerAPISummaryNumberCostInMonth);
+  }
+
+  public searchOrder(searchRequest: SearchRequest): Observable<ResponseServer>{
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.post<ResponseServer>(UrlServerAPISearchOrder, searchRequest);
+  }
+
+  public searchCost(searchRequest: SearchRequest): Observable<ResponseServer>{
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.post<ResponseServer>(UrlServerAPISearchCost, searchRequest);
+  }
+
 }

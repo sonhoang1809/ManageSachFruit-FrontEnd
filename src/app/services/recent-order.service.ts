@@ -16,7 +16,7 @@ export class RecentOrderService {
 
   searchOrder(searchRequest: SearchOrdersRequest): Observable<ResponseServer>{
     
-    const headers = { 'Authorization': 'Bearer my-token', 'My-Custom-Header': 'foobar' };
+    const headers = { 'Authorization': 'Bearer my-token' };
 
     return this.http.post<ResponseServer>(UrlServerAPISearchOrder, searchRequest);
   }

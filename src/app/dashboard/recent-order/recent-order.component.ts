@@ -1,6 +1,7 @@
-import { SearchOrdersRequest } from './../../Requests/search-orders-request';
+import { SummaryService } from './../../services/summary.service';
+import { SearchRequest } from './../../Requests/search-orders-request';
 import { OrderDetails } from './../../models/order-details';
-import { RecentOrderService } from './../../services/recent-order.service';
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -12,10 +13,10 @@ export class RecentOrderComponent implements OnInit {
 
   recentOrders: Array<OrderDetails> = [];
 
-  constructor(private orderService: RecentOrderService) { }
+  constructor(private summaryService: SummaryService) { }
 
   ngOnInit(): void {
-    var searchOrder: SearchOrdersRequest = {
+    var searchOrder: SearchRequest = {
       Limit: 5,
       Page: 1,
       Search:"",
@@ -23,12 +24,11 @@ export class RecentOrderComponent implements OnInit {
       SortOrder:""
     };
 
-    this.orderService.searchOrder(searchOrder)
+    this.summaryService.searchOrder(searchOrder)
     .subscribe( response => {
       console.log(response.data.data);
-      var data = response.data.data;
-      for(let i=0;i<data.length;i++){
-        this.recentOrders.push(new OrderDetails(data[i].orderId,data[i].customerName,data[i].total,data[i].orderTime));
+      for(var data of response.data.data){
+        this.recentOrders.push(data);
       }
     });
     

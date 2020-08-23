@@ -15,10 +15,10 @@ export class SummaryRevenueComponent implements OnInit {
   constructor(private summaryService: SummaryService) { }
 
   ngOnInit(): void {
-    
-    
+     
     this.summaryService.getSummaryRevenueInMonth().subscribe(response => {
-      this.summaryFrames.push(new SummaryFrame("Tổng doanh thu trong tháng",response.data.total,response.data.rateCompareToLastMonth));
+      this.summaryFrames.push(
+        new SummaryFrame("Tổng doanh thu trong tháng", response.data.total, response.data.rateCompareToLastMonth));
     });
     
     this.summaryService.getSummaryCostInMonth().subscribe(response => {

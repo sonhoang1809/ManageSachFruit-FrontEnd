@@ -1,14 +1,14 @@
 export class OrderDetails {
-    OrderId: string;
-    CustomerName: string;
-    Total: number;
-    OrderTime: string;
-    Status: string;
+    orderId: string;
+    customerName: string;
+    total: number;
+    orderTime: string;
+    status: string;
     public constructor(OrderId: string, CustomerName: string,Total: number, OrderTime: string) {
-        this.OrderId = OrderId;
-        this.CustomerName = CustomerName;
-        this.Total = Total;
-        this.OrderTime = OrderTime;
-        this.Status = "Delivered";
+        this.orderId = OrderId;
+        this.customerName = CustomerName;
+        this.total = Total;
+        this.orderTime = OrderTime;
+        this.status = "Delivered";
     }
 }
