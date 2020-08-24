@@ -29,8 +29,8 @@ export class SummaryRevenueComponent implements OnInit {
       this.summaryFrames.push(new SummaryFrame("Tổng lợi nhuận trong tháng",response.data.total,response.data.rateCompareToLastMonth));
     });
 
-    this.summaryService.getSummaryRevenuePerOrderInMonth().subscribe(response=>{
-      this.summaryFrames.push(new SummaryFrame("Doanh thu trên mỗi order",response.data.total,response.data.rateCompareToLastMonth));
+    this.summaryService.getRemainMoney().subscribe(response=>{
+      this.summaryFrames.push(new SummaryFrame("Tiền đầu tư còn lại", response.data, 0));
     });
   
   }

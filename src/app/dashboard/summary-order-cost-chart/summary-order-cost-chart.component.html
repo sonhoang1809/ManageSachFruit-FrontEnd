@@ -10,7 +10,7 @@
         <h5 class="mb-0">Biểu đồ chi phí - doanh thu trong năm</h5>
     </div>
     <div class="card-body">
-        <app-line-chart></app-line-chart>
+        <app-line-chart *ngIf="lineChartModel!=null" [lineChartModel]=lineChartModel></app-line-chart>
         <!--<div class="ct-chart-product ct-golden-section"></div>-->
     </div>
 </div>
