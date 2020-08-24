@@ -11,9 +11,9 @@
                 </div>
 
                 <div class={{summaryFrame.classStyleSheet}}>
-                    <span *ngIf="summaryFrame.rateCompareToLastMonth > 0"><i class="fa fa-fw fa-arrow-up"></i></span>
-                    <span *ngIf="summaryFrame.rateCompareToLastMonth<=0"><i class="fa fa-fw fa-arrow-down"></i></span>
-                    <span>{{summaryFrame.rateCompareToLastMonth}}%</span>
+                    <span *ngIf="summaryFrame.rateCompareToLastTime > 0"><i class="fa fa-fw fa-arrow-up"></i></span>
+                    <span *ngIf="summaryFrame.rateCompareToLastTime<=0"><i class="fa fa-fw fa-arrow-down"></i></span>
+                    <span>{{summaryFrame.rateCompareToLastTime}}%</span>
                 </div>
                 <div id="sparkline-revenue2"></div>
             </div>

@@ -18,19 +18,22 @@ export class SummaryRevenueComponent implements OnInit {
      
     this.summaryService.getSummaryRevenueInMonth().subscribe(response => {
       this.summaryFrames.push(
-        new SummaryFrame("Tổng doanh thu trong tháng", response.data.total, response.data.rateCompareToLastMonth));
+        new SummaryFrame("Tổng doanh thu trong tháng", response.data.total, response.data.rateCompareToLastTime));
     });
     
     this.summaryService.getSummaryCostInMonth().subscribe(response => {
-      this.summaryFrames.push(new SummaryFrame("Tổng chi phí trong tháng",response.data.total,response.data.rateCompareToLastMonth));
+      this.summaryFrames.push(
+        new SummaryFrame("Tổng chi phí trong tháng",response.data.total,response.data.rateCompareToLastTime));
     });
 
     this.summaryService.getSummaryProfitInMonth().subscribe(response => {
-      this.summaryFrames.push(new SummaryFrame("Tổng lợi nhuận trong tháng",response.data.total,response.data.rateCompareToLastMonth));
+      this.summaryFrames.push(
+        new SummaryFrame("Tổng lợi nhuận trong tháng",response.data.total,response.data.rateCompareToLastTime));
     });
 
     this.summaryService.getRemainMoney().subscribe(response=>{
-      this.summaryFrames.push(new SummaryFrame("Tiền đầu tư còn lại", response.data, 0));
+      this.summaryFrames.push(
+        new SummaryFrame("Tiền đầu tư còn lại", response.data, 0));
     });
   
   }

@@ -10,7 +10,19 @@
         <h5 class="mb-0">Biểu đồ chi phí - doanh thu trong năm</h5>
     </div>
     <div class="card-body">
-        <app-line-chart *ngIf="lineChartModel!=null" [lineChartModel]=lineChartModel></app-line-chart>
+        <div class="chartjs-container" *ngIf="lineChartModel!=null">
+            <canvas baseChart 
+                [datasets]="lineChartModel.lineChartData" 
+                [labels]="lineChartModel.lineChartLabels" 
+                [options]="lineChartModel.lineChartOptions"
+                [colors]="lineChartModel.lineChartColors" 
+                [legend]="lineChartModel.lineChartLegend" 
+                [chartType]="lineChartModel.lineChartType" 
+                [plugins]="lineChartModel.lineChartPlugins"
+                (chartHover)="lineChartModel.chartHovered($event)" 
+                (chartClick)="lineChartModel.chartClicked($event)">
+            </canvas>
+        </div>
         <!--<div class="ct-chart-product ct-golden-section"></div>-->
     </div>
 </div>

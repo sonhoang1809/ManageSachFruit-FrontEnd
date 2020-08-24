@@ -15,7 +15,7 @@ export const UrlServerAPISummaryNumberOrderInMonth = UrlServer+'/api/orders/Numb
 export const UrlServerAPISummaryNumberCostInMonth = UrlServer+'/api/costs/NumberCost';
 export const UrlServerAPISummaryNumberProductInStockInMonth = UrlServer+'/api/products/ProductInStockInMonth';
 export const UrlServerAPIStatisticsRevenueCost = UrlServer+'/api/Moneys/Statistics/Revenue/Cost';
-
+export const UrlServerAPIStatisticsProfit = UrlServer+'/api/Moneys/Statistics/SummaryProfits';
 
 
 export const UrlServerAPISearchOrder = UrlServer+'/api/Orders/Search';

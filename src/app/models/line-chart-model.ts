@@ -4,7 +4,9 @@ import { ChartDataSets, ChartOptions } from "chart.js";
 export class LineChartModel {
     lineChartData: ChartDataSets[];
     lineChartLabels: Label[] = [];
-    lineChartOptions: ChartOptions;
+    lineChartOptions: ChartOptions = {
+        responsive: true
+    };
     lineChartColors: Color[];
     lineChartLegend = true;
     lineChartType = 'line';
@@ -15,6 +17,15 @@ export class LineChartModel {
         this.lineChartData = lineChartData;
         this.lineChartLabels = lineChartLabels;
         this.lineChartColors = lineChartColors;
-            
+        
     }
+     // events
+  chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
+    console.log(event, active);
+    //this.refreshData();
+  }
+
+  chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
+    console.log(event, active);
+  }
 }

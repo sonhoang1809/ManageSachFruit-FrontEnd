@@ -9,7 +9,8 @@ import { UrlServerAPISummaryRevenueInMonth,
    UrlServerAPISearchCost,
    UrlServerAPISummaryNumberProductInStockInMonth,
    UrlServerAPIGetRemainMoney,
-   UrlServerAPIStatisticsRevenueCost
+   UrlServerAPIStatisticsRevenueCost,
+   UrlServerAPIStatisticsProfit
   } from './../models/url-api';
 import { ResponseServer } from './../models/response-server';
 
@@ -80,4 +81,8 @@ export class SummaryService {
     return this.http.get<ResponseServer>(UrlServerAPIStatisticsRevenueCost+'/' + statisticBy);
   }
 
+  public getStatisticProfit(statisticBy: number): Observable<ResponseServer>{
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.get<ResponseServer>(UrlServerAPIStatisticsProfit+'/' + statisticBy);
+  }
 }

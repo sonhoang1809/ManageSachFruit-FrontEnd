@@ -1,0 +1,32 @@
+<div class="card">
+    <div class="card-header">
+        <div class="float-right">
+            <select class="custom-select" (change)="submit($event)">
+                <option *ngFor="let statisticsBy of statisticsBys" value="{{statisticsBy.id}}">
+                    {{statisticsBy.display}}
+                </option>
+            </select>
+        </div>
+        <h5 class="mb-0">{{summaryFrame.descriptionSummary}}</h5>
+    </div>
+    <div class="card-body">
+        <div class="chartjs-container" *ngIf="lineChartModel != null">
+            <canvas baseChart [datasets]="lineChartModel.lineChartData" [labels]="lineChartModel.lineChartLabels"
+                [options]="lineChartModel.lineChartOptions" [colors]="lineChartModel.lineChartColors"
+                [legend]="lineChartModel.lineChartLegend" [chartType]="lineChartModel.lineChartType"
+                [plugins]="lineChartModel.lineChartPlugins" (chartHover)="lineChartModel.chartHovered($event)"
+                (chartClick)="lineChartModel.chartClicked($event)">
+            </canvas>
+        </div>
+    </div>
+    <div class="card-footer">
+        <p class="display-7 font-weight-bold">
+            <span class="text-primary d-inline-block">
+                {{summaryFrame.total | currency:'VND'}}
+            </span>
+            <span class="text-success float-right">
+                {{summaryFrame.rateCompareToLastTime}}%
+            </span>
+        </p>
+    </div>
+</div>

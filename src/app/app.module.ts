@@ -27,6 +27,7 @@ import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
 import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import { DoughnutChartComponent } from './charts/doughnut-chart/doughnut-chart.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SummaryProfitComponent } from './dashboard/summary-profit/summary-profit.component';
 
 
 
@@ -52,7 +53,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     LineChartComponent,
     BarChartComponent,
     PieChartComponent,
-    DoughnutChartComponent
+    DoughnutChartComponent,
+    SummaryProfitComponent
   ],
   imports: [
     BrowserModule,
