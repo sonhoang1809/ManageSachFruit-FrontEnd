@@ -17,7 +17,7 @@ export class SummarySalesComponent implements OnInit {
   ngOnInit(): void {
     this.summaryService.getSummaryNumberOrderInMonth().subscribe(response => {
       this.summaryFrames.push(
-        new SummaryFrame("Tổng số orders",response.data.total, response.data.rateCompareToLastMonth));
+        new SummaryFrame("Số lượng orders trong tháng",response.data.total, response.data.rateCompareToLastMonth));
     });
 
     this.summaryService.getSummaryNumberNewCustomerInMonth().subscribe(response => {
@@ -27,11 +27,13 @@ export class SummarySalesComponent implements OnInit {
 
     this.summaryService.getSummaryNumberCostInMonth().subscribe(response => {
       this.summaryFrames.push(
-        new SummaryFrame("Tổng số lượng chi phí",response.data.total, response.data.rateCompareToLastMonth));
+        new SummaryFrame("Số lượng chi phí trong tháng",response.data.total, response.data.rateCompareToLastMonth));
     });
 
-    this.summaryFrames.push(
-      new SummaryFrame("New ", 0, 0));    
+    this.summaryService.getSummaryNumberProductInStockInMonth().subscribe(response=>{
+      this.summaryFrames.push(
+        new SummaryFrame("Số lượng tồn kho trong tháng",response.data.total, response.data.rateCompareToLastMonth));
+    }); 
   }
 
 }

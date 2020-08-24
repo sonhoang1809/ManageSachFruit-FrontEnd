@@ -24,7 +24,6 @@ export class RecentCostComponent implements OnInit {
     };
     this.summaryService.searchCost(searchCost)
     .subscribe( response => {
-      console.log(response.data.data);
       for(var data of response.data.data){
         this.recentCosts.push(data);
       }

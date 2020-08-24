@@ -6,7 +6,8 @@ import { UrlServerAPISummaryRevenueInMonth,
    UrlServerAPISummaryNumberOrderInMonth, 
    UrlServerAPISummaryNumberCostInMonth,
    UrlServerAPISearchOrder,
-   UrlServerAPISearchCost
+   UrlServerAPISearchCost,
+   UrlServerAPISummaryNumberProductInStockInMonth
   } from './../models/url-api';
 import { ResponseServer } from './../models/response-server';
 
@@ -52,6 +53,10 @@ export class SummaryService {
 
   public getSummaryNumberCostInMonth(): Observable<ResponseServer>{
     return this.http.get<ResponseServer>(UrlServerAPISummaryNumberCostInMonth);
+  }
+
+  public getSummaryNumberProductInStockInMonth(): Observable<ResponseServer>{
+    return this.http.get<ResponseServer>(UrlServerAPISummaryNumberProductInStockInMonth);
   }
 
   public searchOrder(searchRequest: SearchRequest): Observable<ResponseServer>{

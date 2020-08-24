@@ -26,7 +26,6 @@ export class RecentOrderComponent implements OnInit {
 
     this.summaryService.searchOrder(searchOrder)
     .subscribe( response => {
-      console.log(response.data.data);
       for(var data of response.data.data){
         this.recentOrders.push(data);
       }

@@ -20,8 +20,13 @@ import { TopPerformingComponent } from './dashboard/top-performing/top-performin
 import { SummarySalesComponent } from './dashboard/summary-sales/summary-sales.component';
 import { SummarySalesByComponent } from './dashboard/summary-sales-by/summary-sales-by.component';
 import { RecentCostComponent } from './dashboard/recent-cost/recent-cost.component';
-
-
+import { SummaryOrderCostChartComponent } from './dashboard/summary-order-cost-chart/summary-order-cost-chart.component';
+import { ChartsModule } from 'ng2-charts';
+import { LineChartComponent } from './charts/line-chart/line-chart.component';
+import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
+import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
+import { DoughnutChartComponent } from './charts/doughnut-chart/doughnut-chart.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -42,12 +47,19 @@ import { RecentCostComponent } from './dashboard/recent-cost/recent-cost.compone
     TopPerformingComponent,
     SummarySalesComponent,
     SummarySalesByComponent,
-    RecentCostComponent
+    RecentCostComponent,
+    SummaryOrderCostChartComponent,
+    LineChartComponent,
+    BarChartComponent,
+    PieChartComponent,
+    DoughnutChartComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    ChartsModule,
+    ReactiveFormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],

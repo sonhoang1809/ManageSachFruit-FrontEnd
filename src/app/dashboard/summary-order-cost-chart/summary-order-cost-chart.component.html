@@ -1,0 +1,16 @@
+<div class="card">
+    <div class="card-header">
+        <div class="float-right">
+            <select class="custom-select" (change)="submit($event)">
+                <option *ngFor="let statisticsBy of statisticsBys" value="{{statisticsBy.id}}">
+                    {{statisticsBy.display}}
+                </option>
+            </select>
+        </div>
+        <h5 class="mb-0">Biểu đồ chi phí - doanh thu trong năm</h5>
+    </div>
+    <div class="card-body">
+        <app-line-chart></app-line-chart>
+        <!--<div class="ct-chart-product ct-golden-section"></div>-->
+    </div>
+</div>
