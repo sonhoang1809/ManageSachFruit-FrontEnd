@@ -1,14 +1,19 @@
+import { DateTime } from './date-time';
+
 export class OrderDetails {
-    orderId: string;
+    id: string;
     customerName: string;
     total: number;
     orderTime: string;
-    status: string;
-    public constructor(OrderId: string, CustomerName: string,Total: number, OrderTime: string) {
-        this.orderId = OrderId;
-        this.customerName = CustomerName;
-        this.total = Total;
-        this.orderTime = OrderTime;
+    status: string = "Delivered";
+    createAt: DateTime;
+    public constructor(id: string, customerName: string,total: number, createAt: DateTime) {
+        this.id = id;
+        this.customerName = customerName;
+        this.total = total;
+        this.createAt= createAt;
+        this.orderTime = createAt.toString();
         this.status = "Delivered";
     }
 }
+

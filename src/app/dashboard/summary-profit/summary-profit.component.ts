@@ -15,7 +15,7 @@ export class SummaryProfitComponent implements OnInit {
 
   statisticsBys= [];
   lineChartModel: LineChartModel = null;
-  summaryFrame: SummaryFrame;
+  summaryFrame: SummaryFrame = null;
 
   constructor(private summaryService: SummaryService, private helper: GeneralHelperService) { }
 
@@ -39,12 +39,15 @@ export class SummaryProfitComponent implements OnInit {
   }
 
   convertToLineChartModel(dataResponse: any){
-    console.log(dataResponse);
+
     var lineChartData: ChartDataSets[] = [];
     var lineChartLabels: Label[] = [];
     var lineChartColors: Color[] = [];
-    this.summaryFrame = new SummaryFrame("Biểu đồ lợi nhuận", dataResponse.total,
-    dataResponse.rateCompareToLastTime);
+    this.summaryFrame = new SummaryFrame(
+      "Biểu đồ lợi nhuận",
+      dataResponse.total,
+      dataResponse.rateCompareToLastTime
+    );
       var dataArray = [];   
       for(let key in dataResponse.dataSet){        
         lineChartLabels.push(key);
@@ -56,13 +59,11 @@ export class SummaryProfitComponent implements OnInit {
 
     lineChartColors.push(
         {
-          //backgroundColor: '#dffaff',
+          backgroundColor: '#dffaff',
           borderColor: '#25d5f2',
         }
       );
-      // console.log("lineChartData:"+lineChartData);
-      // console.log("lineChartLabels:"+lineChartLabels);
-      // console.log("lineChartColors:"+lineChartColors);
+
     return new LineChartModel(lineChartData, lineChartLabels, lineChartColors);    
   }
 }

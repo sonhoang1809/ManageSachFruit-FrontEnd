@@ -20,3 +20,4 @@ export const UrlServerAPIStatisticsProfit = UrlServer+'/api/Moneys/Statistics/Su
 
 export const UrlServerAPISearchOrder = UrlServer+'/api/Orders/Search';
 export const UrlServerAPISearchCost = UrlServer+'/api/Costs/Search';
+export const UrlServerAPISearchProduct = UrlServer+'/api/Products/Search';

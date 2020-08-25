@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Product } from './../../models/product';
+import { SearchProductRequest } from './../../Requests/search-product-request';
+import { SummaryService } from './../../services/summary.service';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ResponseSearch } from 'src/app/models/response-search';
 
 @Component({
   selector: 'app-manage-products-list',
@@ -7,9 +11,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManageProductsListComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  @Input() productList: Product[] = [];
+  @Input() index: number=1;
+  constructor(private service: SummaryService) { 
+    
   }
 
+  
+  ngOnInit(): void {   
+   
+  }
+  
 }

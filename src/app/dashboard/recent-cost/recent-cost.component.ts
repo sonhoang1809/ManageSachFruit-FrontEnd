@@ -18,9 +18,9 @@ export class RecentCostComponent implements OnInit {
     var searchCost: SearchRequest = {
       Limit: 5,
       Page: 1,
-      Search:"",
-      SortField:"",
-      SortOrder:""
+      Search: "",
+      SortField: "create_at",
+      SortOrder: 1
     };
     this.summaryService.searchCost(searchCost)
     .subscribe( response => {

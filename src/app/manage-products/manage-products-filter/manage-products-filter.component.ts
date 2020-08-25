@@ -10,6 +10,7 @@ export class ManageProductsFilterComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

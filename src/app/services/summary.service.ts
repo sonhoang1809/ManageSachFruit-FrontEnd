@@ -1,3 +1,4 @@
+import { SearchProductRequest } from './../Requests/search-product-request';
 import { SearchRequest } from '../Requests/search-request';
 import { UrlServerAPISummaryRevenueInMonth,
    UrlServerAPISummaryCostInMonth, 
@@ -10,7 +11,8 @@ import { UrlServerAPISummaryRevenueInMonth,
    UrlServerAPISummaryNumberProductInStockInMonth,
    UrlServerAPIGetRemainMoney,
    UrlServerAPIStatisticsRevenueCost,
-   UrlServerAPIStatisticsProfit
+   UrlServerAPIStatisticsProfit,
+   UrlServerAPISearchProduct
   } from './../models/url-api';
 import { ResponseServer } from './../models/response-server';
 
@@ -76,6 +78,11 @@ export class SummaryService {
     return this.http.post<ResponseServer>(UrlServerAPISearchCost, searchRequest);
   }
 
+  public searchProduct(searchRequest: SearchProductRequest): Observable<ResponseServer>{
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.post<ResponseServer>(UrlServerAPISearchProduct, searchRequest);
+  }
+
   public getStatisticRevenueCost(statisticBy: number): Observable<ResponseServer>{
     const headers = { 'Authorization': 'Bearer my-token' };
     return this.http.get<ResponseServer>(UrlServerAPIStatisticsRevenueCost+'/' + statisticBy);
@@ -85,4 +92,6 @@ export class SummaryService {
     const headers = { 'Authorization': 'Bearer my-token' };
     return this.http.get<ResponseServer>(UrlServerAPIStatisticsProfit+'/' + statisticBy);
   }
+
+  
 }

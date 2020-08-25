@@ -1,3 +1,4 @@
+import { DateTime } from './../../models/date-time';
 import { SummaryService } from './../../services/summary.service';
 import { SearchRequest } from '../../Requests/search-request';
 import { OrderDetails } from './../../models/order-details';
@@ -20,14 +21,20 @@ export class RecentOrderComponent implements OnInit {
       Limit: 5,
       Page: 1,
       Search:"",
-      SortField:"",
-      SortOrder:""
+      SortField:"create_at",
+      SortOrder: 1
     };
 
     this.summaryService.searchOrder(searchOrder)
     .subscribe( response => {
       for(var data of response.data.data){
-        this.recentOrders.push(data);
+
+        this.recentOrders.push(
+          new OrderDetails(data.id,data.customerName,data.total,
+            new DateTime(data.createAt.day,data.createAt.month,data.createAt.year,data.createAt.hour,
+              data.createAt.minute,data.createAt.second)
+          )
+        );
       }
     });
     
