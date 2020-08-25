@@ -1,7 +1,7 @@
 import { SummaryService } from './../../services/summary.service';
 import { CostDetails } from './../../models/cost-details';
 import { Component, OnInit } from '@angular/core';
-import { SearchRequest } from 'src/app/Requests/search-orders-request';
+import { SearchRequest } from 'src/app/Requests/search-request';
 
 @Component({
   selector: 'app-recent-cost',

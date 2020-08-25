@@ -1,5 +1,5 @@
 import { SummaryService } from './../../services/summary.service';
-import { SearchRequest } from './../../Requests/search-orders-request';
+import { SearchRequest } from '../../Requests/search-request';
 import { OrderDetails } from './../../models/order-details';
 
 import { Component, OnInit } from '@angular/core';

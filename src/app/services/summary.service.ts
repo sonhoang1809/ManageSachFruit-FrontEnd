@@ -1,4 +1,4 @@
-import { SearchRequest } from './../Requests/search-orders-request';
+import { SearchRequest } from '../Requests/search-request';
 import { UrlServerAPISummaryRevenueInMonth,
    UrlServerAPISummaryCostInMonth, 
    UrlServerAPISummaryProfitInMonth, 
