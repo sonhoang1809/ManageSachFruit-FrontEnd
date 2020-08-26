@@ -26,3 +26,12 @@ export interface ProductDetails {
     cost: CostDetails;
     category: Category;
 }
+export interface StoreProductRequest{
+    productName: string;
+    description: string;
+    quantityInStock: number;
+    unit: string;
+    unitPrice: number;
+    categoryId: string;
+    importPrice: number;
+}

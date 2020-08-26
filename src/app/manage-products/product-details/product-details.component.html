@@ -1,77 +1,216 @@
-
-        <div class="card">
-            <h5 class="card-header">Product Details</h5>
-            <div class="card-body">
-
-                <div class="row">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
-                        <label for="validationCustom01">Product name</label>
-                        <input type="text" class="form-control" id="validationCustom01" placeholder="First name"
-                            value="{{data.productName}}" required>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                    </div>
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
-                        <label for="validationCustom02">Last name</label>
-                        <input type="text" class="form-control" id="validationCustom02" placeholder="Last name"
-                            value="Otto" required>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                    </div>
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
-                        <label for="validationCustomUsername">Username</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupPrepend">@</span>
-                            </div>
-                            <input type="text" class="form-control" id="validationCustomUsername" placeholder="Username"
-                                aria-describedby="inputGroupPrepend" required>
-                            <div class="invalid-feedback">
-                                Please choose a username.
-                            </div>
-                        </div>
+<div class="card" *ngIf="data!=null">
+    <h5 class="card-header">Chi tiết sản phẩm {{data.productName}}</h5>
+    <form>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                    <label for="validationCustom01">Product name</label>
+                    <input type="text" class="form-control" id="validationCustom01" placeholder="First name"
+                        value="{{data.productName}}" required>
+                    <div class="valid-feedback">
+                        Looks good!
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
-                        <label for="validationCustom03">City</label>
-                        <input type="text" class="form-control" id="validationCustom03" placeholder="City" required>
-                        <div class="invalid-feedback">
-                            Please provide a valid city.
-                        </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                    <label for="exampleFormControlTextarea1">Description</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                        required>{{data.description}}</textarea>
+                    <div class="valid-feedback">
+                        Looks good!
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
-                        <label for="validationCustom04">State</label>
-                        <input type="text" class="form-control" id="validationCustom04" placeholder="State" required>
-                        <div class="invalid-feedback">
-                            Please provide a valid state.
-                        </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                    <label for="validationCustom03">Tồn kho</label>
+                    <input type="text" class="form-control" id="validationCustom03" placeholder="Số lượng tồn kho"
+                        required value="{{data.quantityInStock}}">
+                    <div class="invalid-feedback">
+                        Please provide a valid city.
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
-                        <label for="validationCustom05">Zip</label>
-                        <input type="text" class="form-control" id="validationCustom05" placeholder="Zip" required>
-                        <div class="invalid-feedback">
-                            Please provide a valid zip.
-                        </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                    <label for="validationCustom04">Số lượng lúc đầu</label>
+                    <input type="text" class="form-control" id="validationCustom04" placeholder="Số lượng lúc đầu"
+                        readonly value="{{data.quantityAtBegining}}">
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                    <label for="validationCustom05">Đơn vị tính</label>
+                    <input type="text" class="form-control" id="validationCustom05" placeholder="Zip" required
+                        value="{{data.unit}}">
+                    <div class="invalid-feedback">
+                        Please provide a valid zip.
                     </div>
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                                <label class="form-check-label" for="invalidCheck">
-                                    Agree to terms and conditions
-                                </label>
-                                <div class="invalid-feedback">
-                                    You must agree before submitting.
-                                </div>
-                            </div>
-                        </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                    <label for="validationCustom05">Đơn giá</label>
+                    <input type="number" class="form-control" id="validationCustom05"
+                        placeholder="{{data.cost.total | currency:'VND'}}" required value="">
+                    <div class="invalid-feedback">
+                        Please provide a valid zip.
                     </div>
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
-                        <button class="btn btn-primary" type="submit">Submit form</button>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                    <label for="input-select">Category</label>
+                    <select class="form-control" id="input-select">
+                        <option value="{{data.category.id}}">{{data.category.categoryName}}</option>
+                        <option *ngFor="let category of categories" value="{{category.id}}">{{category.categoryName}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                    <label for="validationCustomUsername">{{data.cost.costDescription}}</label>
+                    <div class="input-group">
+
+                        <input type="number" class="form-control" id="validationCustomUsername"
+                            placeholder="{{data.cost.total | currency:'VND'}}" aria-describedby="inputGroupPrepend"
+                            value="" required>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupPrepend">đồng</span>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="form-row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                            <label class="form-check-label" for="invalidCheck">
+                                Agree to terms and conditions
+                            </label>
+                            <div class="invalid-feedback">
+                                You must agree before submitting.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                    <button class="btn btn-primary" type="submit">Cập nhật sản phẩm</button>
+                </div>
+            </div>
         </div>
+    </form>
+</div>
+<div class="card" *ngIf="data==null">
+    <h5 class="card-header">Thêm sản phẩm</h5>
+    <form [formGroup]="inputForm" (ngSubmit)="onStoreProduct(inputForm.value)">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                    <label for="validationCustom01">Tên sản phẩm</label>
+                    <input type="text" class="form-control" id="validationCustom01" placeholder="" value="" required
+                        formControlName="productName">
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                    <label for="exampleFormControlTextarea1">Mô tả</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required
+                        formControlName="description"></textarea>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                    <label for="validationCustom03">Số lượng nhập</label>
+                    <input type="number" class="form-control" id="validationCustom03" placeholder="" required value=""
+                        formControlName="quantityInStock">
+                    <div class="invalid-feedback">
+                        Please provide a valid city.
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                    <label for="validationCustom05">Đơn vị tính</label>
+                    <input type="text" class="form-control" 
+                    id="validationCustom05" placeholder="" required 
+                    value="Kg"
+                    formControlName="unit">
+                    <div class="invalid-feedback">
+                        Please provide a valid zip.
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                    <label for="validationCustom05">Đơn giá</label>
+                    <input type="number" class="form-control" 
+                    id="validationCustom05" placeholder="" required value=""
+                    formControlName="unitPrice">
+                    <div class="invalid-feedback">
+                        Please provide a valid zip.
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                    <label for="input-select">Category</label>
+                    <select class="form-control" id="input-select" formControlName="categoryId">
+                        <option *ngFor="let category of categories" value="{{category.id}}">{{category.categoryName}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                    <label for="validationCustomUsername">Chi phí nhập</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" id="validationCustomUsername" placeholder=""
+                            aria-describedby="inputGroupPrepend" value="" required
+                            formControlName="importPrice">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupPrepend">đồng</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                            <label class="form-check-label" for="invalidCheck">
+                                Agree to terms and conditions
+                            </label>
+                            <div class="invalid-feedback">
+                                You must agree before submitting.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                    <button class="btn btn-primary" type="submit">Thêm mới sản phẩm</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="../assets/vendor/inputmask/js/jquery.inputmask.bundle.js"></script>
+<script>
+    $(function (e) {
+        "use strict";
+        $(".date-inputmask").inputmask("dd/mm/yyyy"),
+            $(".phone-inputmask").inputmask("(999) 999-9999"),
+            $(".international-inputmask").inputmask("+9(999)999-9999"),
+            $(".xphone-inputmask").inputmask("(999) 999-9999 / x999999"),
+            $(".purchase-inputmask").inputmask("aaaa 9999-****"),
+            $(".cc-inputmask").inputmask("9999 9999 9999 9999"),
+            $(".ssn-inputmask").inputmask("999-99-9999"),
+            $(".isbn-inputmask").inputmask("999-99-999-9999-9"),
+            $(".currency-inputmask").inputmask("$9999"),
+            $(".percentage-inputmask").inputmask("99%"),
+            $(".decimal-inputmask").inputmask({
+                alias: "decimal",
+                radixPoint: "."
+            }),
+
+            $(".email-inputmask").inputmask({
+                mask: "*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@*{1,20}[*{2,6}][*{1,2}].*{1,}[.*{2,6}][.*{1,2}]",
+                greedy: !1,
+                onBeforePaste: function (n, a) {
+                    return (e = e.toLowerCase()).replace("mailto:", "")
+                },
+                definitions: {
+                    "*": {
+                        validator: "[0-9A-Za-z!#$%&'*+/=?^_`{|}~/-]",
+                        cardinality: 1,
+                        casing: "lower"
+                    }
+                }
+            })
+    });
+</script>

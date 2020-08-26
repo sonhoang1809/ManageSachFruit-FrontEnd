@@ -19,7 +19,7 @@ export class ManageProductsListComponent implements OnInit {
   @Input() index: number = 1;
   constructor(private dialog: MatDialog, private service: SummaryService) { }
 
-  showDetail(product: ProductDetails): void{
+  showDialogProduct(product: ProductDetails): void{
 
     this.dialog.open<ProductDetailsComponent>(ProductDetailsComponent, {
       panelClass: 'myapp-no-padding-dialog',

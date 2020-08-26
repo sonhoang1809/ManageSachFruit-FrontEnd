@@ -12,7 +12,9 @@ import { UrlServerAPISummaryRevenueInMonth,
    UrlServerAPIGetRemainMoney,
    UrlServerAPIStatisticsRevenueCost,
    UrlServerAPIStatisticsProfit,
-   UrlServerAPISearchProduct
+   UrlServerAPISearchProduct,
+   UrlServerAPIGetAllCategory,
+   UrlServerAPIStoreNewProduct
   } from './../models/url-api';
 import { ResponseServer } from './../models/response-server';
 
@@ -91,6 +93,17 @@ export class SummaryService {
   public getStatisticProfit(statisticBy: number): Observable<ResponseServer>{
     const headers = { 'Authorization': 'Bearer my-token' };
     return this.http.get<ResponseServer>(UrlServerAPIStatisticsProfit+'/' + statisticBy);
+  }
+
+  public getAllCategories(): Observable<ResponseServer>{
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.get<ResponseServer>(UrlServerAPIGetAllCategory);
+  }
+
+  public storeNewProduct(data): Observable<ResponseServer>{
+    const headers = { 'Authorization': 'Bearer my-token' };
+    console.log(data);
+    return this.http.post<ResponseServer>(UrlServerAPIStoreNewProduct, data);
   }
 
   
