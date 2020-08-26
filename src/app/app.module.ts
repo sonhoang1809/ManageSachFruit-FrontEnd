@@ -3,7 +3,6 @@ import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,7 +34,15 @@ import { SummaryProfitComponent } from './dashboard/summary-profit/summary-profi
 import { ManageProductsFilterComponent } from './manage-products/manage-products-filter/manage-products-filter.component';
 import { ManageProductsListComponent } from './manage-products/manage-products-list/manage-products-list.component';
 import { ManageProductsComponent } from './manage-products/manage-products.component';
-
+import { MaterialModule } from './material/material.module';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ProductDetailsComponent } from './manage-products/product-details/product-details.component';
+import { MessageComponent } from './message/message.component';
+import { DialogExampleComponent } from './dialog-example/dialog-example.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +70,10 @@ import { ManageProductsComponent } from './manage-products/manage-products.compo
     SummaryProfitComponent,
     ManageProductsComponent,
     ManageProductsFilterComponent,
-    ManageProductsListComponent
+    ManageProductsListComponent,
+    ProductDetailsComponent,
+    MessageComponent,
+    DialogExampleComponent
   ],
   imports: [
     BrowserModule,
@@ -71,8 +81,13 @@ import { ManageProductsComponent } from './manage-products/manage-products.compo
     AppRoutingModule,
     ChartsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule, 
-    MaterialModule,
+    BrowserAnimationsModule,
+    MaterialModule, 
+    MatDialogModule,
+    MatInputModule, 
+    MatButtonModule, 
+    MatCardModule, 
+    MatFormFieldModule,
     RouterModule.forRoot([
       {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
       {path: 'dashboard', component: DashboardComponent},

@@ -19,13 +19,19 @@
                     <tr *ngFor="let product of productList;index as i">
                         <td>{{i+1}}</td>
                         <td>{{product.productName}}</td>
-                        <td>{{product.category}}</td>
+                        <td>{{product.category.categoryName}}</td>
                         <td>{{product.description}}</td>
                         <td>{{product.quantityInStock}}</td>
                         <td>{{product.unit}}</td>
                         <td>{{product.unitPrice}}</td>
                         <td colspan="9">
-                            <a href="#" class="btn btn-outline-light float-right">Chi tiết</a>
+                            
+                            <a class="btn btn-outline-light float-right" (click)='showDetail(product);'>Chi tiết</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="9">
+                            <a href="#" class="btn btn-outline-light float-right">Thêm sản phẩm</a>
                         </td>
                     </tr>
                 </tbody>

@@ -1,16 +1,22 @@
+
+import { Component, OnInit, ViewChild, AfterViewInit, Injectable } from '@angular/core';
+import { LoginComponent } from './../login/login.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ManageProductsListComponent } from './manage-products-list/manage-products-list.component';
 import { PageInfo } from './../models/page-info';
 import { ResponseSearch } from './../models/response-search';
-import { Product } from './../models/product';
+import { Product, ProductDetails } from './../models/product';
 import { SummaryService } from './../services/summary.service';
 import { SearchProductRequest } from './../Requests/search-product-request';
-import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-manage-products',
   templateUrl: './manage-products.component.html',
   styleUrls: ['./manage-products.component.css']
 })
-export class ManageProductsComponent implements OnInit {
+@Injectable()
+export class ManageProductsComponent implements OnInit  {
 
   titleComponent: string = 'Quản lý danh sách sản phẩm';
 
@@ -18,22 +24,25 @@ export class ManageProductsComponent implements OnInit {
   searchProductRequest: SearchProductRequest;
   searchResult: ResponseSearch = null;
   pageInfo: PageInfo;
-  productList: Product[];
+  productList: ProductDetails[];
 
-  constructor(private service: SummaryService) { }
+  selectProduct: ProductDetails = null;
 
-  
+  constructor(private service: SummaryService, private dialog: MatDialog) {
+
+  }
 
   ngOnInit(): void {
     this.pageInfo = {isFirstPage: true, isLastPage: false, numberOfPage: 1};
     
     this.searchProductRequest= {
-      limit: 20,
+      limit: 10,
       page: 1,
       search:"",
       sortField: "create_at",
       sortOrder: 1,
-      category: ""
+      categoryId: null,
+      unit: null
     };
     this.service.searchProduct(this.searchProductRequest).subscribe(response=>{
       this.getData(response.data);

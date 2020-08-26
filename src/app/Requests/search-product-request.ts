@@ -4,5 +4,6 @@ export class SearchProductRequest {
     search: string;
     sortField: string;
     sortOrder: number;
-    category: string;
+    categoryId: string;
+    unit: string;
 }
