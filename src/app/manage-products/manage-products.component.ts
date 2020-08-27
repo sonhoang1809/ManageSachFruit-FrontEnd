@@ -1,5 +1,7 @@
+import { MessageComponent } from './../message/message.component';
+import { ProductsService } from './products.service';
 
-import { Component, OnInit, ViewChild, AfterViewInit, Injectable } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoginComponent } from './../login/login.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ManageProductsListComponent } from './manage-products-list/manage-products-list.component';
@@ -15,73 +17,74 @@ import { SearchProductRequest } from './../Requests/search-product-request';
   templateUrl: './manage-products.component.html',
   styleUrls: ['./manage-products.component.css']
 })
-@Injectable()
+
 export class ManageProductsComponent implements OnInit  {
 
   titleComponent: string = 'Quản lý danh sách sản phẩm';
 
+ // pageInfo: PageInfo = { isFirstPage: true, isLastPage: false, numberOfPage: 1, info: null };
+  pageInfo: PageInfo = null;
+  
+  searchProductRequest: SearchProductRequest= {
+    limit: 5,
+    page: 1,
+    search:"",
+    sortField: "create_at",
+    sortOrder: 1,
+    categoryId: null,
+    unit: null
+  };
+  
+  productList: Product[] = [];
 
-  searchProductRequest: SearchProductRequest;
-  searchResult: ResponseSearch = null;
-  pageInfo: PageInfo;
-  productList: ProductDetails[];
-
-  selectProduct: ProductDetails = null;
-
-  constructor(private service: SummaryService, private dialog: MatDialog) {
-
+  constructor(private dialog: MatDialog, private productService: ProductsService) {
+    //this.productService.getProductList();
+    //this.productList = this.productService.productList;
+    this.pageInfo = this.productService.getPageInfo();
+    //this.productList = this.productService.getProductList();
+    //console.log(this.productList);
+    //console.log(this.pageInfo);
   }
 
   ngOnInit(): void {
-    this.pageInfo = {isFirstPage: true, isLastPage: false, numberOfPage: 1};
-    
-    this.searchProductRequest= {
-      limit: 10,
-      page: 1,
-      search:"",
-      sortField: "create_at",
-      sortOrder: 1,
-      categoryId: null,
-      unit: null
-    };
-    this.service.searchProduct(this.searchProductRequest).subscribe(response=>{
-      this.getData(response.data);
-    });
+    //this.searchProduct(1);
     
   }
 
-  getData(responseData){
-    this.productList = [];
-    this.searchResult = {
-      data: responseData.data,
-      info: responseData.info
-    };
+  handleError(error) {
+    this.dialog.open(MessageComponent,{
+      panelClass: 'myapp-no-padding-dialog',
+        position: {
+          bottom: '50px',
+          right: ' 50px'
+        },
+        data: error
+    });
+  }
 
-    for(var prod of this.searchResult.data){
-      this.productList.push(prod);
-    }
-
-    this.pageInfo.numberOfPage = Math.ceil(this.searchResult.info.totalRecord / this.searchResult.info.limit);
-
-    if(this.searchResult.info.page == 1){
-      this.pageInfo.isFirstPage = true;
-    }else{
-      this.pageInfo.isFirstPage = false;
-    }
-    if(this.searchResult.info.page == this.pageInfo.numberOfPage){
-      this.pageInfo.isLastPage = true;
-    }else{
-      this.pageInfo.isLastPage = false;
-    }
-
+  getData(responseData) {
+    //this.productList = [];
+    this.pageInfo.info = responseData.info;
+    this.productList = responseData.data;
+    this.pageInfo.numberOfPage = Math.ceil(this.pageInfo.info.totalRecord / this.pageInfo.info.limit);
+      if (this.pageInfo.info.page == 1) {
+        this.pageInfo.isFirstPage = true;
+      } else {
+        this.pageInfo.isFirstPage = false;
+      }
+      if (this.pageInfo.info.page == this.pageInfo.numberOfPage) {
+        this.pageInfo.isLastPage = true;
+      } else {
+        this.pageInfo.isLastPage = false;
+      }
   }
 
   searchProduct(page: number){
-    this.searchProductRequest.page = page;
-    this.service.searchProduct(this.searchProductRequest).subscribe(response=>{
-      this.getData(response.data);
-    });
-
+    this.searchProductRequest.page= page;
+    this.productService.searchProduct(this.searchProductRequest);
+    
   }
+
+
 
 }

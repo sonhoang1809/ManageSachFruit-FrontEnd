@@ -1,11 +1,10 @@
-import { DialogExampleComponent } from './../../dialog-example/dialog-example.component';
+import { ProductsService } from './../products.service';
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ProductDetailsComponent } from './../product-details/product-details.component';
 import { Product, ProductDetails } from './../../models/product';
 import { SearchProductRequest } from './../../Requests/search-product-request';
 import { SummaryService } from './../../services/summary.service';
 
-import { ResponseSearch } from 'src/app/models/response-search';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -15,22 +14,27 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ManageProductsListComponent implements OnInit {
 
-  @Input() productList: ProductDetails[] = [];
-  @Input() index: number = 1;
-  constructor(private dialog: MatDialog, private service: SummaryService) { }
+  productList: Product[] = null;
 
-  showDialogProduct(product: ProductDetails): void{
+  constructor(private dialog: MatDialog, private service: SummaryService, public productService: ProductsService) {
+    //console.log(this.productService.getProductList());
+    this.productList = this.productService.getProductList();
+    //console.log(this.productList);
+    //this.productList = this.productService.getProductList();
+  }
+  
+  ngOnInit(): void {   
+    
+  }
+  
 
+  showDialogProduct(productId: string): void{
     this.dialog.open<ProductDetailsComponent>(ProductDetailsComponent, {
       panelClass: 'myapp-no-padding-dialog',
       width: '650px',
-      data: product
+      data: productId
     });
-
   }
 
-  ngOnInit(): void {   
-   
-  }
   
 }

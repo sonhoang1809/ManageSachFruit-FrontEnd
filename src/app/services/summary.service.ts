@@ -14,7 +14,8 @@ import { UrlServerAPISummaryRevenueInMonth,
    UrlServerAPIStatisticsProfit,
    UrlServerAPISearchProduct,
    UrlServerAPIGetAllCategory,
-   UrlServerAPIStoreNewProduct
+   UrlServerAPIStoreNewProduct,
+   UrlServerAPIGetDetailsProduct
   } from './../models/url-api';
 import { ResponseServer } from './../models/response-server';
 
@@ -102,9 +103,11 @@ export class SummaryService {
 
   public storeNewProduct(data): Observable<ResponseServer>{
     const headers = { 'Authorization': 'Bearer my-token' };
-    console.log(data);
     return this.http.post<ResponseServer>(UrlServerAPIStoreNewProduct, data);
   }
 
-  
+  public getDetailsProduct(id: string): Observable<ResponseServer>{
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.get<ResponseServer>(UrlServerAPIGetDetailsProduct+'/'+id);
+  }
 }

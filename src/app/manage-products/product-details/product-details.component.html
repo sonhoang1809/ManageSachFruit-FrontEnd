@@ -1,12 +1,12 @@
 <div class="card" *ngIf="data!=null">
-    <h5 class="card-header">Chi tiết sản phẩm {{data.productName}}</h5>
+    <h5 class="card-header">Chi tiết sản phẩm {{productDetails.productName}}</h5>
     <form>
         <div class="card-body">
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
                     <label for="validationCustom01">Product name</label>
                     <input type="text" class="form-control" id="validationCustom01" placeholder="First name"
-                        value="{{data.productName}}" required>
+                        value="{{productDetails.productName}}" required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -14,7 +14,7 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
                     <label for="exampleFormControlTextarea1">Description</label>
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                        required>{{data.description}}</textarea>
+                        required>{{productDetails.description}}</textarea>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -22,7 +22,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <label for="validationCustom03">Tồn kho</label>
                     <input type="text" class="form-control" id="validationCustom03" placeholder="Số lượng tồn kho"
-                        required value="{{data.quantityInStock}}">
+                        required value="{{productDetails.quantityInStock}}">
                     <div class="invalid-feedback">
                         Please provide a valid city.
                     </div>
@@ -30,12 +30,12 @@
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <label for="validationCustom04">Số lượng lúc đầu</label>
                     <input type="text" class="form-control" id="validationCustom04" placeholder="Số lượng lúc đầu"
-                        readonly value="{{data.quantityAtBegining}}">
+                        readonly value="{{productDetails.quantityAtBegining}}">
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <label for="validationCustom05">Đơn vị tính</label>
                     <input type="text" class="form-control" id="validationCustom05" placeholder="Zip" required
-                        value="{{data.unit}}">
+                        value="{{productDetails.unit}}">
                     <div class="invalid-feedback">
                         Please provide a valid zip.
                     </div>
@@ -43,7 +43,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <label for="validationCustom05">Đơn giá</label>
                     <input type="number" class="form-control" id="validationCustom05"
-                        placeholder="{{data.cost.total | currency:'VND'}}" required value="">
+                        placeholder="{{productDetails.cost.total | currency:'VND'}}" required value="">
                     <div class="invalid-feedback">
                         Please provide a valid zip.
                     </div>
@@ -51,17 +51,17 @@
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <label for="input-select">Category</label>
                     <select class="form-control" id="input-select">
-                        <option value="{{data.category.id}}">{{data.category.categoryName}}</option>
+                        <option value="{{productDetails.category.id}}">{{productDetails.category.categoryName}}</option>
                         <option *ngFor="let category of categories" value="{{category.id}}">{{category.categoryName}}
                         </option>
                     </select>
                 </div>
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
-                    <label for="validationCustomUsername">{{data.cost.costDescription}}</label>
+                    <label for="validationCustomUsername">{{productDetails.cost.costDescription}}</label>
                     <div class="input-group">
 
                         <input type="number" class="form-control" id="validationCustomUsername"
-                            placeholder="{{data.cost.total | currency:'VND'}}" aria-describedby="inputGroupPrepend"
+                            placeholder="{{productDetails.cost.total | currency:'VND'}}" aria-describedby="inputGroupPrepend"
                             value="" required>
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroupPrepend">đồng</span>

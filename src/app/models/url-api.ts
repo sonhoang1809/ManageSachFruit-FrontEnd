@@ -1,5 +1,7 @@
-//export const UrlServer = "http://localhost:9000";
-export const UrlServer = "https://managesachfruits-backend.herokuapp.com";
+import { HttpHeaders, HttpParams } from '@angular/common/http';
+
+export const UrlServer = "http://localhost:9000";
+//export const UrlServer = "https://managesachfruits-backend.herokuapp.com";
  
 
 
@@ -26,3 +28,13 @@ export const UrlServerAPIGetAllCategory = UrlServer+'/api/Categories';
 
 
 export const UrlServerAPIStoreNewProduct = UrlServer+'/api/Products';
+export const UrlServerAPIGetDetailsProduct = UrlServer+'/api/Products';
+
+export interface Options{
+    headers?: HttpHeaders | {[header: string]: string | string[]},
+    observe?: 'body' | 'events' | 'response',
+    params?: HttpParams|{[param: string]: string | string[]},
+    reportProgress?: boolean,
+    responseType: 'json',
+    withCredentials?: boolean,
+}

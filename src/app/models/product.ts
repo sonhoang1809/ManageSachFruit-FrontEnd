@@ -12,6 +12,7 @@ export interface Product {
     unit: string;
     unitPrice: number;
     createAt: DateTime;
+    updateAt: DateTime;
 }
 
 export interface ProductDetails {

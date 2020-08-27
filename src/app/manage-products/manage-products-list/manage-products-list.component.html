@@ -7,25 +7,27 @@
                     <tr class="border-0">
                         <th class="border-0">#</th>
                         <th class="border-0">Tên sản phẩm</th>
-                        <th class="border-0">Loại sản phẩm</th>
                         <th class="border-0">Mô tả</th>
                         <th class="border-0">Tồn kho</th>                        
                         <th class="border-0">Đơn vị tính</th>
                         <th class="border-0">Đơn giá bán</th>
                         <th class="border-0"></th>
+                        <th class="border-0"></th>
                     </tr>
                 </thead>
                 <tbody *ngIf="productList!=null">
-                    <tr *ngFor="let product of productList;index as i">
+                    <tr *ngFor="let product of productService.getProductList();index as i">
                         <td>{{i+1}}</td>
                         <td>{{product.productName}}</td>
-                        <td>{{product.category.categoryName}}</td>
                         <td>{{product.description}}</td>
                         <td>{{product.quantityInStock}}</td>
                         <td>{{product.unit}}</td>
                         <td>{{product.unitPrice | currency: 'VND'}}</td>
+                        <td>
+                            <a class="btn btn-outline-light float-right" (click)='showDialogProduct(product.id);'>Chi tiết</a>
+                        </td>
                         <td colspan="9">
-                            <a class="btn btn-outline-light float-right" (click)='showDialogProduct(product);'>Chi tiết</a>
+                            <a class="btn btn-outline-light float-right" (click)='showDialogProduct(null);'>Xóa</a>
                         </td>
                     </tr>
                     <tr>

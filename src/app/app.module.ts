@@ -1,7 +1,10 @@
+import { SummaryService } from './services/summary.service';
+import { ProductsService } from './manage-products/products.service';
+import { HandleError } from './supports/handle-error';
 
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -43,6 +46,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ProductDetailsComponent } from './manage-products/product-details/product-details.component';
 import { MessageComponent } from './message/message.component';
 import { DialogExampleComponent } from './dialog-example/dialog-example.component';
+
 
 @NgModule({
   declarations: [
@@ -95,7 +99,10 @@ import { DialogExampleComponent } from './dialog-example/dialog-example.componen
     ]),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [
+    ProductsService,
+    SummaryService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

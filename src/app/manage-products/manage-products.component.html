@@ -13,31 +13,31 @@
                 <!-- product list  -->
                 <!-- ============================================================== -->
                 <div class="col-xl-9 col-lg-12 col-md-6 col-sm-12 col-12">
-                    <app-manage-products-list *ngIf="productList!=null" [productList]=productList>
+                    <app-manage-products-list>
                     </app-manage-products-list>
 
-                    <nav aria-label="Page navigation example" *ngIf="searchResult!=null">
-                        <ul class="pagination" *ngIf="pageInfo!=null">
+                    <nav aria-label="Page navigation example" *ngIf="pageInfo!=null" >
+                        <ul class="pagination" *ngIf="pageInfo.info!=null">
                             <li *ngIf="pageInfo.isFirstPage==false" class="page-item">
-                                <a class="page-link"  (click)="searchProduct(searchResult.info.page-1)">
+                                <a class="page-link"  (click)="searchProduct(pageInfo.info.page-1)">
                                     Previous
                                 </a>
                             </li>
                             <li *ngIf="pageInfo.isFirstPage==false" class="page-item">
-                                <a class="page-link" (click)="searchProduct(searchResult.info.page-1)">
-                                    {{searchResult.info.page-1}}
+                                <a class="page-link" (click)="searchProduct(pageInfo.info.page-1)">
+                                    {{pageInfo.info.page-1}}
                                 </a>
                             </li>
                             <li class="page-item active">
                                 <a class="page-link" >
-                                    {{searchResult.info.page}}
+                                    {{pageInfo.info.page}}
                                 </a>
                             </li>
                             <li *ngIf="pageInfo.isLastPage==false" class="page-item">
-                                <a class="page-link" (click)="searchProduct(searchResult.info.page+1)">{{searchResult.info.page+1}}</a>
+                                <a class="page-link" (click)="searchProduct(pageInfo.info.page+1)">{{pageInfo.info.page+1}}</a>
                             </li>
                             <li *ngIf="pageInfo.isLastPage==false" class="page-item">
-                                <a class="page-link" (click)="searchProduct(searchResult.info.page+1)">Next</a>
+                                <a class="page-link" (click)="searchProduct(pageInfo.info.page+1)">Next</a>
                             </li>
                         </ul>
                     </nav>
