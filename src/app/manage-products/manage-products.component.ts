@@ -30,7 +30,7 @@ export class ManageProductsComponent implements OnInit  {
     page: 1,
     search:"",
     sortField: "create_at",
-    sortOrder: 1,
+    sortOrder: 0,
     categoryId: null,
     unit: null
   };

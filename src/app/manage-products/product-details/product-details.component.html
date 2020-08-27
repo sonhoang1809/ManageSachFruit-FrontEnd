@@ -1,28 +1,29 @@
 <div class="card" *ngIf="data!=null">
-    <h5 class="card-header">Chi tiết sản phẩm {{productDetails.productName}}</h5>
-    <form>
+    <h5 *ngIf="productDetails!=null" class="card-header">Chi tiết sản phẩm {{productDetails.productName}}</h5>
+    <form *ngIf="productDetails!=null" [formGroup]="updateForm" (ngSubmit)="onUpdateProduct(inputForm.value,productDetails.id);">
         <div class="card-body">
-            <div class="row">
+            <div class="row" >
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
                     <label for="validationCustom01">Product name</label>
-                    <input type="text" class="form-control" id="validationCustom01" placeholder="First name"
-                        value="{{productDetails.productName}}" required>
+                    <input type="text" class="form-control" id="validationCustom01"
+                        placeholder="" value="{{productDetails.productName}}"
+                         required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
                 </div>
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
                     <label for="exampleFormControlTextarea1">Description</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                        required>{{productDetails.description}}</textarea>
+                    <textarea class="form-control"  id="exampleFormControlTextarea1"
+                        rows="3" required >{{productDetails.description}}</textarea>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <label for="validationCustom03">Tồn kho</label>
-                    <input type="text" class="form-control" id="validationCustom03" placeholder="Số lượng tồn kho"
-                        required value="{{productDetails.quantityInStock}}">
+                    <input type="number" class="form-control" id="validationCustom03" placeholder="" required
+                        value="{{productDetails.quantityInStock}}">
                     <div class="invalid-feedback">
                         Please provide a valid city.
                     </div>
@@ -34,7 +35,7 @@
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <label for="validationCustom05">Đơn vị tính</label>
-                    <input type="text" class="form-control" id="validationCustom05" placeholder="Zip" required
+                    <input type="text" class="form-control" id="validationCustom05" placeholder="Đơn vị tính" required
                         value="{{productDetails.unit}}">
                     <div class="invalid-feedback">
                         Please provide a valid zip.
@@ -42,8 +43,8 @@
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <label for="validationCustom05">Đơn giá</label>
-                    <input type="number" class="form-control" id="validationCustom05"
-                        placeholder="{{productDetails.cost.total | currency:'VND'}}" required value="">
+                    <input type="number" class="form-control" id="validationCustom05" placeholder="" required
+                        value="{{productDetails.unitPrice}}">
                     <div class="invalid-feedback">
                         Please provide a valid zip.
                     </div>
@@ -52,17 +53,16 @@
                     <label for="input-select">Category</label>
                     <select class="form-control" id="input-select">
                         <option value="{{productDetails.category.id}}">{{productDetails.category.categoryName}}</option>
-                        <option *ngFor="let category of categories" value="{{category.id}}">{{category.categoryName}}
+                        <option *ngFor="let category of categories" value="{{category.id}}"
+                             >{{category.categoryName}}
                         </option>
                     </select>
                 </div>
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
                     <label for="validationCustomUsername">{{productDetails.cost.costDescription}}</label>
                     <div class="input-group">
-
-                        <input type="number" class="form-control" id="validationCustomUsername"
-                            placeholder="{{productDetails.cost.total | currency:'VND'}}" aria-describedby="inputGroupPrepend"
-                            value="" required>
+                        <input type="number" class="form-control" id="validationCustomUsername" placeholder=""
+                            aria-describedby="inputGroupPrepend" value="{{productDetails.cost.total}}" required >
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroupPrepend">đồng</span>
                         </div>
@@ -105,8 +105,8 @@
                 </div>
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
                     <label for="exampleFormControlTextarea1">Mô tả</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required
-                        formControlName="description"></textarea>
+                    <textarea class="form-control" formControlName="description" id="exampleFormControlTextarea1"
+                        rows="3" required></textarea>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -122,19 +122,16 @@
 
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <label for="validationCustom05">Đơn vị tính</label>
-                    <input type="text" class="form-control" 
-                    id="validationCustom05" placeholder="" required 
-                    value="Kg"
-                    formControlName="unit">
+                    <input type="text" class="form-control" id="validationCustom05" placeholder="" required value="Kg"
+                        formControlName="unit">
                     <div class="invalid-feedback">
                         Please provide a valid zip.
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <label for="validationCustom05">Đơn giá</label>
-                    <input type="number" class="form-control" 
-                    id="validationCustom05" placeholder="" required value=""
-                    formControlName="unitPrice">
+                    <input type="number" class="form-control" id="validationCustom05" placeholder="" required value=""
+                        formControlName="unitPrice">
                     <div class="invalid-feedback">
                         Please provide a valid zip.
                     </div>
@@ -150,8 +147,7 @@
                     <label for="validationCustomUsername">Chi phí nhập</label>
                     <div class="input-group">
                         <input type="number" class="form-control" id="validationCustomUsername" placeholder=""
-                            aria-describedby="inputGroupPrepend" value="" required
-                            formControlName="importPrice">
+                            aria-describedby="inputGroupPrepend" value="" required formControlName="importPrice">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroupPrepend">đồng</span>
                         </div>

@@ -50,6 +50,14 @@ export class ProductsService {
   addProduct(prod: Product){
     this.productList.push(prod);
   }
+
+  updateProductInList(prod: Product){
+    for(var i = 0; i < this.productList.length;i++){
+      if(this.productList[i].id == prod.id){
+        this.productList[i] = prod;
+      }
+    }
+  }
   getData(responseData: ResponseSearch) {
     this.productList = [];
     //console.log(responseData);
@@ -118,6 +126,9 @@ export class ProductsService {
   }
   storeNewProduct(data) {
     return this.service.storeNewProduct(data);
+  }
+  updateProduct(data,id: string){
+    return this.service.updateProduct(data,id);
   }
 
 }

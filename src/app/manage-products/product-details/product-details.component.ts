@@ -16,12 +16,24 @@ export class ProductDetailsComponent implements OnInit {
 
   categories: Category[] = [];
   inputForm;
+  updateForm;
   productDetails: ProductDetails = null;
 
   constructor(private dialogRef: MatDialogRef<ProductDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: string, private productService: ProductsService,
     private formBuilder: FormBuilder, private dialog: MatDialog) {
+      
     this.inputForm = this.formBuilder.group({
+      productName: '',
+      description: '',
+      quantityInStock: '',
+      unit: '',
+      unitPrice: '',
+      categoryId: '',
+      importPrice: ''
+    });
+
+    this.updateForm = this.formBuilder.group({
       productName: '',
       description: '',
       quantityInStock: '',
@@ -34,10 +46,27 @@ export class ProductDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.productService.getDetailsProduct(this.data).subscribe(response => {
       this.productDetails = response.data;
+      //console.log(this.productDetails);
     });
     this.categories = this.productService.categoryList;
 
   }
+
+  onUpdateProduct(data, id: string){
+    console.log(data);
+    this.productService.updateProduct(data,id).subscribe(
+      (response)=> {
+        this.handleMessage(response.message);
+        this.productService.updateProductInList(response.data);
+        this.dialogRef.close();
+      },
+      (error)=>{
+        console.log(error);
+        this.handleError(error.error.message);
+      }
+    )
+  }
+
   onStoreProduct(data) {
     this.productService.storeNewProduct(data).subscribe(
       (response) => {
@@ -46,13 +75,14 @@ export class ProductDetailsComponent implements OnInit {
         if(this.productService.pageInfo.isLastPage && this.productService.productList.length<5){
           this.productService.addProduct(response.data);
         }
+        this.dialogRef.close();
       },
       (error) => {
         console.log(error);
-        this.handleError(error);
+        this.handleError(error.error.message);
       }
     );
-    this.dialogRef.close();
+    
   }
 
   handleMessage(message) {
