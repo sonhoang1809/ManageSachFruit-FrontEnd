@@ -10,16 +10,16 @@
         <h5 class="mb-0">Biểu đồ chi phí - doanh thu trong năm</h5>
     </div>
     <div class="card-body">
+        <div class="chartjs-container" *ngIf="lineChartModel==null">
+            <mat-spinner style="margin-left:auto; 
+                                margin-right:auto;" color="accent" diameter=30>
+            </mat-spinner>
+        </div>
         <div class="chartjs-container" *ngIf="lineChartModel!=null">
-            <canvas baseChart 
-                [datasets]="lineChartModel.lineChartData" 
-                [labels]="lineChartModel.lineChartLabels" 
-                [options]="lineChartModel.lineChartOptions"
-                [colors]="lineChartModel.lineChartColors" 
-                [legend]="lineChartModel.lineChartLegend" 
-                [chartType]="lineChartModel.lineChartType" 
-                [plugins]="lineChartModel.lineChartPlugins"
-                (chartHover)="lineChartModel.chartHovered($event)" 
+            <canvas baseChart [datasets]="lineChartModel.lineChartData" [labels]="lineChartModel.lineChartLabels"
+                [options]="lineChartModel.lineChartOptions" [colors]="lineChartModel.lineChartColors"
+                [legend]="lineChartModel.lineChartLegend" [chartType]="lineChartModel.lineChartType"
+                [plugins]="lineChartModel.lineChartPlugins" (chartHover)="lineChartModel.chartHovered($event)"
                 (chartClick)="lineChartModel.chartClicked($event)">
             </canvas>
         </div>

@@ -14,17 +14,17 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr *ngIf="recentOrders==null">
+                        <td colspan="9">                           
+                                <mat-spinner style="margin-left:auto; 
+                                margin-right:auto;" color="accent" diameter=30></mat-spinner>                           
+                        </td>
+                    </tr>
                     <tr *ngFor="let recentOrder of recentOrders; index as indexNumber">
-                        <!--<td>
-                                <div class="m-r-10"><img src="assets/images/product-pic.jpg"
-                                        alt="user" class="rounded" width="45"></div>
-                            </td>-->
                         <td>{{indexNumber+1}}</td>
                         <td>{{recentOrder.customerName}}</td>
-
                         <td>{{recentOrder.total | currency:'VND'}}</td>
-                        <td>{{recentOrder.orderTime}}</td>
-
+                        <td>{{getToStringTime(recentOrder.createAt)}}</td>
                         <td><span class="badge-dot badge-success mr-1"></span>{{recentOrder.status}}</td>
                         <td colspan="9">
                             <a href="#" class="btn btn-outline-light float-right">Xem chi tiết</a>

@@ -1,3 +1,5 @@
+import { MessageComponent } from './../message/message.component';
+import { MatDialog } from '@angular/material/dialog';
 import { Injectable } from '@angular/core';
 import { LineChartModel } from '../models/line-chart-model';
 import { ChartDataSets } from 'chart.js';
@@ -8,7 +10,7 @@ import { Label, Color } from 'ng2-charts';
 })
 export class GeneralHelperService {
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
   
   convertToLineChartModel(dataResponse: any){
     var lineChartData: ChartDataSets[] = [];
@@ -44,5 +46,26 @@ export class GeneralHelperService {
       // console.log("lineChartLabels:"+lineChartLabels);
       // console.log("lineChartColors:"+lineChartColors);
     return new LineChartModel(lineChartData,lineChartLabels,lineChartColors);    
+  }
+  handleMessage(title,message) {
+    this.dialog.open(MessageComponent, {
+      panelClass: 'myapp-no-padding-dialog',
+      position: {
+        bottom: '50px',
+        right: ' 50px'
+      },
+      data: {title: title, message: message}
+    });
+  }
+
+  handleError(titleCodeError, message) {
+    this.dialog.open(MessageComponent, {
+      panelClass: 'myapp-no-padding-dialog',
+      position: {
+        bottom: '50px',
+        right: ' 50px'
+      },
+      data: {title: titleCodeError, message: message}
+    });
   }
 }

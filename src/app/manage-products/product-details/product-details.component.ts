@@ -1,3 +1,4 @@
+import { GeneralHelperService } from './../../services/general-helper.service';
 import { MessageComponent } from './../../message/message.component';
 import { StoreProductRequest, Product } from './../../models/product';
 import { ProductsService } from './../products.service';
@@ -6,7 +7,7 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dial
 import { ProductDetails } from 'src/app/models/product';
 import { Category } from 'src/app/models/category';
 import { FormBuilder } from '@angular/forms';
-
+import { FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -15,13 +16,16 @@ import { FormBuilder } from '@angular/forms';
 export class ProductDetailsComponent implements OnInit {
 
   categories: Category[] = [];
-  inputForm;
-  updateForm;
+  categorySelected: string;
+  inputForm = null;
+  updateForm = null;
   productDetails: ProductDetails = null;
+
+  //selectFormControl = new FormControl('', Validators.required);
 
   constructor(private dialogRef: MatDialogRef<ProductDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ProductDetails, private productService: ProductsService,
-    private formBuilder: FormBuilder, private dialog: MatDialog) {
+    private formBuilder: FormBuilder, private dialog: MatDialog, private generalService: GeneralHelperService) {
       
     this.inputForm = this.formBuilder.group({
       productName: '',
@@ -33,36 +37,49 @@ export class ProductDetailsComponent implements OnInit {
       importPrice: ''
     });
 
-    this.updateForm = this.formBuilder.group({
-      productName: '',
-      description: '',
-      quantityInStock: '',
-      unit: '',
-      unitPrice: '',
-      categoryId: '',
-      importPrice: ''
-    });
+    // this.updateForm = this.formBuilder.group({
+    //   productName: '',
+    //   description: '',
+    //   quantityInStock: '',
+    //   unit: '',
+    //   unitPrice: '',
+    //   categoryId: '',
+    //   importPrice: ''
+    // });
   }
   ngOnInit(): void {
-    this.productService.getDetailsProduct(this.data.id).subscribe(response => {
-      this.data = response.data;
-      //console.log(this.productDetails);
-    });
-    this.categories = this.productService.categoryList;
+    if (this.data != null) {
+      this.productService.getDetailsProduct(this.data.id).subscribe(response => {
+        this.data = response.data;
+        this.categorySelected = this.data.category.id;
+
+        
+        this.updateForm = this.formBuilder.group({
+          productName: this.data.productName,
+          description: this.data.description,
+          quantityInStock: this.data.quantityInStock,
+          unit: this.data.unit,
+          unitPrice: this.data.unitPrice,
+          categoryId: this.data.category.id,
+          importPrice: this.data.cost.total
+        });
+      });
+    }
+    this.categories = this.productService.getCategories();
 
   }
 
-  onUpdateProduct(data, id: string){
-    console.log(data);
-    this.productService.updateProduct(data,id).subscribe(
-      (response)=> {
-        this.handleMessage(response.message);
+  onUpdateProduct(data, id: string) {
+    //console.log(data);
+    this.productService.updateProduct(data, id).subscribe(
+      (response) => {
+        this.generalService.handleMessage("Success",response.message);
         this.productService.updateProductInList(response.data);
         this.dialogRef.close();
       },
-      (error)=>{
+      (error) => {
         console.log(error);
-        this.handleError(error.error.message);
+        this.generalService.handleError('Error code: '+error.error.statusCode,error.error.message);
       }
     )
   }
@@ -71,41 +88,16 @@ export class ProductDetailsComponent implements OnInit {
     this.productService.storeNewProduct(data).subscribe(
       (response) => {
         //console.log(response.data);
-        this.handleMessage(response.message);
-        if(this.productService.pageInfo.isLastPage && this.productService.productList.length<5){
-          this.productService.addProduct(response.data);
-        }
+        this.generalService.handleMessage("Success",response.message);
+        this.productService.addProduct(response.data);
         this.dialogRef.close();
       },
       (error) => {
         console.log(error);
-        this.handleError(error.error.message);
+        this.generalService.handleError('Error code: '+error.error.statusCode,error.error.message);
       }
     );
-    
-  }
 
-  handleMessage(message) {
-    this.dialog.open(MessageComponent, {
-      panelClass: 'myapp-no-padding-dialog',
-      position: {
-        bottom: '50px',
-        right: ' 50px'
-      },
-      data: message
-    });
   }
-
-  handleError(error) {
-    this.dialog.open(MessageComponent, {
-      panelClass: 'myapp-no-padding-dialog',
-      position: {
-        bottom: '50px',
-        right: ' 50px'
-      },
-      data: error
-    });
-  }
-
 
 }

@@ -13,6 +13,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "./node_modules/ng2-charts/__ivy_ngcc__/fesm2015/g2-charts.js"
+           ],
             "outputPath": "dist/ManageSachFruits",
             "index": "src/index.html",
             "main": "src/main.ts",

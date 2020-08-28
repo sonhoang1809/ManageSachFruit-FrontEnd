@@ -21,6 +21,7 @@ export interface ProductDetails {
     description: string;
     quantityInStock: number;
     quantityAtBegining: number;
+    categoryId: string;
     unit: string;
     unitPrice: number;
     createAt: DateTime;

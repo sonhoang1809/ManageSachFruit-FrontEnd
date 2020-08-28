@@ -28,7 +28,7 @@ export class ProductsService {
   searchResult: ResponseSearch = null;
   detailsProduct: ProductDetails;
   public pageInfo: PageInfo = { isFirstPage: true, isLastPage: false, numberOfPage: 1, info: null };
-  public productList: Product[] = [];
+  public productList: Product[] = null;
   public categoryList: Category[] = [];
 
   constructor(private service: SummaryService, private dialog: MatDialog) {
@@ -38,7 +38,7 @@ export class ProductsService {
     //   this.getData(response.data);
     // });
     if(this.productList == null || this.productList.length==0){
-      console.log("Go search");
+      //console.log("Go search");
       this.searchProduct(this.searchProductRequest);
       //console.log(this.productList);
     }
@@ -48,7 +48,9 @@ export class ProductsService {
     });
   }
   addProduct(prod: Product){
-    this.productList.push(prod);
+    if (this.pageInfo.isLastPage && this.productList.length < 5) {
+      this.productList.push(prod);
+    } 
   }
 
   updateProductInList(prod: Product){
@@ -58,16 +60,20 @@ export class ProductsService {
       }
     }
   }
-  getData(responseData: ResponseSearch) {
-    this.productList = [];
-    //console.log(responseData);
-    this.pageInfo.info = responseData.info;
- 
- //   this.productList = responseData.data;
-    for(var prod of responseData.data){
-      this.productList.push(prod);
+  deleteProductInlist(prod:Product){
+    if(this.pageInfo.isLastPage){
+      for(var i = 0; i < this.productList.length;i++){
+        if(this.productList[i].id == prod.id){
+          this.productList.slice(i,1);
+        }
+      }
     }
-    //console.log(this.productList);
+  }
+  getData(responseData: ResponseSearch) {
+    this.pageInfo.info = responseData.info;
+    console.log(this.pageInfo);
+    this.productList = responseData.data;
+
     this.pageInfo.numberOfPage = Math.ceil(this.pageInfo.info.totalRecord / this.pageInfo.info.limit);
       if (this.pageInfo.info.page == 1) {
         this.pageInfo.isFirstPage = true;
@@ -84,7 +90,9 @@ export class ProductsService {
   getProductList() {
     return this.productList;
   }
-
+  getCategories(){
+    return this.categoryList;
+  }
   handleMessage(message){
     this.dialog.open(MessageComponent,{
       panelClass: 'myapp-no-padding-dialog',
@@ -111,8 +119,33 @@ export class ProductsService {
     return this.pageInfo;
   }
 
+  searchProductOrderBy(sortField: string, sortOrder: number){
+    // var searchProductRequest: SearchProductRequest = {
+    //   limit: this.searchProductRequest.limit,
+    //   page: this.searchProductRequest.page,
+    //   search: this.searchProductRequest.search,
+    //   sortField: sortField,
+    //   sortOrder: sortOrder,
+    //   categoryId: this.searchProductRequest.categoryId,
+    //   unit: this.searchProductRequest.unit
+    // };
+    this.searchProductRequest.sortField = sortField;
+    this.searchProductRequest.sortOrder = sortOrder;
+    this.searchProduct(this.searchProductRequest);
+  }
+
+  searchProductByPage(page: number){
+    this.searchProductRequest.page = page;
+    this.searchProduct(this.searchProductRequest);
+  }
+
   searchProduct(searchProductRequest: SearchProductRequest) {
-    return this.service.searchProduct(searchProductRequest).subscribe(response=>{
+    this.productList = null;
+    if(searchProductRequest!=null){
+      this.searchProductRequest = searchProductRequest;
+    }
+    console.log(this.searchProductRequest);
+    return this.service.searchProduct(this.searchProductRequest).subscribe(response=>{
       this.getData(response.data);
     });
   }
@@ -129,6 +162,9 @@ export class ProductsService {
   }
   updateProduct(data,id: string){
     return this.service.updateProduct(data,id);
+  }
+  deleteProduct(id: string){
+    return this.service.deleteProduct(id);
   }
 
 }

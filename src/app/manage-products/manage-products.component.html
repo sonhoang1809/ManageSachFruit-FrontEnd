@@ -16,32 +16,36 @@
                     <app-manage-products-list>
                     </app-manage-products-list>
 
-                    <nav aria-label="Page navigation example" *ngIf="pageInfo!=null" >
+                    <nav aria-label="Page navigation example" *ngIf="pageInfo!=null">
                         <ul class="pagination" *ngIf="pageInfo.info!=null">
                             <li *ngIf="pageInfo.isFirstPage==false" class="page-item">
-                                <a class="page-link"  (click)="searchProduct(pageInfo.info.page-1)">
+                                <button mat-raised-button class="page-link"
+                                    (click)="searchProduct(pageInfo.info.page-1)">
                                     Previous
-                                </a>
+                                </button>
                             </li>
                             <li *ngIf="pageInfo.isFirstPage==false" class="page-item">
-                                <a class="page-link" (click)="searchProduct(pageInfo.info.page-1)">
+                                <button mat-raised-button class="page-link"
+                                    (click)="searchProduct(pageInfo.info.page-1)">
                                     {{pageInfo.info.page-1}}
-                                </a>
+                                </button>
                             </li>
                             <li class="page-item active">
-                                <a class="page-link" >
+                                <button mat-raised-button class="page-link">
                                     {{pageInfo.info.page}}
-                                </a>
+                                </button>
                             </li>
                             <li *ngIf="pageInfo.isLastPage==false" class="page-item">
-                                <a class="page-link" (click)="searchProduct(pageInfo.info.page+1)">{{pageInfo.info.page+1}}</a>
+                                <button mat-raised-button class="page-link"
+                                    (click)="searchProduct(pageInfo.info.page+1)">{{pageInfo.info.page+1}}</button>
                             </li>
                             <li *ngIf="pageInfo.isLastPage==false" class="page-item">
-                                <a class="page-link" (click)="searchProduct(pageInfo.info.page+1)">Next</a>
+                                <button mat-raised-button class="page-link"
+                                    (click)="searchProduct(pageInfo.info.page+1)">Next</button>
                             </li>
                         </ul>
                     </nav>
-                    
+
                 </div>
                 <!-- ============================================================== -->
                 <!-- end recent orders  -->

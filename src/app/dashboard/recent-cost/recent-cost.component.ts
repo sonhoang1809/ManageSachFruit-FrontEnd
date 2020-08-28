@@ -10,7 +10,7 @@ import { SearchRequest } from 'src/app/Requests/search-request';
 })
 export class RecentCostComponent implements OnInit {
 
-  recentCosts: Array<CostDetails> = [];
+  recentCosts: Array<CostDetails> = null;
 
   constructor(private summaryService: SummaryService) { }
 
@@ -24,9 +24,8 @@ export class RecentCostComponent implements OnInit {
     };
     this.summaryService.searchCost(searchCost)
     .subscribe( response => {
-      for(var data of response.data.data){
-        this.recentCosts.push(data);
-      }
+      this.recentCosts = response.data.data;
+      //console.log(this.recentCosts);
     });
   }
 

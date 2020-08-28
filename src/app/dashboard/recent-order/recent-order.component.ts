@@ -12,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecentOrderComponent implements OnInit {
 
-  recentOrders: Array<OrderDetails> = [];
+  recentOrders: Array<OrderDetails> = null;
 
   constructor(private summaryService: SummaryService) { }
 
@@ -27,17 +27,11 @@ export class RecentOrderComponent implements OnInit {
 
     this.summaryService.searchOrder(searchOrder)
     .subscribe( response => {
-      for(var data of response.data.data){
-
-        this.recentOrders.push(
-          new OrderDetails(data.id,data.customerName,data.total,
-            new DateTime(data.createAt.day,data.createAt.month,data.createAt.year,data.createAt.hour,
-              data.createAt.minute,data.createAt.second)
-          )
-        );
-      }
+      this.recentOrders = response.data.data;
     });
-    
+  }
+  getToStringTime(time: DateTime): string{
+    return time.day+'-'+time.month+'-'+time.year+' '+time.hour+':'+time.minute+':'+time.second;
   }
 
 }

@@ -47,6 +47,7 @@ export class SummaryOrderCostChartComponent implements OnInit {
   }
 
   submit(event: any){
+    this.lineChartModel = null;
     //console.log(event.target.value);
     this.summaryService.getStatisticRevenueCost(event.target.value).subscribe(response=>{
       this.lineChartModel = this.generalHelper.convertToLineChartModel(response.data);

@@ -10,6 +10,11 @@
         <h5 class="mb-0">{{summaryFrame.descriptionSummary}}</h5>
     </div>
     <div class="card-body">
+        <div class="chartjs-container" *ngIf="lineChartModel==null">
+            <mat-spinner style="margin-left:auto; 
+                                margin-right:auto;" color="accent" diameter=30>
+            </mat-spinner>
+        </div>
         <div class="chartjs-container" *ngIf="lineChartModel != null">
             <canvas baseChart [datasets]="lineChartModel.lineChartData" [labels]="lineChartModel.lineChartLabels"
                 [options]="lineChartModel.lineChartOptions" [colors]="lineChartModel.lineChartColors"

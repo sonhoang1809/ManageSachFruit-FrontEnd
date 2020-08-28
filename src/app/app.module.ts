@@ -43,9 +43,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSelectModule} from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 import { ProductDetailsComponent } from './manage-products/product-details/product-details.component';
 import { MessageComponent } from './message/message.component';
 import { DialogExampleComponent } from './dialog-example/dialog-example.component';
+import { VerifyActionComponent } from './verify-action/verify-action.component';
 
 
 @NgModule({
@@ -77,7 +84,8 @@ import { DialogExampleComponent } from './dialog-example/dialog-example.componen
     ManageProductsListComponent,
     ProductDetailsComponent,
     MessageComponent,
-    DialogExampleComponent
+    DialogExampleComponent,
+    VerifyActionComponent
   ],
   imports: [
     BrowserModule,
@@ -92,6 +100,12 @@ import { DialogExampleComponent } from './dialog-example/dialog-example.componen
     MatButtonModule, 
     MatCardModule, 
     MatFormFieldModule,
+    MatProgressSpinnerModule,
+    MatSelectModule,
+    MatIconModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
     RouterModule.forRoot([
       {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
       {path: 'dashboard', component: DashboardComponent},

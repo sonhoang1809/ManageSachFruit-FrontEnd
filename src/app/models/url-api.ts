@@ -30,6 +30,7 @@ export const UrlServerAPIGetAllCategory = UrlServer+'/api/Categories';
 export const UrlServerAPIStoreNewProduct = UrlServer+'/api/Products';
 export const UrlServerAPIGetDetailsProduct = UrlServer+'/api/Products';
 export const UrlServerAPIUpdateProduct = UrlServer+'/api/Products';
+export const UrlServerAPIDeleteProduct = UrlServer+'/api/Products';
 
 export interface Options{
     headers?: HttpHeaders | {[header: string]: string | string[]},

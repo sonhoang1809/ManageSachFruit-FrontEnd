@@ -32,6 +32,7 @@ export class SummaryProfitComponent implements OnInit {
   }
 
   submit(event: any){
+    this.lineChartModel = null;
     //console.log(event.target.value);
     this.summaryService.getStatisticProfit(event.target.value).subscribe(response=>{
       this.lineChartModel = this.convertToLineChartModel(response.data);
