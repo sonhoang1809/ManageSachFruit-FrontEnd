@@ -1,6 +1,6 @@
-import { SummaryService } from './../../services/summary.service';
+import { SummaryFrame } from './../../../models/summary-frame';
+import { SummaryService } from './../../../services/summary.service';
 
-import { SummaryFrame } from './../../models/summary-frame';
 import { Component, OnInit } from '@angular/core';
 
 

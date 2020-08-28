@@ -1,7 +1,8 @@
-import { SummaryFrame } from './../../models/summary-frame';
-import { LineChartModel } from './../../models/line-chart-model';
-import { GeneralHelperService } from './../../services/general-helper.service';
-import { SummaryService } from './../../services/summary.service';
+import { SummaryService } from './../../../services/summary.service';
+import { GeneralHelperService } from './../../../services/general-helper.service';
+import { LineChartModel } from './../../../models/line-chart-model';
+import { SummaryFrame } from './../../../models/summary-frame';
+
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
 import { Label, Color } from 'ng2-charts';

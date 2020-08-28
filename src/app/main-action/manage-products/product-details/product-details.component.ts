@@ -1,6 +1,7 @@
-import { GeneralHelperService } from './../../services/general-helper.service';
-import { MessageComponent } from './../../message/message.component';
-import { StoreProductRequest, Product } from './../../models/product';
+import { StoreProductRequest } from './../../../models/product';
+import { MessageComponent } from './../../../message/message.component';
+import { GeneralHelperService } from './../../../services/general-helper.service';
+
 import { ProductsService } from './../products.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';

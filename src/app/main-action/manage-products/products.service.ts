@@ -1,13 +1,14 @@
-import { Category } from 'src/app/models/category';
+import { Category } from './../../models/category';
+import { PageInfo } from './../../models/page-info';
+import { SummaryService } from './../../services/summary.service';
+import { ProductDetails, Product } from './../../models/product';
+import { SearchProductRequest } from './../../Requests/search-product-request';
+import { ResponseSearch } from './../../models/response-search';
+import { MessageComponent } from './../../message/message.component';
+
 import { catchError, retry } from 'rxjs/operators';
-import { MessageComponent } from './../message/message.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ResponseSearch } from './../models/response-search';
-import { SearchProductRequest } from './../Requests/search-product-request';
-import { ProductDetails, Product } from './../models/product';
-import { SummaryService } from './../services/summary.service';
 import { Injectable, OnInit } from '@angular/core';
-import { PageInfo } from '../models/page-info';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -29,19 +30,17 @@ export class ProductsService {
   detailsProduct: ProductDetails;
   public pageInfo: PageInfo = { isFirstPage: true, isLastPage: false, numberOfPage: 1, info: null };
   public productList: Product[] = null;
+  
   public categoryList: Category[] = [];
 
   constructor(private service: SummaryService, private dialog: MatDialog) {
     
-    // this.service.searchProduct(this.searchProductRequest).subscribe(response=>{
-    //   console.log("On init");
-    //   this.getData(response.data);
-    // });
     if(this.productList == null || this.productList.length==0){
       //console.log("Go search");
       this.searchProduct(this.searchProductRequest);
       //console.log(this.productList);
     }
+    //console.log(this.productList);
 
     this.service.getAllCategories().subscribe(response=>{
       this.categoryList = response.data;
@@ -61,13 +60,7 @@ export class ProductsService {
     }
   }
   deleteProductInlist(prod:Product){
-    // if(this.pageInfo.isLastPage){
-    //   for(var i = 0; i < this.productList.length;i++){
-    //     if(this.productList[i].id == prod.id){
-    //       this.productList.slice(i,1);
-    //     }
-    //   }
-    // }
+
   }
   getData(responseData: ResponseSearch) {
     
@@ -93,11 +86,13 @@ export class ProductsService {
   }
 
   getProductList() {
+    
     return this.productList;
   }
   getCategories(){
     return this.categoryList;
   }
+
   handleMessage(message){
     this.dialog.open(MessageComponent,{
       panelClass: 'myapp-no-padding-dialog',
@@ -144,17 +139,20 @@ export class ProductsService {
     this.searchProduct(this.searchProductRequest);
   }
 
-  searchProduct(searchProductRequest: SearchProductRequest) {
+  searchProduct(searchProductRequest: SearchProductRequest){
     this.productList = null;
     if(searchProductRequest!=null){
       this.searchProductRequest = searchProductRequest;
     }
     //console.log(this.searchProductRequest);
-    return this.service.searchProduct(this.searchProductRequest).subscribe(response=>{
-      this.getData(response.data);
-    });
+    this.searchProductList(this.searchProductRequest).subscribe(response=>
+      this.getData(response.data)
+    );
   }
 
+  searchProductList(searchProductRequest: SearchProductRequest){
+    return this.service.searchProduct(searchProductRequest);
+  }
 
   getAllCategories() {
     return this.service.getAllCategories();

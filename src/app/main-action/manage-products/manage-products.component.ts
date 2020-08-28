@@ -1,15 +1,17 @@
-import { MessageComponent } from './../message/message.component';
+import { SearchProductRequest } from './../../Requests/search-product-request';
+import { SummaryService } from './../../services/summary.service';
+import { Product, ProductDetails } from './../../models/product';
+import { ResponseSearch } from './../../models/response-search';
+import { PageInfo } from './../../models/page-info';
+
+import { MessageComponent } from './../../message/message.component';
+
 import { ProductsService } from './products.service';
 
 import { Component, OnInit } from '@angular/core';
-import { LoginComponent } from './../login/login.component';
+
 import { MatDialog } from '@angular/material/dialog';
 import { ManageProductsListComponent } from './manage-products-list/manage-products-list.component';
-import { PageInfo } from './../models/page-info';
-import { ResponseSearch } from './../models/response-search';
-import { Product, ProductDetails } from './../models/product';
-import { SummaryService } from './../services/summary.service';
-import { SearchProductRequest } from './../Requests/search-product-request';
 
 
 @Component({
@@ -80,9 +82,8 @@ export class ManageProductsComponent implements OnInit  {
   }
 
   searchProduct(page: number){
-    this.searchProductRequest.page= page;
-    this.productService.searchProduct(this.searchProductRequest);
-    
+    //this.searchProductRequest.page= page;
+    this.productService.searchProductByPage(page); 
   }
 
 

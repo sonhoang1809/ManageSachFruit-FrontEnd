@@ -1,7 +1,8 @@
-import { GeneralHelperService } from './../../services/general-helper.service';
-import { LineChartModel } from './../../models/line-chart-model';
+import { SummaryService } from './../../../services/summary.service';
+import { LineChartModel } from './../../../models/line-chart-model';
+import { GeneralHelperService } from './../../../services/general-helper.service';
+
 import { Label, Color } from 'ng2-charts';
-import { SummaryService } from './../../services/summary.service';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,

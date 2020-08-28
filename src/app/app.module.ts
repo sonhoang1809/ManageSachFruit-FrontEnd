@@ -1,6 +1,36 @@
+
+import { VerifyActionComponent } from './main-action/verify-action/verify-action.component';
+import { DialogExampleComponent } from './main-action/dialog-example/dialog-example.component';
+import { ProductDetailsComponent } from './main-action/manage-products/product-details/product-details.component';
+import { ManageProductsComponent } from './main-action/manage-products/manage-products.component';
+import { ManageProductsListComponent } from './main-action/manage-products/manage-products-list/manage-products-list.component';
+import { ManageProductsFilterComponent } from './main-action/manage-products/manage-products-filter/manage-products-filter.component';
+import { SummaryProfitComponent } from './main-action/dashboard/summary-profit/summary-profit.component';
+import { SummaryOrderCostChartComponent } from './main-action/dashboard/summary-order-cost-chart/summary-order-cost-chart.component';
+import { RecentCostComponent } from './main-action/dashboard/recent-cost/recent-cost.component';
+import { SummarySalesByComponent } from './main-action/dashboard/summary-sales-by/summary-sales-by.component';
+import { SummarySalesComponent } from './main-action/dashboard/summary-sales/summary-sales.component';
+import { TopPerformingComponent } from './main-action/dashboard/top-performing/top-performing.component';
+import { ProductSalesComponent } from './main-action/dashboard/product-sales/product-sales.component';
+import { ProductCategoryComponent } from './main-action/dashboard/product-category/product-category.component';
+import { CustomerAcquisitionComponent } from './main-action/dashboard/customer-acquisition/customer-acquisition.component';
+import { RecentOrderComponent } from './main-action/dashboard/recent-order/recent-order.component';
+import { SummaryRevenueComponent } from './main-action/dashboard/summary-revenue/summary-revenue.component';
+import { PageHeaderContentComponent } from './main-action/page-header-content/page-header-content.component';
+import { FooterComponent } from './main-action/footer/footer.component';
+import { DashboardComponent } from './main-action/dashboard/dashboard.component';
+import { HeaderComponent } from './main-action/header/header.component';
+import { SideBarComponent } from './main-action/side-bar/side-bar.component';
+import { DoughnutChartComponent } from './main-action/charts/doughnut-chart/doughnut-chart.component';
+import { PieChartComponent } from './main-action/charts/pie-chart/pie-chart.component';
+import { BarChartComponent } from './main-action/charts/bar-chart/bar-chart.component';
+import { LineChartComponent } from './main-action/charts/line-chart/line-chart.component';
+import { MessageComponent } from './message/message.component';
+import { MainActionComponent } from './main-action/main-action.component';
+
 import { SummaryService } from './services/summary.service';
-import { ProductsService } from './manage-products/products.service';
-import { HandleError } from './supports/handle-error';
+import { ProductsService } from './main-action/manage-products/products.service';
+//import { HandleError } from './supports/handle-error';
 
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
@@ -10,49 +40,29 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+
 import { environment } from '../environments/environment';
+
 import { LoginComponent } from './login/login.component';
-import { SideBarComponent } from './side-bar/side-bar.component';
-import { HeaderComponent } from './header/header.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { FooterComponent } from './footer/footer.component';
-import { PageHeaderContentComponent } from './page-header-content/page-header-content.component';
-import { SummaryRevenueComponent } from './dashboard/summary-revenue/summary-revenue.component';
-import { RecentOrderComponent } from './dashboard/recent-order/recent-order.component';
-import { CustomerAcquisitionComponent } from './dashboard/customer-acquisition/customer-acquisition.component';
-import { ProductCategoryComponent } from './dashboard/product-category/product-category.component';
-import { ProductSalesComponent } from './dashboard/product-sales/product-sales.component';
-import { TopPerformingComponent } from './dashboard/top-performing/top-performing.component';
-import { SummarySalesComponent } from './dashboard/summary-sales/summary-sales.component';
-import { SummarySalesByComponent } from './dashboard/summary-sales-by/summary-sales-by.component';
-import { RecentCostComponent } from './dashboard/recent-cost/recent-cost.component';
-import { SummaryOrderCostChartComponent } from './dashboard/summary-order-cost-chart/summary-order-cost-chart.component';
+
 import { ChartsModule } from 'ng2-charts';
-import { LineChartComponent } from './charts/line-chart/line-chart.component';
-import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
-import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
-import { DoughnutChartComponent } from './charts/doughnut-chart/doughnut-chart.component';
+
 import { ReactiveFormsModule } from '@angular/forms';
-import { SummaryProfitComponent } from './dashboard/summary-profit/summary-profit.component';
-import { ManageProductsFilterComponent } from './manage-products/manage-products-filter/manage-products-filter.component';
-import { ManageProductsListComponent } from './manage-products/manage-products-list/manage-products-list.component';
-import { ManageProductsComponent } from './manage-products/manage-products.component';
 import { MaterialModule } from './material/material.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatSelectModule} from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
-import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSortModule} from '@angular/material/sort';
-import { ProductDetailsComponent } from './manage-products/product-details/product-details.component';
-import { MessageComponent } from './message/message.component';
-import { DialogExampleComponent } from './dialog-example/dialog-example.component';
-import { VerifyActionComponent } from './verify-action/verify-action.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+
+
+
 
 
 @NgModule({
@@ -85,7 +95,8 @@ import { VerifyActionComponent } from './verify-action/verify-action.component';
     ProductDetailsComponent,
     MessageComponent,
     DialogExampleComponent,
-    VerifyActionComponent
+    VerifyActionComponent,
+    MainActionComponent
   ],
   imports: [
     BrowserModule,
@@ -94,11 +105,11 @@ import { VerifyActionComponent } from './verify-action/verify-action.component';
     ChartsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MaterialModule, 
+    MaterialModule,
     MatDialogModule,
-    MatInputModule, 
-    MatButtonModule, 
-    MatCardModule, 
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
     MatSelectModule,
@@ -107,9 +118,17 @@ import { VerifyActionComponent } from './verify-action/verify-action.component';
     MatPaginatorModule,
     MatSortModule,
     RouterModule.forRoot([
-      {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
-      {path: 'dashboard', component: DashboardComponent},
-      {path: 'manageProduct/products', component: ManageProductsComponent}
+      { path: '', redirectTo: 'main', pathMatch: 'full' },
+      {
+        path: 'main', component: MainActionComponent, children: [
+          { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+          { path: 'dashboard', component: DashboardComponent },
+          { path: 'products', component: ManageProductsComponent }
+        ]
+      }
+      //{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+      //{path: 'dashboard', component: DashboardComponent},
+      //{ path: 'manageProduct/products', component: ManageProductsComponent }
     ]),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],

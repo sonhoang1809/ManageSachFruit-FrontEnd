@@ -1,12 +1,13 @@
-import { GeneralHelperService } from './../../services/general-helper.service';
+import { SummaryService } from './../../../services/summary.service';
+import { SearchProductRequest } from './../../../Requests/search-product-request';
+import { ProductDetails, Product } from './../../../models/product';
+import { GeneralHelperService } from './../../../services/general-helper.service';
+
 import { VerifyActionComponent } from './../../verify-action/verify-action.component';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { ProductsService } from './../products.service';
-import { Component, OnInit, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, ViewChild, Injectable } from '@angular/core';
 import { ProductDetailsComponent } from './../product-details/product-details.component';
-import { Product, ProductDetails } from './../../models/product';
-import { SearchProductRequest } from './../../Requests/search-product-request';
-import { SummaryService } from './../../services/summary.service';
 
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -17,6 +18,7 @@ import { Sort } from '@angular/material/sort';
   templateUrl: './manage-products-list.component.html',
   styleUrls: ['./manage-products-list.component.css']
 })
+
 export class ManageProductsListComponent implements OnInit {
 
   //displayedColumns: string[] = ['Vi tri', 'name', 'weight', 'symbol'];
@@ -30,10 +32,32 @@ export class ManageProductsListComponent implements OnInit {
 
   constructor(private dialog: MatDialog, private service: SummaryService, public productService: ProductsService,
     private generalHelper: GeneralHelperService) {
-    //this.productList = this.productService.getProductList();
+      
+      if(this.productService.getProductList()!=null){
+        this.productList = this.productService.getProductList();
+      }else{
+        this.searchProduct();
+      }
+      
+      console.log(this.productList);
+      
     //this.dataSource = new MatTableDataSource<Product>(this.productService.getProductList());
     //this.index = this.productService.getPageInfo().info.page * this.productService.getPageInfo().info.limit;
 
+  }
+
+  searchProduct(){
+    this.productService.searchProductList({
+      limit: 5,
+      page: 1,
+      search: "",
+      sortField: "create_at",
+      sortOrder: 0,
+      categoryId: null,
+      unit: null
+    }).subscribe(response=>{
+      this.productList = response.data.data;
+    });
   }
 
   ngOnInit(): void {

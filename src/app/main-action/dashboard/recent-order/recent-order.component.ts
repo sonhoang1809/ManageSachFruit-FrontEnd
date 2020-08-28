@@ -1,7 +1,8 @@
-import { DateTime } from './../../models/date-time';
-import { SummaryService } from './../../services/summary.service';
-import { SearchRequest } from '../../Requests/search-request';
-import { OrderDetails } from './../../models/order-details';
+import { OrderDetails } from './../../../models/order-details';
+import { SearchRequest } from './../../../Requests/search-request';
+import { SummaryService } from './../../../services/summary.service';
+import { DateTime } from './../../../models/date-time';
+
 
 import { Component, OnInit } from '@angular/core';
 
