@@ -61,19 +61,24 @@ export class ProductsService {
     }
   }
   deleteProductInlist(prod:Product){
-    if(this.pageInfo.isLastPage){
-      for(var i = 0; i < this.productList.length;i++){
-        if(this.productList[i].id == prod.id){
-          this.productList.slice(i,1);
-        }
-      }
-    }
+    // if(this.pageInfo.isLastPage){
+    //   for(var i = 0; i < this.productList.length;i++){
+    //     if(this.productList[i].id == prod.id){
+    //       this.productList.slice(i,1);
+    //     }
+    //   }
+    // }
   }
   getData(responseData: ResponseSearch) {
+    
+    //console.log(this.productList);
+    if(responseData.data.length==0 && responseData.info.page>1){    
+      this.searchProductByPage(responseData.info.page-1);
+      return;
+    }
     this.pageInfo.info = responseData.info;
-    console.log(this.pageInfo);
+    //console.log(this.pageInfo);
     this.productList = responseData.data;
-
     this.pageInfo.numberOfPage = Math.ceil(this.pageInfo.info.totalRecord / this.pageInfo.info.limit);
       if (this.pageInfo.info.page == 1) {
         this.pageInfo.isFirstPage = true;
@@ -144,7 +149,7 @@ export class ProductsService {
     if(searchProductRequest!=null){
       this.searchProductRequest = searchProductRequest;
     }
-    console.log(this.searchProductRequest);
+    //console.log(this.searchProductRequest);
     return this.service.searchProduct(this.searchProductRequest).subscribe(response=>{
       this.getData(response.data);
     });

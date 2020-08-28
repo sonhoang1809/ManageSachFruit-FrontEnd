@@ -57,12 +57,12 @@ export class ManageProductsListComponent implements OnInit {
       data:{title:'Xác nhận',message:'Bạn có chắc muốn xóa sản phẩm: '+prod.productName}
     });
     dialogRef.afterClosed().subscribe(result=>{
-      console.log(result);
+      //console.log(result);
       if(result == true){
         this.productService.deleteProduct(prod.id).subscribe(
           (response)=>{
             this.generalHelper.handleMessage("Success",response.message);
-            this.productService.deleteProductInlist(prod);
+            this.productService.searchProduct(null);
             dialogRef.close();
           },
           (error)=>{
