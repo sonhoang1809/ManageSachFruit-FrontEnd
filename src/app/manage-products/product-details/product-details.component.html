@@ -1,12 +1,12 @@
 <div class="card" *ngIf="data!=null">
-    <h5 *ngIf="productDetails!=null" class="card-header">Chi tiết sản phẩm {{productDetails.productName}}</h5>
-    <form *ngIf="productDetails!=null" [formGroup]="updateForm" (ngSubmit)="onUpdateProduct(inputForm.value,productDetails.id);">
+    <h5 class="card-header">Chi tiết sản phẩm</h5>
+    <form [formGroup]="updateForm" (ngSubmit)="onUpdateProduct(inputForm.value,data.id);">
         <div class="card-body">
             <div class="row" >
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
                     <label for="validationCustom01">Product name</label>
                     <input type="text" class="form-control" id="validationCustom01"
-                        placeholder="" value="{{productDetails.productName}}"
+                        placeholder="" value="{{data.productName}}"
                          required>
                     <div class="valid-feedback">
                         Looks good!
@@ -14,8 +14,8 @@
                 </div>
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
                     <label for="exampleFormControlTextarea1">Description</label>
-                    <textarea class="form-control"  id="exampleFormControlTextarea1"
-                        rows="3" required >{{productDetails.description}}</textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1"
+                        rows="3" required >{{data.description}}</textarea>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -23,7 +23,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <label for="validationCustom03">Tồn kho</label>
                     <input type="number" class="form-control" id="validationCustom03" placeholder="" required
-                        value="{{productDetails.quantityInStock}}">
+                        value="{{data.quantityInStock}}">
                     <div class="invalid-feedback">
                         Please provide a valid city.
                     </div>
@@ -31,12 +31,12 @@
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <label for="validationCustom04">Số lượng lúc đầu</label>
                     <input type="text" class="form-control" id="validationCustom04" placeholder="Số lượng lúc đầu"
-                        readonly value="{{productDetails.quantityAtBegining}}">
+                        readonly value="{{data.quantityAtBegining}}">
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <label for="validationCustom05">Đơn vị tính</label>
                     <input type="text" class="form-control" id="validationCustom05" placeholder="Đơn vị tính" required
-                        value="{{productDetails.unit}}">
+                        value="{{data.unit}}">
                     <div class="invalid-feedback">
                         Please provide a valid zip.
                     </div>
@@ -44,7 +44,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <label for="validationCustom05">Đơn giá</label>
                     <input type="number" class="form-control" id="validationCustom05" placeholder="" required
-                        value="{{productDetails.unitPrice}}">
+                        value="{{data.unitPrice}}">
                     <div class="invalid-feedback">
                         Please provide a valid zip.
                     </div>
@@ -52,17 +52,17 @@
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <label for="input-select">Category</label>
                     <select class="form-control" id="input-select">
-                        <option value="{{productDetails.category.id}}">{{productDetails.category.categoryName}}</option>
+                        <option value="{{data.category.id}}">{{data.category.categoryName}}</option>
                         <option *ngFor="let category of categories" value="{{category.id}}"
                              >{{category.categoryName}}
                         </option>
                     </select>
                 </div>
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
-                    <label for="validationCustomUsername">{{productDetails.cost.costDescription}}</label>
+                    <label for="validationCustomUsername">{{data.cost.costDescription}}</label>
                     <div class="input-group">
                         <input type="number" class="form-control" id="validationCustomUsername" placeholder=""
-                            aria-describedby="inputGroupPrepend" value="{{productDetails.cost.total}}" required >
+                            aria-describedby="inputGroupPrepend" value="{{data.cost.total}}" required >
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroupPrepend">đồng</span>
                         </div>
@@ -70,19 +70,6 @@
                 </div>
             </div>
             <div class="form-row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div class="form-group">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                            <label class="form-check-label" for="invalidCheck">
-                                Agree to terms and conditions
-                            </label>
-                            <div class="invalid-feedback">
-                                You must agree before submitting.
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
                     <button class="btn btn-primary" type="submit">Cập nhật sản phẩm</button>
                 </div>

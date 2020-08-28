@@ -1,5 +1,5 @@
 import { MessageComponent } from './../../message/message.component';
-import { StoreProductRequest } from './../../models/product';
+import { StoreProductRequest, Product } from './../../models/product';
 import { ProductsService } from './../products.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
@@ -20,7 +20,7 @@ export class ProductDetailsComponent implements OnInit {
   productDetails: ProductDetails = null;
 
   constructor(private dialogRef: MatDialogRef<ProductDetailsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: string, private productService: ProductsService,
+    @Inject(MAT_DIALOG_DATA) public data: ProductDetails, private productService: ProductsService,
     private formBuilder: FormBuilder, private dialog: MatDialog) {
       
     this.inputForm = this.formBuilder.group({
@@ -44,8 +44,8 @@ export class ProductDetailsComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.productService.getDetailsProduct(this.data).subscribe(response => {
-      this.productDetails = response.data;
+    this.productService.getDetailsProduct(this.data.id).subscribe(response => {
+      this.data = response.data;
       //console.log(this.productDetails);
     });
     this.categories = this.productService.categoryList;
