@@ -33,8 +33,8 @@ export class ManageProductsComponent implements OnInit  {
     search:"",
     sortField: "create_at",
     sortOrder: 0,
-    categoryId: null,
-    unit: null
+    categoryIds: null,
+    units: null
   };
   
   productList: Product[] = [];
@@ -42,7 +42,7 @@ export class ManageProductsComponent implements OnInit  {
   constructor(private dialog: MatDialog, private productService: ProductsService) {
     //this.productService.getProductList();
     //this.productList = this.productService.productList;
-    
+    //this.pageInfo = this.productService.getPageInfo();
     //this.productList = this.productService.getProductList();
     //console.log(this.productList);
     //console.log(this.pageInfo);

@@ -1,28 +1,11 @@
 <div class="product-sidebar">
     <div class="product-sidebar-widget">
-        <h4 class="mb-0">E-Commerce Filter</h4>
+        <h4 class="mb-0">Tìm sản phẩm theo</h4>
     </div>
     <div class="product-sidebar-widget">
-        <h4 class="product-sidebar-widget-title">Category</h4>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="cat-1">
-            <label class="custom-control-label" for="cat-1">Categories #1</label>
-        </div>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="cat-2">
-            <label class="custom-control-label" for="cat-2">Categories #2</label>
-        </div>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="cat-3">
-            <label class="custom-control-label" for="cat-3">Categories #3</label>
-        </div>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="cat-4">
-            <label class="custom-control-label" for="cat-4">Categories #4</label>
-        </div>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="cat-5">
-            <label class="custom-control-label" for="cat-5">Categories #5</label>
+        <h4 class="product-sidebar-widget-title">Loại sản phẩm</h4>
+        <div class="custom-control custom-checkbox" *ngFor="let category of categoryList">
+            <mat-checkbox class="example-margin" (change)='selectCategory(category.id)' >{{category.categoryName}}</mat-checkbox>
         </div>
     </div>
     <div class="product-sidebar-widget">

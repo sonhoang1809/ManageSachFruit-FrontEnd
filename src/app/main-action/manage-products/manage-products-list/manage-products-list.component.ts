@@ -36,8 +36,8 @@ export class ManageProductsListComponent implements OnInit {
     search: "",
     sortField: "create_at",
     sortOrder: 0,
-    categoryId: null,
-    unit: null
+    categoryIds: null,
+    units: null
   };
   searchResult: ResponseSearch = null;
   productList: Product[] = null;
@@ -48,7 +48,7 @@ export class ManageProductsListComponent implements OnInit {
   //@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
 
-  constructor(private dialog: MatDialog, private service: SummaryService, public productService: ProductsService,
+  constructor(private dialog: MatDialog, private service: SummaryService, private productService: ProductsService,
     private generalHelper: GeneralHelperService, private formBuilder: FormBuilder) {
     //this.dataSource = new MatTableDataSource<Product>(this.productService.getProductList());
     //this.index = this.productService.getPageInfo().info.page * this.productService.getPageInfo().info.limit;
@@ -56,10 +56,13 @@ export class ManageProductsListComponent implements OnInit {
   ngOnInit(): void {
     //this.dataSource.paginator = this.paginator;
     this.searchProductList();
+    
+    //this.productList = this.productService.getProductList();
+    //this.pageInfo = this.productService.getPageInfo();
   }
   searchProductList() {
     this.productList = null;
-    this.productService.searchProductList(this.searchProductRequest).subscribe(
+    this.productService.searchProduct(this.searchProductRequest).subscribe(
       (response) => {
         this.getData(response.data);
       },
@@ -92,8 +95,11 @@ export class ManageProductsListComponent implements OnInit {
     }
   }
   searchProductByPage(page: number) {
+
     this.searchProductRequest.page = page;
     this.searchProductList();
+    //this.productService.searchProductByPage(page);
+    //this.productList = this.productService.getProductList();
   }
   searchProductSortBy(sort: Sort) {
     if (sort.active != "product_name"
@@ -126,6 +132,17 @@ export class ManageProductsListComponent implements OnInit {
     }
 
   }
+  searchProductByCategory(categoryIds: string[]){
+
+    if(categoryIds==null||categoryIds.length==0){
+      this.searchProductRequest.categoryIds = null;
+    }else{
+      this.searchProductRequest.categoryIds = categoryIds;
+    }
+    
+    this.searchProductList();
+    //console.log(categoryIds);
+  }
 
   showDialogProduct(product): void {
     const dialogRef = this.dialog.open<ProductDetailsComponent>(ProductDetailsComponent, {
@@ -134,13 +151,13 @@ export class ManageProductsListComponent implements OnInit {
       data: product
     });
     dialogRef.afterClosed().subscribe(result => {
-      if(result!=null){
+      if (result != null) {
         console.log(result);
         if (result == true) {
           this.searchProductList();
         }
       }
-      
+
 
     });
   }

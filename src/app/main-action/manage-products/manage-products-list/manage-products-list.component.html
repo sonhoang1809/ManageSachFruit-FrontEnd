@@ -1,4 +1,3 @@
-
 <div class="row">
     <!-- product list  -->
     <!-- ============================================================== -->
@@ -10,12 +9,17 @@
                     <table matSort class="table" (matSortChange)="searchProductSortBy($event)">
                         <thead class="bg-light">
                             <tr class="border-0">
-                                <th class="border-0">No.</th>
-                                <th mat-sort-header="product_name" class="border-0">Tên sản phẩm</th>
-                                <th mat-sort-header="description" class="border-0">Mô tả</th>
-                                <th mat-sort-header="quantity_in_stock" class="border-0">Tồn kho</th>
-                                <th mat-sort-header="unit" class="border-0">Đơn vị tính</th>
-                                <th mat-sort-header="unit_price" class="border-0">Đơn giá bán</th>
+                                <th class="border-0" style="font-family: 'Montserrat', sans-serif;">No.</th>
+                                <th mat-sort-header="product_name" class="border-0"
+                                    style="font-family: 'Montserrat', sans-serif;">Tên sản phẩm</th>
+                                <th mat-sort-header="description" class="border-0"
+                                    style="font-family: 'Montserrat', sans-serif;">Mô tả</th>
+                                <th mat-sort-header="quantity_in_stock" class="border-0"
+                                    style="font-family: 'Montserrat', sans-serif;">Tồn kho</th>
+                                <th mat-sort-header="unit" class="border-0"
+                                    style="font-family: 'Montserrat', sans-serif;">Đơn vị tính</th>
+                                <th mat-sort-header="unit_price" class="border-0"
+                                    style="font-family: 'Montserrat', sans-serif;">Đơn giá bán</th>
                                 <th class="border-0"></th>
                                 <th class="border-0"></th>
                             </tr>
@@ -41,14 +45,16 @@
                                         mat-raised-button>Chi tiết</button>
                                 </td>
                                 <td colspan="9">
-                                    <button class="btn-outline-light" (click)='deleteProduct(product);' mat-fab color="white">
+                                    <button class="btn-outline-light" (click)='deleteProduct(product);' mat-fab
+                                        color="white">
                                         <mat-icon>delete</mat-icon>
                                     </button>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="9">
-                                    <button mat-raised-button class="btn-outline-light" (click)='showDialogProduct(null);'
+                                    <button mat-raised-button class="btn-outline-light"
+                                        (click)='showDialogProduct(null);'
                                         class="btn btn-outline-light float-right">Thêm
                                         sản
                                         phẩm</button>
@@ -59,7 +65,7 @@
                 </div>
             </div>
         </div>
-        
+
         <nav aria-label="Page navigation example" *ngIf="pageInfo!=null">
             <ul class="pagination" *ngIf="pageInfo.info!=null">
                 <li *ngIf="pageInfo.isFirstPage==false" class="page-item">
@@ -94,7 +100,7 @@
     <!-- filter search  -->
     <!-- ============================================================== -->
     <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-12">
-        <app-manage-products-filter></app-manage-products-filter>
+        <app-manage-products-filter (selectedCategory)="searchProductByCategory($event);" ></app-manage-products-filter>
     </div>
     <br>
 

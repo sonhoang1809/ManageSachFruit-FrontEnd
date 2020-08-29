@@ -61,6 +61,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 
@@ -118,6 +119,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatCheckboxModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'main', pathMatch: 'full' },
       {
