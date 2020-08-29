@@ -1,10 +1,11 @@
+import { ProductDetailsComponent } from './main-action/manage-products/manage-products-list/product-details/product-details.component';
+import { ManageProductsFilterComponent } from './main-action/manage-products/manage-products-list/manage-products-filter/manage-products-filter.component';
 
 import { VerifyActionComponent } from './main-action/verify-action/verify-action.component';
 import { DialogExampleComponent } from './main-action/dialog-example/dialog-example.component';
-import { ProductDetailsComponent } from './main-action/manage-products/product-details/product-details.component';
+
 import { ManageProductsComponent } from './main-action/manage-products/manage-products.component';
 import { ManageProductsListComponent } from './main-action/manage-products/manage-products-list/manage-products-list.component';
-import { ManageProductsFilterComponent } from './main-action/manage-products/manage-products-filter/manage-products-filter.component';
 import { SummaryProfitComponent } from './main-action/dashboard/summary-profit/summary-profit.component';
 import { SummaryOrderCostChartComponent } from './main-action/dashboard/summary-order-cost-chart/summary-order-cost-chart.component';
 import { RecentCostComponent } from './main-action/dashboard/recent-cost/recent-cost.component';

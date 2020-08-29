@@ -35,12 +35,12 @@ export class ProductsService {
 
   constructor(private service: SummaryService, private dialog: MatDialog) {
     
-    if(this.productList == null || this.productList.length==0){
-      //console.log("Go search");
-      this.searchProduct(this.searchProductRequest);
-      //console.log(this.productList);
-    }
-    //console.log(this.productList);
+    // if(this.productList == null || this.productList.length==0){
+    //   //console.log("Go search");
+    //   this.searchProduct(this.searchProductRequest);
+    //   //console.log(this.productList);
+    // }
+    // //console.log(this.productList);
 
     this.service.getAllCategories().subscribe(response=>{
       this.categoryList = response.data;
@@ -59,7 +59,7 @@ export class ProductsService {
       }
     }
   }
-  deleteProductInlist(prod:Product){
+  deleteProductInList(prod:Product){
 
   }
   getData(responseData: ResponseSearch) {
@@ -86,33 +86,10 @@ export class ProductsService {
   }
 
   getProductList() {
-    
     return this.productList;
   }
   getCategories(){
     return this.categoryList;
-  }
-
-  handleMessage(message){
-    this.dialog.open(MessageComponent,{
-      panelClass: 'myapp-no-padding-dialog',
-      position: {
-        bottom: '50px',
-        right: ' 50px'
-      },
-      data: message
-    });
-  }
-
-  handleError(error){
-    this.dialog.open(MessageComponent,{
-      panelClass: 'myapp-no-padding-dialog',
-      position: {
-        bottom: '50px',
-        right: ' 50px'
-      },
-      data: error
-    })
   }
 
   getPageInfo(): PageInfo {
@@ -145,9 +122,7 @@ export class ProductsService {
       this.searchProductRequest = searchProductRequest;
     }
     //console.log(this.searchProductRequest);
-    this.searchProductList(this.searchProductRequest).subscribe(response=>
-      this.getData(response.data)
-    );
+    return this.searchProductList(this.searchProductRequest);
   }
 
   searchProductList(searchProductRequest: SearchProductRequest){

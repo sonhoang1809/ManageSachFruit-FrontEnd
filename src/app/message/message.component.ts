@@ -16,7 +16,7 @@ export class MessageComponent implements OnInit {
     this.dialogRef.afterOpened().subscribe(_ => {
       setTimeout(() => {
          this.dialogRef.close();
-      }, 800)
+      }, 900)
     });
   }
 

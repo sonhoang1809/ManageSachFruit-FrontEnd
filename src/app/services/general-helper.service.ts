@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { LineChartModel } from '../models/line-chart-model';
 import { ChartDataSets } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
+import { AutofillMonitor } from '@angular/cdk/text-field';
 
 @Injectable({
   providedIn: 'root'
@@ -58,14 +59,15 @@ export class GeneralHelperService {
     });
   }
 
-  handleError(titleCodeError, message) {
+  handleError(error) {
     this.dialog.open(MessageComponent, {
       panelClass: 'myapp-no-padding-dialog',
+      height: '210px',
       position: {
         bottom: '50px',
         right: ' 50px'
       },
-      data: {title: titleCodeError, message: message}
+      data: {title: 'Error code: '+error.error.statusCode,message: error.error.message}
     });
   }
 }

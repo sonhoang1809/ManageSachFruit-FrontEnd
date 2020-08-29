@@ -1,8 +1,6 @@
-import { StoreProductRequest } from './../../../models/product';
-import { MessageComponent } from './../../../message/message.component';
-import { GeneralHelperService } from './../../../services/general-helper.service';
-
-import { ProductsService } from './../products.service';
+import { ProductsService } from './../../products.service';
+import { GeneralHelperService } from './../../../../services/general-helper.service';
+import { MessageComponent } from './../../../../message/message.component';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { ProductDetails } from 'src/app/models/product';
@@ -28,33 +26,14 @@ export class ProductDetailsComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: ProductDetails, private productService: ProductsService,
     private formBuilder: FormBuilder, private dialog: MatDialog, private generalService: GeneralHelperService) {
       
-    this.inputForm = this.formBuilder.group({
-      productName: '',
-      description: '',
-      quantityInStock: '',
-      unit: '',
-      unitPrice: '',
-      categoryId: '',
-      importPrice: ''
-    });
-
-    // this.updateForm = this.formBuilder.group({
-    //   productName: '',
-    //   description: '',
-    //   quantityInStock: '',
-    //   unit: '',
-    //   unitPrice: '',
-    //   categoryId: '',
-    //   importPrice: ''
-    // });
+    
   }
   ngOnInit(): void {
+    
     if (this.data != null) {
       this.productService.getDetailsProduct(this.data.id).subscribe(response => {
         this.data = response.data;
         this.categorySelected = this.data.category.id;
-
-        
         this.updateForm = this.formBuilder.group({
           productName: this.data.productName,
           description: this.data.description,
@@ -65,9 +44,18 @@ export class ProductDetailsComponent implements OnInit {
           importPrice: this.data.cost.total
         });
       });
+    }else if(this.data==null){
+      this.inputForm = this.formBuilder.group({
+        productName: '',
+        description: '',
+        quantityInStock: '',
+        unit: '',
+        unitPrice: '',
+        categoryId: '',
+        importPrice: ''
+      });
     }
     this.categories = this.productService.getCategories();
-
   }
 
   onUpdateProduct(data, id: string) {
@@ -75,12 +63,11 @@ export class ProductDetailsComponent implements OnInit {
     this.productService.updateProduct(data, id).subscribe(
       (response) => {
         this.generalService.handleMessage("Success",response.message);
-        this.productService.updateProductInList(response.data);
-        this.dialogRef.close();
+        this.dialogRef.close(true);
       },
       (error) => {
         console.log(error);
-        this.generalService.handleError('Error code: '+error.error.statusCode,error.error.message);
+        this.generalService.handleError(error);
       }
     )
   }
@@ -88,14 +75,12 @@ export class ProductDetailsComponent implements OnInit {
   onStoreProduct(data) {
     this.productService.storeNewProduct(data).subscribe(
       (response) => {
-        //console.log(response.data);
         this.generalService.handleMessage("Success",response.message);
-        this.productService.addProduct(response.data);
-        this.dialogRef.close();
+        this.dialogRef.close(true);
       },
       (error) => {
         console.log(error);
-        this.generalService.handleError('Error code: '+error.error.statusCode,error.error.message);
+        this.generalService.handleError(error);
       }
     );
 

@@ -9,56 +9,8 @@
         <!-- ============================================================== -->
         <div class="ecommerce-widget">
             <!--End Summary1-->
-            <div class="row">
-                <!-- product list  -->
-                <!-- ============================================================== -->
-                <div class="col-xl-9 col-lg-12 col-md-6 col-sm-12 col-12">
-                    <app-manage-products-list>
-                    </app-manage-products-list>
-
-                    <nav aria-label="Page navigation example" *ngIf="pageInfo!=null">
-                        <ul class="pagination" *ngIf="pageInfo.info!=null">
-                            <li *ngIf="pageInfo.isFirstPage==false" class="page-item">
-                                <button mat-raised-button class="page-link"
-                                    (click)="searchProduct(pageInfo.info.page-1)">
-                                    Previous
-                                </button>
-                            </li>
-                            <li *ngIf="pageInfo.isFirstPage==false" class="page-item">
-                                <button mat-raised-button class="page-link"
-                                    (click)="searchProduct(pageInfo.info.page-1)">
-                                    {{pageInfo.info.page-1}}
-                                </button>
-                            </li>
-                            <li class="page-item active">
-                                <button mat-raised-button class="page-link">
-                                    {{pageInfo.info.page}}
-                                </button>
-                            </li>
-                            <li *ngIf="pageInfo.isLastPage==false" class="page-item">
-                                <button mat-raised-button class="page-link"
-                                    (click)="searchProduct(pageInfo.info.page+1)">{{pageInfo.info.page+1}}</button>
-                            </li>
-                            <li *ngIf="pageInfo.isLastPage==false" class="page-item">
-                                <button mat-raised-button class="page-link"
-                                    (click)="searchProduct(pageInfo.info.page+1)">Next</button>
-                            </li>
-                        </ul>
-                    </nav>
-
-                </div>
-                <!-- ============================================================== -->
-                <!-- end recent orders  -->
-
-                <!-- filter search  -->
-                <!-- ============================================================== -->
-                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-12">
-                    <app-manage-products-filter></app-manage-products-filter>
-                </div>
-                <br>
-
-                <!-- end filter search  -->
-            </div>
+            <app-manage-products-list>
+            </app-manage-products-list>
         </div>
     </div>
     <!-- footer -->

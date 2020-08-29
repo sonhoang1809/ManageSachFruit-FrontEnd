@@ -42,7 +42,7 @@ export class ManageProductsComponent implements OnInit  {
   constructor(private dialog: MatDialog, private productService: ProductsService) {
     //this.productService.getProductList();
     //this.productList = this.productService.productList;
-    this.pageInfo = this.productService.getPageInfo();
+    
     //this.productList = this.productService.getProductList();
     //console.log(this.productList);
     //console.log(this.pageInfo);
