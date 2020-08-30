@@ -19,11 +19,11 @@ export class RecentCostComponent implements OnInit {
 
   ngOnInit(): void {
     var searchCost: SearchRequest = {
-      Limit: 5,
-      Page: 1,
-      Search: "",
-      SortField: "create_at",
-      SortOrder: 1
+      limit: 5,
+      page: 1,
+      search: "",
+      sortField: "create_at",
+      sortOrder: 1
     };
     this.summaryService.searchCost(searchCost)
     .subscribe( response => {
