@@ -62,6 +62,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { SummaryRevenueByCategoryComponent } from './main-action/dashboard/summary-revenue-by-category/summary-revenue-by-category.component';
 
 
 
@@ -98,7 +99,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MessageComponent,
     DialogExampleComponent,
     VerifyActionComponent,
-    MainActionComponent
+    MainActionComponent,
+    SummaryRevenueByCategoryComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 
-export const UrlServer = "http://localhost:9000";
-//export const UrlServer = "https://managesachfruits-backend.herokuapp.com";
+//export const UrlServer = "http://localhost:9000";
+export const UrlServer = "https://managesachfruits-backend.herokuapp.com";
  
 
 
@@ -18,6 +18,7 @@ export const UrlServerAPISummaryNumberCostInMonth = UrlServer+'/api/costs/Number
 export const UrlServerAPISummaryNumberProductInStockInMonth = UrlServer+'/api/products/ProductInStockInMonth';
 export const UrlServerAPIStatisticsRevenueCost = UrlServer+'/api/Moneys/Statistics/Revenue/Cost';
 export const UrlServerAPIStatisticsProfit = UrlServer+'/api/Moneys/Statistics/SummaryProfits';
+export const UrlServerAPIStatisticsRevenueByCategory = UrlServer+'/api/Moneys/Statistics/Revenue/Category';
 
 
 export const UrlServerAPISearchOrder = UrlServer+'/api/Orders/Search';

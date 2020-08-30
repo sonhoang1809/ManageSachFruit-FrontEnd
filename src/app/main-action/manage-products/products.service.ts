@@ -39,16 +39,16 @@ export class ProductsService {
 
     // if(this.productList == null || this.productList.length==0){
     //   //console.log("Go search");
-    this.searchProduct(this.searchProductRequest).subscribe(response => {
-      this.getData(response.data);
-    });
-    //   //console.log(this.productList);
-    // }
-    // //console.log(this.productList);
+    // this.searchProduct(this.searchProductRequest).subscribe(response => {
+    //   this.getData(response.data);
+    // });
+    // //   //console.log(this.productList);
+    // // }
+    // // //console.log(this.productList);
 
-    this.service.getAllCategories().subscribe(response => {
-      this.categoryList = response.data;
-    });
+    // this.service.getAllCategories().subscribe(response => {
+    //   this.categoryList = response.data;
+    // });
   }
 
   addProduct(prod: Product) {

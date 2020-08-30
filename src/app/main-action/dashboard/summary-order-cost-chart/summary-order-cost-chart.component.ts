@@ -1,5 +1,6 @@
+import { LineChartModel } from './../../../models/chart-model';
 import { SummaryService } from './../../../services/summary.service';
-import { LineChartModel } from './../../../models/line-chart-model';
+
 import { GeneralHelperService } from './../../../services/general-helper.service';
 
 import { Label, Color } from 'ng2-charts';
@@ -14,6 +15,7 @@ import {
 import { ChartDataSets } from 'chart.js';
 import { KeyValue } from '@angular/common';
 
+
 @Component({
   selector: 'app-summary-order-cost-chart',
   templateUrl: './summary-order-cost-chart.component.html',
@@ -21,7 +23,7 @@ import { KeyValue } from '@angular/common';
 })
 export class SummaryOrderCostChartComponent implements OnInit {
 
-  form: FormGroup;
+  //form: FormGroup;
   statisticsBys= [];
   
   lineChartModel: LineChartModel = null;
@@ -31,9 +33,9 @@ export class SummaryOrderCostChartComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.form = this.formBuilder.group({
-      statisticsBys:['']
-    });
+    // this.form = this.formBuilder.group({
+    //   statisticsBys:['']
+    // });
 
     this.statisticsBys=[
       {id:0, display:'Hằng ngày'},

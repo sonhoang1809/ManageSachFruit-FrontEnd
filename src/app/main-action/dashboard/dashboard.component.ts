@@ -10,7 +10,7 @@ export class DashboardComponent implements OnInit {
 
   titleComponent: string = 'E-commerce Dashboard';
 
-  constructor(private productService: ProductsService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }

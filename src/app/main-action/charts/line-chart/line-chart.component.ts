@@ -1,4 +1,5 @@
-import { LineChartModel } from './../../../models/line-chart-model';
+import { LineChartModel } from './../../../models/chart-model';
+
 import { Component, OnInit, Input } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';

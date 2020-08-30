@@ -16,11 +16,10 @@
             </mat-spinner>
         </div>
         <div class="chartjs-container" *ngIf="lineChartModel != null">
-            <canvas baseChart [datasets]="lineChartModel.lineChartData" [labels]="lineChartModel.lineChartLabels"
-                [options]="lineChartModel.lineChartOptions" [colors]="lineChartModel.lineChartColors"
-                [legend]="lineChartModel.lineChartLegend" [chartType]="lineChartModel.lineChartType"
-                [plugins]="lineChartModel.lineChartPlugins" (chartHover)="lineChartModel.chartHovered($event)"
-                (chartClick)="lineChartModel.chartClicked($event)">
+            <canvas baseChart [datasets]="lineChartModel.chartData" [labels]="lineChartModel.chartLabels"
+                [options]="lineChartModel.chartOptions" [colors]="lineChartModel.chartColors"
+                [legend]="lineChartModel.chartLegend" [chartType]="lineChartModel.chartType"
+                [plugins]="lineChartModel.chartPlugins">
             </canvas>
         </div>
     </div>

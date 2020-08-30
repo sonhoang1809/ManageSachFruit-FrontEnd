@@ -7,19 +7,19 @@
                 </option>
             </select>
         </div>
-        <h5 class="mb-0">Biểu đồ chi phí - doanh thu trong năm</h5>
+        <h5 class="mb-0">Doanh thu của các loại sản phẩm</h5>
     </div>
     <div class="card-body">
-        <div class="chartjs-container" *ngIf="lineChartModel==null">
+        <div class="chartjs-container" *ngIf="barChartModel==null">
             <mat-spinner style="margin-left:auto; 
                                 margin-right:auto;" color="accent" diameter=30>
             </mat-spinner>
         </div>
-        <div class="chartjs-container" *ngIf="lineChartModel!=null">
-            <canvas baseChart [datasets]="lineChartModel.chartData" [labels]="lineChartModel.chartLabels"
-                [options]="lineChartModel.chartOptions" [colors]="lineChartModel.chartColors"
-                [legend]="lineChartModel.chartLegend" [chartType]="lineChartModel.chartType"
-                [plugins]="lineChartModel.chartPlugins" >
+        <div class="chartjs-container" *ngIf="barChartModel!=null"  >
+            <canvas height="261vw" baseChart [datasets]="barChartModel.chartData" [labels]="barChartModel.chartLabels"
+                [options]="barChartModel.chartOptions" [colors]="barChartModel.chartColors"
+                [legend]="barChartModel.chartLegend" [chartType]="barChartModel.chartType"
+                [plugins]="barChartModel.chartPlugins" >
             </canvas>
         </div>
         <!--<div class="ct-chart-product ct-golden-section"></div>-->

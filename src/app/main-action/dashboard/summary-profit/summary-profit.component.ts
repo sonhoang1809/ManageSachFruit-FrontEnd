@@ -1,6 +1,6 @@
+import { LineChartModel } from './../../../models/chart-model';
 import { SummaryService } from './../../../services/summary.service';
 import { GeneralHelperService } from './../../../services/general-helper.service';
-import { LineChartModel } from './../../../models/line-chart-model';
 import { SummaryFrame } from './../../../models/summary-frame';
 
 import { Component, OnInit } from '@angular/core';
@@ -14,7 +14,7 @@ import { Label, Color } from 'ng2-charts';
 })
 export class SummaryProfitComponent implements OnInit {
 
-  statisticsBys= [];
+  statisticsBys = [];
   lineChartModel: LineChartModel = null;
   summaryFrame: SummaryFrame = null;
 
@@ -22,50 +22,76 @@ export class SummaryProfitComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.statisticsBys=[
-      {id:0, display:'Hằng ngày'},
-      {id:1, display:'Hằng tháng'},
-      {id:2, display:'Tất cả'}
-    ]
-    this.summaryService.getStatisticProfit(0).subscribe(response => {
-      this.lineChartModel = this.convertToLineChartModel(response.data);
-    });
+    this.statisticsBys = [
+      { id: 0, display: 'Hằng ngày' },
+      { id: 1, display: 'Hằng tháng' },
+      { id: 2, display: 'Tất cả' }
+    ];
+    this.summaryService.getStatisticProfit(0).subscribe(
+      (response) => {
+        console.log(response);
+        this.summaryFrame = new SummaryFrame("Lợi nhuận theo thời gian",response.data.total,response.data.rateCompareToLastTime);
+        this.lineChartModel = this.helper.convertToLineChartModel(response.data.chartModel);
+        //console.log(this.lineChartModel);
+      },
+      (error)=>{
+        this.helper.handleError(error);
+      }
+    );
   }
 
-  submit(event: any){
+  submit(event: any) {
     this.lineChartModel = null;
     //console.log(event.target.value);
-    this.summaryService.getStatisticProfit(event.target.value).subscribe(response=>{
-      this.lineChartModel = this.convertToLineChartModel(response.data);
+    this.summaryService.getStatisticProfit(event.target.value).subscribe(response => {
+      this.lineChartModel = this.helper.convertToLineChartModel(response.data);
+
     });
   }
 
-  convertToLineChartModel(dataResponse: any){
-
+  convertToLineChartModel(dataResponse: any): LineChartModel {
+    //console.log(dataResponse.dataSetStatistics);
+    var chartModel: LineChartModel;
     var lineChartData: ChartDataSets[] = [];
     var lineChartLabels: Label[] = [];
     var lineChartColors: Color[] = [];
-    this.summaryFrame = new SummaryFrame(
-      "Biểu đồ lợi nhuận",
-      dataResponse.total,
-      dataResponse.rateCompareToLastTime
-    );
-      var dataArray = [];   
-      for(let key in dataResponse.dataSet){        
-        lineChartLabels.push(key);
 
-        dataArray.push(dataResponse.dataSet[key]);
-      }            
-      lineChartData.push({data: dataArray,label: dataResponse.label});
-    
+    for (var dataSetStatistic of dataResponse.dataSetStatistics) {
+      var dataArray = [];
+      if (lineChartLabels.length == 0) {
+        for (let key in dataSetStatistic.dataSet) {
+          lineChartLabels.push(key);
+          dataArray.push(dataSetStatistic.dataSet[key]);
+        }
+      } else {
+        for (let key in dataSetStatistic.dataSet) {
+          dataArray.push(dataSetStatistic.dataSet[key]);
+        }
+      }
+      lineChartData.push({ data: dataArray, label: dataSetStatistic.label });
+    }
 
     lineChartColors.push(
-        {
-          backgroundColor: '#dffaff',
-          borderColor: '#25d5f2',
-        }
-      );
-
-    return new LineChartModel(lineChartData, lineChartLabels, lineChartColors);    
+      {
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+      },
+      {
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+      }
+    );
+    chartModel = {
+      chartData: lineChartData,
+      chartLabels: lineChartLabels,
+      chartColors: lineChartColors,
+      chartOptions: {
+        responsive: true
+      },
+      chartLegend: true,
+      chartType: 'line',
+      chartPlugins: []
+    };
+    return chartModel;
   }
 }
