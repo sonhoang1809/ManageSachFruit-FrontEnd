@@ -133,15 +133,25 @@ export class ManageProductsListComponent implements OnInit {
 
   }
   searchProductByCategory(categoryIds: string[]){
-
     if(categoryIds==null||categoryIds.length==0){
       this.searchProductRequest.categoryIds = null;
     }else{
       this.searchProductRequest.categoryIds = categoryIds;
     }
-    
     this.searchProductList();
     //console.log(categoryIds);
+  }
+  searchProductByUnit(units: string[]){
+    if(units==null||units.length==0){
+      this.searchProductRequest.units = null;
+    }else{
+      this.searchProductRequest.units = units;
+    }
+    this.searchProductList();
+  }
+  searchProductByNameDescription(search: string){
+    this.searchProductRequest.search = search;
+    this.searchProductList();
   }
 
   showDialogProduct(product): void {

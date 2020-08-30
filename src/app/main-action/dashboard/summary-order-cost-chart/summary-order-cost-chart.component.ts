@@ -24,8 +24,12 @@ import { KeyValue } from '@angular/common';
 export class SummaryOrderCostChartComponent implements OnInit {
 
   //form: FormGroup;
-  statisticsBys= [];
-  
+  statisticsBys =[
+    {id:0, display:'Hằng ngày'},
+    {id:1, display:'Hằng tháng'},
+    {id:2, display:'Tất cả'}
+  ];
+  selected = this.statisticsBys[0].id;
   lineChartModel: LineChartModel = null;
 
   constructor(private formBuilder: FormBuilder, private summaryService: SummaryService,
@@ -36,7 +40,7 @@ export class SummaryOrderCostChartComponent implements OnInit {
     // this.form = this.formBuilder.group({
     //   statisticsBys:['']
     // });
-
+    
     this.statisticsBys=[
       {id:0, display:'Hằng ngày'},
       {id:1, display:'Hằng tháng'},
@@ -50,9 +54,11 @@ export class SummaryOrderCostChartComponent implements OnInit {
   }
 
   submit(event: any){
+
+    //console.log(event);
     this.lineChartModel = null;
-    //console.log(event.target.value);
-    this.summaryService.getStatisticRevenueCost(event.target.value).subscribe(response=>{
+    console.log(event.target.value);
+    this.summaryService.getStatisticRevenueCost(event.value).subscribe(response=>{
       this.lineChartModel = this.generalHelper.convertToLineChartModel(response.data);
     });
   }

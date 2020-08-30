@@ -47,7 +47,7 @@
                                 <td colspan="9">
                                     <button class="btn-outline-light" (click)='deleteProduct(product);' mat-fab
                                         color="white">
-                                        <mat-icon>delete</mat-icon>
+                                        <mat-icon>delete_outline</mat-icon>
                                     </button>
                                 </td>
                             </tr>
@@ -100,7 +100,8 @@
     <!-- filter search  -->
     <!-- ============================================================== -->
     <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-12">
-        <app-manage-products-filter (selectedCategory)="searchProductByCategory($event);" ></app-manage-products-filter>
+        <app-manage-products-filter (selectedUnit)="searchProductByUnit($event);" (nameDescription)="searchProductByNameDescription($event);"
+            (selectedCategory)="searchProductByCategory($event);"></app-manage-products-filter>
     </div>
     <br>
 

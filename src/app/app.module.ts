@@ -61,8 +61,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SummaryRevenueByCategoryComponent } from './main-action/dashboard/summary-revenue-by-category/summary-revenue-by-category.component';
+import { ManageCostsComponent } from './main-action/manage-costs/manage-costs.component';
+import { ManageCostsListComponent } from './main-action/manage-costs/manage-costs-list/manage-costs-list.component';
+import { ManageCostDetailsComponent } from './main-action/manage-costs/manage-costs-list/manage-cost-details/manage-cost-details.component';
+import { ManageCostsFilterComponent } from './main-action/manage-costs/manage-costs-list/manage-costs-filter/manage-costs-filter.component';
 
 
 
@@ -100,7 +104,11 @@ import { SummaryRevenueByCategoryComponent } from './main-action/dashboard/summa
     DialogExampleComponent,
     VerifyActionComponent,
     MainActionComponent,
-    SummaryRevenueByCategoryComponent
+    SummaryRevenueByCategoryComponent,
+    ManageCostsComponent,
+    ManageCostsListComponent,
+    ManageCostDetailsComponent,
+    ManageCostsFilterComponent
   ],
   imports: [
     BrowserModule,
@@ -128,7 +136,8 @@ import { SummaryRevenueByCategoryComponent } from './main-action/dashboard/summa
         path: 'main', component: MainActionComponent, children: [
           { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
           { path: 'dashboard', component: DashboardComponent },
-          { path: 'products', component: ManageProductsComponent }
+          { path: 'products', component: ManageProductsComponent },
+          { path: 'costs', component: ManageCostsComponent }
         ]
       }
       //{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },

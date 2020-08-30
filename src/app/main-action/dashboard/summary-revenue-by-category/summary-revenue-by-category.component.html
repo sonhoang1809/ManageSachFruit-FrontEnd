@@ -1,12 +1,14 @@
 <div class="card">
     <div class="card-header">
-        <div class="float-right">
-            <select class="custom-select" (change)="submit($event)">
-                <option *ngFor="let statisticsBy of statisticsBys" value="{{statisticsBy.id}}">
+        <mat-form-field appearance="outline" class="float-right">
+            <mat-label for="validationCustom05">Theo thời gian</mat-label>
+            <mat-select matNativeControl [(value)]="selected" required (selectionChange)="submit($event)">
+                <mat-option *ngFor="let statisticsBy of statisticsBys" [value]="statisticsBy.id">
                     {{statisticsBy.display}}
-                </option>
-            </select>
-        </div>
+                </mat-option>
+            </mat-select>
+            <mat-hint align="end">Chọn 1</mat-hint>
+        </mat-form-field>
         <h5 class="mb-0">Doanh thu của các loại sản phẩm</h5>
     </div>
     <div class="card-body">

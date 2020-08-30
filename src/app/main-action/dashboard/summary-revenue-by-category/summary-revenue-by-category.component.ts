@@ -11,17 +11,17 @@ import { Component, OnInit } from '@angular/core';
 export class SummaryRevenueByCategoryComponent implements OnInit {
 
   barChartModel: BarChartModel = null;
-  statisticsBys = [];
+  statisticsBys = [
+    { id: 0, display: 'Hằng ngày' },
+    { id: 1, display: 'Hằng tháng' },
+    { id: 2, display: 'Tất cả' }
+  ];
+  selected = this.statisticsBys[0].id;
 
   constructor(private summaryService: SummaryService,
     private generalHelper: GeneralHelperService) { }
 
   ngOnInit(): void {
-    this.statisticsBys = [
-      { id: 0, display: 'Hằng ngày' },
-      { id: 1, display: 'Hằng tháng' },
-      { id: 2, display: 'Tất cả' }
-    ];
 
     this.summaryService.getStatisticRevenueByCategory(0).subscribe(
       (response) => {
@@ -36,9 +36,9 @@ export class SummaryRevenueByCategoryComponent implements OnInit {
   submit(event: any) {
     this.barChartModel = null;
     //console.log(event.target.value);
-    // this.summaryService.getStatisticRevenueCost(event.target.value).subscribe(response=>{
-    //   this.lineChartModel = this.generalHelper.convertToLineChartModel(response.data);
-    // });
+    this.summaryService.getStatisticRevenueByCategory(event.value).subscribe(response=>{
+      this.barChartModel = this.generalHelper.convertToBarChartModel(response.data);
+    });
   }
 
 }

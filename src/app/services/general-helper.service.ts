@@ -14,7 +14,6 @@ export class GeneralHelperService {
   constructor(private dialog: MatDialog) { }
 
   convertToLineChartModel(dataResponse: any): LineChartModel {
-    console.log(dataResponse.dataSetStatistics);
     var chartModel: LineChartModel;
     var lineChartData: ChartDataSets[] = dataResponse.dataSets;
     var lineChartLabels: Label[] = dataResponse.chartLabel;

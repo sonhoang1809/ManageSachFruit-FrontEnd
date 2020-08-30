@@ -55,7 +55,15 @@ export class ProductDetailsComponent implements OnInit {
         importPrice: ''
       });
     }
-    this.categories = this.productService.getCategories();
+    // this.categories = this.productService.getCategories();
+    this.productService.getAllCategories().subscribe(
+      (response)=>{
+        this.categories = response.data;
+      },
+      (error)=>{
+        this.generalService.handleError(error);
+      }
+    )
   }
 
   onUpdateProduct(data, id: string) {

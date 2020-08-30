@@ -11,7 +11,13 @@ export class ManageProductsFilterComponent implements OnInit {
 
   categoryList: Category[];
   categoryIds: string[] = [];
+  unitList: string[] = ["Kg","Cái"];
+  units: string[] = [];
+
   @Output() selectedCategory: EventEmitter<string[]> = new EventEmitter<string[]>();
+  @Output() nameDescription: EventEmitter<string>= new EventEmitter<string>();
+  @Output() selectedUnit: EventEmitter<string[]>= new EventEmitter<string[]>();
+
   constructor(private productService: ProductsService) { }
 
   ngOnInit(): void {
@@ -30,5 +36,18 @@ export class ManageProductsFilterComponent implements OnInit {
     //console.log(this.categoryIds);
     this.selectedCategory.emit(this.categoryIds);
   }
+  selectUnit(unit: string){
+    if(this.units.includes(unit)){
+      this.units.splice(this.units.indexOf(unit),1);
+    }else{
+      this.units.push(unit);
+    }
+    this.selectedUnit.emit(this.units);
+  }
+
+  changeNameDescription(data){
+    this.nameDescription.emit(data.target.value);
+  }
+  
 
 }
