@@ -1,10 +1,12 @@
 <div class="row">
     <div class="col-xl-9 col-lg-12 col-md-6 col-sm-12 col-12">
-        <div class="card">
-            <h3 class="card-header" style="font-family: 'Montserrat', sans-serif;">Danh sách sản phẩm</h3>
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table matSort class="table" (matSortChange)="searchProductSortBy($event)">
+        <mat-card class="card">
+            <mat-card-header class="product-sidebar-widget">
+                <mat-card-title>Danh sách chi phí</mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="card-body p-0">
+                <mat-card-content class="table-responsive">
+                    <table matSort class="table" (matSortChange)="searchCostSortBy($event)">
                         <thead class="bg-light">
                             <tr class="border-0">
                                 <th class="border-0" style="font-family: 'Montserrat', sans-serif;">No.</th>
@@ -37,28 +39,24 @@
                                         mat-raised-button>Chi tiết</button>
                                 </td>
                                 <td colspan="9">
-                                    <button class="btn-outline-light" (click)='deleteCost(cost);' mat-fab
-                                        color="white">
+                                    <button class="btn-outline-light" (click)='deleteCost(cost);' mat-fab color="white">
                                         <mat-icon>delete</mat-icon>
                                     </button>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="9">
-                                    <button mat-raised-button class="btn-outline-light"
-                                        (click)='showDialogCost(null);'
-                                        class="btn btn-outline-light float-right">Thêm
-                                        sản
-                                        phẩm</button>
+                                    <button mat-raised-button class="btn-outline-light" (click)='showDialogCost(null);'
+                                        class="btn btn-outline-light float-right">Thêm chi phí</button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                </div>
-            </div>
-        </div>
+                </mat-card-content>
+            </mat-card-content>
+        </mat-card>
 
-        <nav aria-label="Page navigation example" *ngIf="pageInfo!=null">
+        <nav aria-label="Page navigation example" *ngIf="pageInfo!=null&&pageInfo.info.totalRecord>0">
             <ul class="pagination" *ngIf="pageInfo.info!=null">
                 <li *ngIf="pageInfo.isFirstPage==false" class="page-item">
                     <button mat-raised-button class="page-link" (click)="searchByPage(pageInfo.info.page-1)">
@@ -88,9 +86,9 @@
     </div>
 
     <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-12">
-        <app-manage-costs-filter ></app-manage-costs-filter>
+        <app-manage-costs-filter (description)="searchCostByDescription($event)" (selectedCostTypeIds)="searchCostByCostType($event)"></app-manage-costs-filter>
     </div>
-    
+
     <br>
 
     <!-- end filter search  -->

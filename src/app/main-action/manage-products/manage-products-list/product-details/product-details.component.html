@@ -55,6 +55,11 @@
                     </mat-select>
                     <mat-hint align="end">Chọn 1</mat-hint>
                 </mat-form-field>
+                <mat-form-field *ngIf="data.createAt!=null" appearance="outline" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                    <mat-label for="validationCustom05">Thời gian tạo</mat-label>
+                    <input matInput type="text" readonly value="{{getToStringTime(data.createAt)}}">
+                    <mat-hint align="end">Không chọn</mat-hint>
+                </mat-form-field>
                 <mat-form-field appearance="outline" *ngIf="data.cost!=null"
                     class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
                     <mat-label for="validationCustomUsername">{{data.cost.costDescription}}</mat-label>

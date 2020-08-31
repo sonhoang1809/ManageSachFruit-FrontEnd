@@ -1,4 +1,5 @@
-import { ProductsService } from './../../products.service';
+import { DateTime } from './../../../../models/date-time';
+import { ProductsService } from '../../ProductServices/products.service';
 import { GeneralHelperService } from './../../../../services/general-helper.service';
 import { MessageComponent } from './../../../../message/message.component';
 import { Component, OnInit, Inject } from '@angular/core';
@@ -75,6 +76,9 @@ export class ProductDetailsComponent implements OnInit {
         this.generalService.handleError(error);
       }
     )
+  }
+  getToStringTime(time: DateTime){
+    return this.generalService.getToStringTime(time);
   }
 
   onUpdateProduct(data, id: string) {

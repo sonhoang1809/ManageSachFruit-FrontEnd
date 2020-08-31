@@ -1,11 +1,11 @@
-import { GeneralHelperService } from './../../services/general-helper.service';
-import { Category } from './../../models/category';
-import { PageInfo } from './../../models/page-info';
-import { SummaryService } from './../../services/summary.service';
-import { ProductDetails, Product } from './../../models/product';
-import { SearchProductRequest } from './../../Requests/search-product-request';
-import { ResponseSearch } from './../../models/response-search';
-import { MessageComponent } from './../../message/message.component';
+import { GeneralHelperService } from '../../../services/general-helper.service';
+import { Category } from '../../../models/category';
+import { PageInfo } from '../../../models/page-info';
+import { SummaryService } from '../../../services/summary.service';
+import { ProductDetails, Product } from '../../../models/product';
+import { SearchProductRequest } from '../../../Requests/search-product-request';
+import { ResponseSearch } from '../../../models/response-search';
+import { MessageComponent } from '../../../message/message.component';
 
 import { catchError, retry } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';

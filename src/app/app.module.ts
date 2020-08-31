@@ -30,7 +30,7 @@ import { MessageComponent } from './message/message.component';
 import { MainActionComponent } from './main-action/main-action.component';
 
 import { SummaryService } from './services/summary.service';
-import { ProductsService } from './main-action/manage-products/products.service';
+import { ProductsService } from './main-action/manage-products/ProductServices/products.service';
 //import { HandleError } from './supports/handle-error';
 
 import { RouterModule } from '@angular/router';
@@ -137,7 +137,8 @@ import { ManageCostsFilterComponent } from './main-action/manage-costs/manage-co
           { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
           { path: 'dashboard', component: DashboardComponent },
           { path: 'products', component: ManageProductsComponent },
-          { path: 'costs', component: ManageCostsComponent }
+          { path: 'costs', component: ManageCostsComponent },
+          { path: 'cost-types', component: ManageCostsComponent }
         ]
       }
       //{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },

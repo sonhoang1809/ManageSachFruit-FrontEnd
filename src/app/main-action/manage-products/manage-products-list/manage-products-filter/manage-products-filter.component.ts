@@ -1,5 +1,5 @@
 import { Category } from './../../../../models/category';
-import { ProductsService } from './../../products.service';
+import { ProductsService } from '../../ProductServices/products.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({

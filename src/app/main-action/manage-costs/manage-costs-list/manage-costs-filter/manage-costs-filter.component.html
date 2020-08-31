@@ -1,1 +1,30 @@
-<p>manage-costs-filter works!</p>
+<mat-card class="product-sidebar">
+    <mat-card-header class="product-sidebar-widget">
+        <mat-card-title>Tìm chi phí theo</mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content class="product-sidebar-widget">
+        <mat-form-field appearance="outline" class="custom-control">
+            <mat-label for="validationCustom01">Mô tả</mat-label>
+            <input matInput type="text" required (input)="onChangeDescription($event);">
+        </mat-form-field>
+    </mat-card-content>
+    <mat-card-content class="product-sidebar-widget">
+        <h4 class="product-sidebar-widget-title">Loại sản phẩm</h4>
+        <div class="custom-control custom-checkbox" *ngFor="let costType of costTypeList">
+            <mat-checkbox class="example-margin" (change)='selectCostType(costType.id)' >{{costType.costTypeName}}</mat-checkbox>
+        </div>
+    </mat-card-content>
+    <mat-card-content class="product-sidebar-widget">
+        <h4 class="product-sidebar-widget-title"></h4>       
+    </mat-card-content>
+    <mat-card-content class="product-sidebar-widget">
+        <h4 class="product-sidebar-widget-title"></h4>
+    </mat-card-content>
+    <mat-card-content class="product-sidebar-widget">
+        <h4 class="product-sidebar-widget-title"></h4>       
+    </mat-card-content>
+    <mat-card-content class="product-sidebar-widget">
+        <h4 class="product-sidebar-widget-title"></h4>
+    </mat-card-content>
+</mat-card>

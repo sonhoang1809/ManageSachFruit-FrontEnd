@@ -56,7 +56,7 @@ export class ManageCostsListComponent implements OnInit {
       return;
     }
     this.pageInfo.info = responseData.info;
-    //console.log(this.pageInfo);
+    console.log(this.pageInfo);
     this.costList = responseData.data;
     //console.log(this.productList);
     this.pageInfo.numberOfPage = Math.ceil(this.pageInfo.info.totalRecord / this.pageInfo.info.limit);
@@ -75,7 +75,7 @@ export class ManageCostsListComponent implements OnInit {
     this.searchCostRequest.page = page;
     this.searchCostList();
   }
-  searchProductSortBy(sort: Sort) {
+  searchCostSortBy(sort: Sort) {
     if (sort.active != "cost_description"
       && sort.active != "total"
       && sort.active != "create_at") {
@@ -103,6 +103,10 @@ export class ManageCostsListComponent implements OnInit {
       }
     }
 
+  }
+  searchCostByDescription(search: string){
+    this.searchCostRequest.search = search;
+    this.searchCostList();
   }
   searchCostByCostType(costTypeIds: string[]){
     if(costTypeIds==null||costTypeIds.length==0){

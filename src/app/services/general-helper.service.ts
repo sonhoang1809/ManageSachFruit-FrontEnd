@@ -15,6 +15,9 @@ export class GeneralHelperService {
   constructor(private dialog: MatDialog) { }
 
   getToStringTime(time: DateTime): string{
+    if(time.second<10){
+      return time.day+'-'+time.month+'-'+time.year+' '+time.hour+':'+time.minute+':0'+time.second;
+    }
     return time.day+'-'+time.month+'-'+time.year+' '+time.hour+':'+time.minute+':'+time.second;
   }
 

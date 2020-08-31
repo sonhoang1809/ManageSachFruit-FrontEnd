@@ -6,7 +6,7 @@ import { PageInfo } from './../../models/page-info';
 
 import { MessageComponent } from './../../message/message.component';
 
-import { ProductsService } from './products.service';
+import { ProductsService } from './ProductServices/products.service';
 
 import { Component, OnInit } from '@angular/core';
 

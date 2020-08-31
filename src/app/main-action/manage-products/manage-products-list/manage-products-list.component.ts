@@ -10,7 +10,7 @@ import { GeneralHelperService } from './../../../services/general-helper.service
 
 import { VerifyActionComponent } from './../../verify-action/verify-action.component';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import { ProductsService } from './../products.service';
+import { ProductsService } from '../ProductServices/products.service';
 import { Component, OnInit, Input, OnChanges, SimpleChanges, ViewChild, Injectable } from '@angular/core';
 
 
