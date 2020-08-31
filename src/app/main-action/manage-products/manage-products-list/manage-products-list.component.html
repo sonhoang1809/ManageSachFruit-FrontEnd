@@ -2,9 +2,9 @@
     <!-- product list  -->
     <!-- ============================================================== -->
     <div class="col-xl-9 col-lg-12 col-md-6 col-sm-12 col-12">
-        <div class="card">
-            <h3 class="card-header" style="font-family: 'Montserrat', sans-serif;">Danh sách sản phẩm</h3>
-            <div class="card-body p-0">
+        <mat-card class="card">
+            <mat-card-title style="font-family: 'Montserrat', sans-serif;">Danh sách sản phẩm</mat-card-title>
+            <mat-card-content class="card-body p-0">
                 <div class="table-responsive">
                     <table matSort class="table" (matSortChange)="searchProductSortBy($event)">
                         <thead class="bg-light">
@@ -55,18 +55,17 @@
                                 <td colspan="9">
                                     <button mat-raised-button class="btn-outline-light"
                                         (click)='showDialogProduct(null);'
-                                        class="btn btn-outline-light float-right">Thêm
-                                        sản
-                                        phẩm</button>
+                                        class="btn btn-outline-light float-right">Thêm sản phẩm
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
+            </mat-card-content>
+        </mat-card>
 
-        <nav aria-label="Page navigation example" *ngIf="pageInfo!=null">
+        <nav aria-label="Page navigation example" *ngIf="pageInfo.numberOfPage>0">
             <ul class="pagination" *ngIf="pageInfo.info!=null">
                 <li *ngIf="pageInfo.isFirstPage==false" class="page-item">
                     <button mat-raised-button class="page-link" (click)="searchProductByPage(pageInfo.info.page-1)">
@@ -100,7 +99,8 @@
     <!-- filter search  -->
     <!-- ============================================================== -->
     <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-12">
-        <app-manage-products-filter (selectedUnit)="searchProductByUnit($event);" (nameDescription)="searchProductByNameDescription($event);"
+        <app-manage-products-filter (selectedUnit)="searchProductByUnit($event);"
+            (nameDescription)="searchProductByNameDescription($event);"
             (selectedCategory)="searchProductByCategory($event);"></app-manage-products-filter>
     </div>
     <br>

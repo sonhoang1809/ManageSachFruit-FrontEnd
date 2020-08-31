@@ -1,4 +1,4 @@
-import { SearchRequest } from './../../../Requests/search-request';
+import { SearchRequest, SearchCostRequest } from './../../../Requests/search-request';
 import { CostDetails } from './../../../models/cost-details';
 import { SummaryService } from './../../../services/summary.service';
 
@@ -18,12 +18,13 @@ export class RecentCostComponent implements OnInit {
   constructor(private summaryService: SummaryService) { }
 
   ngOnInit(): void {
-    var searchCost: SearchRequest = {
+    var searchCost: SearchCostRequest = {
       limit: 5,
       page: 1,
       search: "",
       sortField: "create_at",
-      sortOrder: 1
+      sortOrder: 1,
+      costTypeIds: null
     };
     this.summaryService.searchCost(searchCost)
     .subscribe( response => {

@@ -95,7 +95,6 @@ export class ManageProductsListComponent implements OnInit {
     }
   }
   searchProductByPage(page: number) {
-
     this.searchProductRequest.page = page;
     this.searchProductList();
     //this.productService.searchProductByPage(page);

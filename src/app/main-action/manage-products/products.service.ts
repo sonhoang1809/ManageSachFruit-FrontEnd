@@ -141,6 +141,9 @@ export class ProductsService {
   getAllCategories() {
     return this.service.getAllCategories();
   }
+  getAllUnits(){
+    return this.service.getAllUnits();
+  }
   getDetailsProduct(id: string) {
     return this.service.getDetailsProduct(id);
   }

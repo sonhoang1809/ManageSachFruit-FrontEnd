@@ -1,7 +1,7 @@
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 
-//export const UrlServer = "http://localhost:9000";
-export const UrlServer = "https://managesachfruits-backend.herokuapp.com";
+export const UrlServer = "http://localhost:9000";
+//export const UrlServer = "https://managesachfruits-backend.herokuapp.com";
  
 
 
@@ -27,11 +27,17 @@ export const UrlServerAPISearchProduct = UrlServer+'/api/Products/Search';
 
 export const UrlServerAPIGetAllCategory = UrlServer+'/api/Categories';
 
+export const UrlServerAPIGetAllUnits = UrlServer+'/api/Products/Units';
+
 
 export const UrlServerAPIStoreNewProduct = UrlServer+'/api/Products';
 export const UrlServerAPIGetDetailsProduct = UrlServer+'/api/Products';
 export const UrlServerAPIUpdateProduct = UrlServer+'/api/Products';
 export const UrlServerAPIDeleteProduct = UrlServer+'/api/Products';
+
+export const UrlServerAPICost = UrlServer+'/api/Costs';
+
+export const UrlServerAPICostType = UrlServer+'/api/CostTypes';
 
 export interface Options{
     headers?: HttpHeaders | {[header: string]: string | string[]},

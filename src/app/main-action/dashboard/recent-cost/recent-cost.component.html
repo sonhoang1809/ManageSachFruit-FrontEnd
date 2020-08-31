@@ -1,5 +1,5 @@
 <div class="card">
-    <h5 class="card-header">Các chi phí gần nhất</h5>
+    <h5 class="card-header"> Các chi phí gần nhất </h5>
     <div class="card-body p-0">
         <div class="table-responsive">
             <table class="table no-wrap p-table">
@@ -21,7 +21,9 @@
                         <td>{{recentCost.total | currency:'VND'}}</td>
                     </tr>
                     <tr>
-                        <td colspan="9"><a href="#" class="btn btn-outline-light float-right">Xem chi tiết</a>
+                        <td colspan="9">
+                            <a class="btn-outline-light float-right" [routerLink]="['../costs']"
+                                        mat-raised-button>Xem thêm</a>
                         </td>
                     </tr>
                 </tbody>

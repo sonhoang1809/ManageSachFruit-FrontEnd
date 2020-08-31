@@ -1,3 +1,4 @@
+import { DateTime } from './../models/date-time';
 import { LineChartModel, BarChartModel } from './../models/chart-model';
 import { MessageComponent } from './../message/message.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,7 +14,12 @@ export class GeneralHelperService {
 
   constructor(private dialog: MatDialog) { }
 
+  getToStringTime(time: DateTime): string{
+    return time.day+'-'+time.month+'-'+time.year+' '+time.hour+':'+time.minute+':'+time.second;
+  }
+
   convertToLineChartModel(dataResponse: any): LineChartModel {
+    //console.log(dataResponse);
     var chartModel: LineChartModel;
     var lineChartData: ChartDataSets[] = dataResponse.dataSets;
     var lineChartLabels: Label[] = dataResponse.chartLabel;
@@ -74,6 +80,7 @@ export class GeneralHelperService {
     };
     return chartModel; 
   }
+
   handleMessage(title, message) {
     this.dialog.open(MessageComponent, {
       panelClass: 'myapp-no-padding-dialog',
@@ -84,7 +91,6 @@ export class GeneralHelperService {
       data: { title: title, message: message }
     });
   }
-
   handleError(error) {
     console.log(error);
     var data;

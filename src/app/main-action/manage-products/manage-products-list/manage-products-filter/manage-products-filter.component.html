@@ -1,79 +1,25 @@
-<div class="product-sidebar">
-    <div class="product-sidebar-widget">
-        <h4 class="mb-0">Tìm sản phẩm theo</h4>
-    </div>
-    <div class="product-sidebar-widget">
+<mat-card class="product-sidebar">
+    <mat-card-header class="product-sidebar-widget">
+        <mat-card-title>Tìm sản phẩm theo</mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content class="product-sidebar-widget">
         <mat-form-field appearance="outline" class="custom-control">
             <mat-label for="validationCustom01">Tên sản phẩm / Mô tả</mat-label>
             <input matInput type="text" required (input)="changeNameDescription($event);">
         </mat-form-field>
-    </div>
-    <div class="product-sidebar-widget">
+    </mat-card-content>
+    <mat-card-content class="product-sidebar-widget">
         <h4 class="product-sidebar-widget-title">Loại sản phẩm</h4>
         <div class="custom-control custom-checkbox" *ngFor="let category of categoryList">
             <mat-checkbox class="example-margin" (change)='selectCategory(category.id)' >{{category.categoryName}}</mat-checkbox>
         </div>
-    </div>
-    <div class="product-sidebar-widget">
+    </mat-card-content>
+    <mat-card-content class="product-sidebar-widget">
         <h4 class="product-sidebar-widget-title">Đơn vị tính</h4>
         <div class="custom-control custom-checkbox" *ngFor="let unit of unitList">
             <mat-checkbox class="example-margin" (change)='selectUnit(unit)' >{{unit}}</mat-checkbox>
         </div>
-    </div>
-    <div class="product-sidebar-widget">
-        <h4 class="product-sidebar-widget-title">Brand</h4>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="brand-1">
-            <label class="custom-control-label" for="brand-1">Brand Name #1</label>
-        </div>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="brand-2">
-            <label class="custom-control-label" for="brand-2">Brand Name #2</label>
-        </div>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="brand-3">
-            <label class="custom-control-label" for="brand-3">Brand Name #3</label>
-        </div>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="brand-4">
-            <label class="custom-control-label" for="brand-4">Brand Name #4</label>
-        </div>
-    </div>
-    <div class="product-sidebar-widget">
-        <h4 class="product-sidebar-widget-title">Color</h4>
-        <div class="custom-control custom-radio custom-color-blue ">
-            <input type="radio" id="color-1" name="customRadio" class="custom-control-input">
-            <label class="custom-control-label" for="color-1">Blue</label>
-        </div>
-        <div class="custom-control custom-radio custom-color-red ">
-            <input type="radio" id="color-2" name="customRadio" class="custom-control-input">
-            <label class="custom-control-label" for="color-2">Red</label>
-        </div>
-        <div class="custom-control custom-radio custom-color-yellow ">
-            <input type="radio" id="color-3" name="customRadio" class="custom-control-input">
-            <label class="custom-control-label" for="color-3">Yellow</label>
-        </div>
-        <div class="custom-control custom-radio custom-color-black ">
-            <input type="radio" id="color-4" name="customRadio" class="custom-control-input">
-            <label class="custom-control-label" for="color-4">Black</label>
-        </div>
-    </div>
-    <div class="product-sidebar-widget">
-        <h4 class="product-sidebar-widget-title">Price</h4>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="price-1">
-            <label class="custom-control-label" for="price-1">$$</label>
-        </div>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="price-2">
-            <label class="custom-control-label" for="price-2">$$$</label>
-        </div>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="price-3">
-            <label class="custom-control-label" for="price-3">$$$$</label>
-        </div>
-    </div>
-    <div class="product-sidebar-widget">
-        <a href="#" class="btn btn-outline-light">Reset Filter</a>
-    </div>
-</div>
+    </mat-card-content>
+    
+</mat-card>

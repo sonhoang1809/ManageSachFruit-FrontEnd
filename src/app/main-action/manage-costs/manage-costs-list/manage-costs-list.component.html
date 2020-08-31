@@ -1,5 +1,4 @@
 <div class="row">
-    <!-- cost list
     <div class="col-xl-9 col-lg-12 col-md-6 col-sm-12 col-12">
         <div class="card">
             <h3 class="card-header" style="font-family: 'Montserrat', sans-serif;">Danh sách sản phẩm</h3>
@@ -9,21 +8,17 @@
                         <thead class="bg-light">
                             <tr class="border-0">
                                 <th class="border-0" style="font-family: 'Montserrat', sans-serif;">No.</th>
-                                <th mat-sort-header="product_name" class="border-0"
-                                    style="font-family: 'Montserrat', sans-serif;">Tên sản phẩm</th>
-                                <th mat-sort-header="description" class="border-0"
-                                    style="font-family: 'Montserrat', sans-serif;">Mô tả</th>
-                                <th mat-sort-header="quantity_in_stock" class="border-0"
-                                    style="font-family: 'Montserrat', sans-serif;">Tồn kho</th>
-                                <th mat-sort-header="unit" class="border-0"
-                                    style="font-family: 'Montserrat', sans-serif;">Đơn vị tính</th>
-                                <th mat-sort-header="unit_price" class="border-0"
-                                    style="font-family: 'Montserrat', sans-serif;">Đơn giá bán</th>
+                                <th mat-sort-header="cost_description" class="border-0"
+                                    style="font-family: 'Montserrat', sans-serif;">Mô tả chi phí</th>
+                                <th mat-sort-header="total" class="border-0"
+                                    style="font-family: 'Montserrat', sans-serif;">Tổng cộng chi phí</th>
+                                <th mat-sort-header="create_at" class="border-0"
+                                    style="font-family: 'Montserrat', sans-serif;">Thời gian tạo</th>
                                 <th class="border-0"></th>
                                 <th class="border-0"></th>
                             </tr>
                         </thead>
-                        <tbody *ngIf="productList==null">
+                        <tbody *ngIf="costList==null">
                             <tr>
                                 <td colspan="9" style="height: 430px;">
                                     <mat-spinner style="margin-left:auto; 
@@ -31,20 +26,18 @@
                                 </td>
                             </tr>
                         </tbody>
-                        <tbody *ngIf="productList!=null">
-                            <tr *ngFor="let product of productList;index as i">
+                        <tbody *ngIf="costList!=null">
+                            <tr *ngFor="let cost of costList;index as i">
                                 <td>{{i+(pageInfo.info.page*pageInfo.info.limit)-(pageInfo.info.limit-1)}}</td>
-                                <td>{{product.productName}}</td>
-                                <td>{{product.description}}</td>
-                                <td>{{product.quantityInStock}}</td>
-                                <td>{{product.unit}}</td>
-                                <td>{{product.unitPrice | currency: 'VND'}}</td>
+                                <td>{{cost.costDescription}}</td>
+                                <td>{{cost.total | currency:'VND'}}</td>
+                                <td>{{getToStringTime(cost.createAt)}}</td>
                                 <td>
-                                    <button class="btn-outline-light" (click)='showDialogProduct(product);'
+                                    <button class="btn-outline-light" (click)='showDialogCost(cost);'
                                         mat-raised-button>Chi tiết</button>
                                 </td>
                                 <td colspan="9">
-                                    <button class="btn-outline-light" (click)='deleteProduct(product);' mat-fab
+                                    <button class="btn-outline-light" (click)='deleteCost(cost);' mat-fab
                                         color="white">
                                         <mat-icon>delete</mat-icon>
                                     </button>
@@ -53,7 +46,7 @@
                             <tr>
                                 <td colspan="9">
                                     <button mat-raised-button class="btn-outline-light"
-                                        (click)='showDialogProduct(null);'
+                                        (click)='showDialogCost(null);'
                                         class="btn btn-outline-light float-right">Thêm
                                         sản
                                         phẩm</button>
@@ -68,12 +61,12 @@
         <nav aria-label="Page navigation example" *ngIf="pageInfo!=null">
             <ul class="pagination" *ngIf="pageInfo.info!=null">
                 <li *ngIf="pageInfo.isFirstPage==false" class="page-item">
-                    <button mat-raised-button class="page-link" (click)="searchProductByPage(pageInfo.info.page-1)">
+                    <button mat-raised-button class="page-link" (click)="searchByPage(pageInfo.info.page-1)">
                         Previous
                     </button>
                 </li>
                 <li *ngIf="pageInfo.isFirstPage==false" class="page-item">
-                    <button mat-raised-button class="page-link" (click)="searchProductByPage(pageInfo.info.page-1)">
+                    <button mat-raised-button class="page-link" (click)="searchByPage(pageInfo.info.page-1)">
                         {{pageInfo.info.page-1}}
                     </button>
                 </li>
@@ -84,20 +77,19 @@
                 </li>
                 <li *ngIf="pageInfo.isLastPage==false" class="page-item">
                     <button mat-raised-button class="page-link"
-                        (click)="searchProductByPage(pageInfo.info.page+1)">{{pageInfo.info.page+1}}</button>
+                        (click)="searchByPage(pageInfo.info.page+1)">{{pageInfo.info.page+1}}</button>
                 </li>
                 <li *ngIf="pageInfo.isLastPage==false" class="page-item">
                     <button mat-raised-button class="page-link"
-                        (click)="searchProductByPage(pageInfo.info.page+1)">Next</button>
+                        (click)="searchByPage(pageInfo.info.page+1)">Next</button>
                 </li>
             </ul>
         </nav>
     </div>
 
     <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-12">
-        <app-manage-products-filter (selectedCategory)="searchProductByCategory($event);" ></app-manage-products-filter>
-    </div>  -->
-    <!-- ============================================================== -->
+        <app-manage-costs-filter ></app-manage-costs-filter>
+    </div>
     
     <br>
 

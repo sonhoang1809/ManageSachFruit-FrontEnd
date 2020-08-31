@@ -11,7 +11,7 @@ export class ManageProductsFilterComponent implements OnInit {
 
   categoryList: Category[];
   categoryIds: string[] = [];
-  unitList: string[] = ["Kg","Cái"];
+  unitList: string[];
   units: string[] = [];
 
   @Output() selectedCategory: EventEmitter<string[]> = new EventEmitter<string[]>();
@@ -24,6 +24,9 @@ export class ManageProductsFilterComponent implements OnInit {
     //this.categoryList = this.productService.getCategories();
     this.productService.getAllCategories().subscribe(response=>{
       this.categoryList = response.data;
+    });
+    this.productService.getAllUnits().subscribe(response=>{
+      this.unitList = response.data;
     });
   }
 

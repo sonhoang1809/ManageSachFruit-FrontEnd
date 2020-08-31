@@ -1,25 +1,29 @@
+import { SearchRequest, SearchCostRequest } from './../Requests/search-request';
 import { SearchProductRequest } from './../Requests/search-product-request';
-import { SearchRequest } from '../Requests/search-request';
-import { UrlServerAPISummaryRevenueInMonth,
-   UrlServerAPISummaryCostInMonth, 
-   UrlServerAPISummaryProfitInMonth, 
-   UrlServerAPISummaryRevenuePerOrderInMonth, 
-   UrlServerAPISummaryNumberOrderInMonth, 
-   UrlServerAPISummaryNumberCostInMonth,
-   UrlServerAPISearchOrder,
-   UrlServerAPISearchCost,
-   UrlServerAPISummaryNumberProductInStockInMonth,
-   UrlServerAPIGetRemainMoney,
-   UrlServerAPIStatisticsRevenueCost,
-   UrlServerAPIStatisticsProfit,
-   UrlServerAPISearchProduct,
-   UrlServerAPIGetAllCategory,
-   UrlServerAPIStoreNewProduct,
-   UrlServerAPIGetDetailsProduct,
-   UrlServerAPIUpdateProduct,
-   UrlServerAPIDeleteProduct,
-   UrlServerAPIStatisticsRevenueByCategory
-  } from './../models/url-api';
+import {
+  UrlServerAPISummaryRevenueInMonth,
+  UrlServerAPISummaryCostInMonth,
+  UrlServerAPISummaryProfitInMonth,
+  UrlServerAPISummaryRevenuePerOrderInMonth,
+  UrlServerAPISummaryNumberOrderInMonth,
+  UrlServerAPISummaryNumberCostInMonth,
+  UrlServerAPISearchOrder,
+  UrlServerAPISearchCost,
+  UrlServerAPISummaryNumberProductInStockInMonth,
+  UrlServerAPIGetRemainMoney,
+  UrlServerAPIStatisticsRevenueCost,
+  UrlServerAPIStatisticsProfit,
+  UrlServerAPISearchProduct,
+  UrlServerAPIGetAllCategory,
+  UrlServerAPIStoreNewProduct,
+  UrlServerAPIGetDetailsProduct,
+  UrlServerAPIUpdateProduct,
+  UrlServerAPIDeleteProduct,
+  UrlServerAPIStatisticsRevenueByCategory,
+  UrlServerAPIGetAllUnits,
+  UrlServerAPICost,
+  UrlServerAPICostType
+} from './../models/url-api';
 import { ResponseServer } from './../models/response-server';
 
 import { SummaryFrame } from './../models/summary-frame';
@@ -33,99 +37,133 @@ import { catchError, retry } from 'rxjs/operators';
 })
 export class SummaryService {
 
-  
+
   constructor(private http: HttpClient) {
 
   }
 
-  public getSummaryRevenueInMonth(): Observable<ResponseServer>{
+  public getSummaryRevenueInMonth(): Observable<ResponseServer> {
     return this.http.get<ResponseServer>(UrlServerAPISummaryRevenueInMonth);
   }
 
-  public getSummaryCostInMonth(): Observable<ResponseServer>{
+  public getSummaryCostInMonth(): Observable<ResponseServer> {
     return this.http.get<ResponseServer>(UrlServerAPISummaryCostInMonth);
   }
 
-  public getSummaryProfitInMonth(): Observable<ResponseServer>{
+  public getSummaryProfitInMonth(): Observable<ResponseServer> {
     return this.http.get<ResponseServer>(UrlServerAPISummaryProfitInMonth);
   }
 
-  public getSummaryRevenuePerOrderInMonth(): Observable<ResponseServer>{
+  public getSummaryRevenuePerOrderInMonth(): Observable<ResponseServer> {
     return this.http.get<ResponseServer>(UrlServerAPISummaryRevenuePerOrderInMonth);
   }
 
-  public getSummaryNumberNewCustomerInMonth(): Observable<ResponseServer>{
+  public getSummaryNumberNewCustomerInMonth(): Observable<ResponseServer> {
     return this.http.get<ResponseServer>(UrlServerAPISummaryNumberOrderInMonth);
   }
 
-  public getSummaryNumberOrderInMonth(): Observable<ResponseServer>{
+  public getSummaryNumberOrderInMonth(): Observable<ResponseServer> {
     return this.http.get<ResponseServer>(UrlServerAPISummaryNumberOrderInMonth);
   }
 
-  public getSummaryNumberCostInMonth(): Observable<ResponseServer>{
+  public getSummaryNumberCostInMonth(): Observable<ResponseServer> {
     return this.http.get<ResponseServer>(UrlServerAPISummaryNumberCostInMonth);
   }
 
-  public getSummaryNumberProductInStockInMonth(): Observable<ResponseServer>{
+  public getSummaryNumberProductInStockInMonth(): Observable<ResponseServer> {
     return this.http.get<ResponseServer>(UrlServerAPISummaryNumberProductInStockInMonth);
   }
 
-  public getRemainMoney(): Observable<ResponseServer>{
+  public getRemainMoney(): Observable<ResponseServer> {
     return this.http.get<ResponseServer>(UrlServerAPIGetRemainMoney);
   }
 
-  public searchOrder(searchRequest: SearchRequest): Observable<ResponseServer>{
+  public searchOrder(searchRequest: SearchRequest): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
     return this.http.post<ResponseServer>(UrlServerAPISearchOrder, searchRequest);
   }
 
-  public searchCost(searchRequest: SearchRequest): Observable<ResponseServer>{
+  public getStatisticRevenueCost(statisticBy: number): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.post<ResponseServer>(UrlServerAPISearchCost, searchRequest);
+    return this.http.get<ResponseServer>(UrlServerAPIStatisticsRevenueCost + '/' + statisticBy);
   }
 
-  public searchProduct(searchRequest: SearchProductRequest): Observable<ResponseServer>{
+  public getStatisticRevenueByCategory(statisticBy: number): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.post<ResponseServer>(UrlServerAPISearchProduct, searchRequest);
+    return this.http.get<ResponseServer>(UrlServerAPIStatisticsRevenueByCategory + '/' + statisticBy);
   }
 
-  public getStatisticRevenueCost(statisticBy: number): Observable<ResponseServer>{
+  public getStatisticProfit(statisticBy: number): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.get<ResponseServer>(UrlServerAPIStatisticsRevenueCost+'/' + statisticBy);
+    return this.http.get<ResponseServer>(UrlServerAPIStatisticsProfit + '/' + statisticBy);
   }
 
-  public getStatisticRevenueByCategory(statisticBy: number): Observable<ResponseServer>{
-    const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.get<ResponseServer>(UrlServerAPIStatisticsRevenueByCategory+'/' + statisticBy);
-  }
-
-  public getStatisticProfit(statisticBy: number): Observable<ResponseServer>{
-    const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.get<ResponseServer>(UrlServerAPIStatisticsProfit+'/' + statisticBy);
-  }
-
-  public getAllCategories(): Observable<ResponseServer>{
+  public getAllCategories(): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
     return this.http.get<ResponseServer>(UrlServerAPIGetAllCategory);
   }
 
-  public storeNewProduct(data): Observable<ResponseServer>{
+  public getAllUnits(): Observable<ResponseServer> {
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.get<ResponseServer>(UrlServerAPIGetAllUnits);
+  }
+
+  public storeNewProduct(data): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
     return this.http.post<ResponseServer>(UrlServerAPIStoreNewProduct, data);
   }
 
-  public getDetailsProduct(id: string): Observable<ResponseServer>{
+  public getDetailsProduct(id: string): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.get<ResponseServer>(UrlServerAPIGetDetailsProduct+'/'+id);
+    return this.http.get<ResponseServer>(UrlServerAPIGetDetailsProduct + '/' + id);
   }
 
-  public updateProduct(data, id: string): Observable<ResponseServer>{
+  public updateProduct(data, id: string): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.put<ResponseServer>(UrlServerAPIUpdateProduct+'/'+id, data);
+    return this.http.put<ResponseServer>(UrlServerAPIUpdateProduct + '/' + id, data);
   }
 
-  public deleteProduct(id: string): Observable<ResponseServer>{
+  public deleteProduct(id: string): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.delete<ResponseServer>(UrlServerAPIDeleteProduct+'/'+id);
+    return this.http.delete<ResponseServer>(UrlServerAPIDeleteProduct + '/' + id);
   }
+
+  public searchProduct(searchRequest: SearchProductRequest): Observable<ResponseServer> {
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.post<ResponseServer>(UrlServerAPISearchProduct, searchRequest);
+  }
+
+  public searchCost(searchRequest: SearchCostRequest): Observable<ResponseServer> {
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.post<ResponseServer>(UrlServerAPISearchCost, searchRequest);
+  }
+
+  public storeNewCost(data): Observable<ResponseServer> {
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.post<ResponseServer>(UrlServerAPICost, data);
+  }
+
+  public updateCost(data, id: string): Observable<ResponseServer> {
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.put<ResponseServer>(UrlServerAPICost+'/'+id, data);
+  }
+
+  public deleteCost(id: string): Observable<ResponseServer>{
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.delete<ResponseServer>(UrlServerAPICost + '/' + id);
+  }
+
+  public getDetailsCost(id: string): Observable<ResponseServer>{
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.get<ResponseServer>(UrlServerAPICost + '/' + id);
+  }
+
+  public getAllCostType(): Observable<ResponseServer>{
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.get<ResponseServer>(UrlServerAPICostType);
+  }
+
+
+
+
 }

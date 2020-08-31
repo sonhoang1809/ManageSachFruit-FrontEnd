@@ -15,11 +15,13 @@ import { FormControl, Validators } from '@angular/forms';
 export class ProductDetailsComponent implements OnInit {
 
   categories: Category[] = [];
+  units: string[] = [];
+  unitSelected: string;
   categorySelected: string;
   inputForm = null;
   updateForm = null;
   productDetails: ProductDetails = null;
-
+  
   //selectFormControl = new FormControl('', Validators.required);
 
   constructor(private dialogRef: MatDialogRef<ProductDetailsComponent>,
@@ -29,11 +31,11 @@ export class ProductDetailsComponent implements OnInit {
     
   }
   ngOnInit(): void {
-    
     if (this.data != null) {
       this.productService.getDetailsProduct(this.data.id).subscribe(response => {
         this.data = response.data;
         this.categorySelected = this.data.category.id;
+        this.unitSelected = this.data.unit;
         this.updateForm = this.formBuilder.group({
           productName: this.data.productName,
           description: this.data.description,
@@ -59,6 +61,15 @@ export class ProductDetailsComponent implements OnInit {
     this.productService.getAllCategories().subscribe(
       (response)=>{
         this.categories = response.data;
+        
+      },
+      (error)=>{
+        this.generalService.handleError(error);
+      }
+    );
+    this.productService.getAllUnits().subscribe(
+      (response)=>{
+        this.units = response.data;
       },
       (error)=>{
         this.generalService.handleError(error);

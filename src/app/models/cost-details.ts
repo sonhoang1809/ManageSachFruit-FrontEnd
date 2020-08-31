@@ -1,10 +1,19 @@
 import { DateTime } from './date-time';
-export interface CostDetails {
+export interface Cost{
     id: string;
-    costCode: string;
     costDescription: string;
     total: number;
-    costTime: string;
+    createAt: DateTime;
+}
+export interface CostType{
+    id: number;
+    costTypeName: string;
+}
+export interface CostDetails {
+    id: string;
+    costType: CostType;
+    costDescription: string;
+    total: number;
     createAt: DateTime;
     updateAt: DateTime;
     // public constructor(OrderId: string, CostDescription: string, Total: number, CostCode: string) {

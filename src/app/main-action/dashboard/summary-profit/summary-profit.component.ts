@@ -28,7 +28,7 @@ export class SummaryProfitComponent implements OnInit {
   ngOnInit(): void {
     this.summaryService.getStatisticProfit(0).subscribe(
       (response) => {
-        //console.log(response);
+        console.log(response);
         this.summaryFrame = new SummaryFrame("Lợi nhuận theo thời gian",response.data.total,response.data.rateCompareToLastTime);
         this.lineChartModel = this.helper.convertToLineChartModel(response.data.chartModel);
         //console.log(this.lineChartModel);

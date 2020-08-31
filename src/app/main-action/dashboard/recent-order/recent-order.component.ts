@@ -1,3 +1,4 @@
+import { GeneralHelperService } from './../../../services/general-helper.service';
 import { OrderDetails } from './../../../models/order-details';
 import { SearchRequest } from './../../../Requests/search-request';
 import { SummaryService } from './../../../services/summary.service';
@@ -15,7 +16,7 @@ export class RecentOrderComponent implements OnInit {
 
   recentOrders: Array<OrderDetails> = null;
 
-  constructor(private summaryService: SummaryService) { }
+  constructor(private summaryService: SummaryService,private generalHelper: GeneralHelperService) { }
 
   ngOnInit(): void {
     var searchOrder: SearchRequest = {
@@ -32,7 +33,7 @@ export class RecentOrderComponent implements OnInit {
     });
   }
   getToStringTime(time: DateTime): string{
-    return time.day+'-'+time.month+'-'+time.year+' '+time.hour+':'+time.minute+':'+time.second;
+    return this.generalHelper.getToStringTime(time);
   }
 
 }
