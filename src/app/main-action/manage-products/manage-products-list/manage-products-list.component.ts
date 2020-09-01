@@ -156,12 +156,12 @@ export class ManageProductsListComponent implements OnInit {
   showDialogProduct(product): void {
     const dialogRef = this.dialog.open<ProductDetailsComponent>(ProductDetailsComponent, {
       panelClass: 'myapp-no-padding-dialog',
-      width: '650px',
+      width: '700px',
       data: product
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result != null) {
-        console.log(result);
+        //console.log(result);
         if (result == true) {
           this.searchProductList();
         }
@@ -181,13 +181,16 @@ export class ManageProductsListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       //console.log(result);
       if (result == true) {
+        this.generalHelper.openWaitingPopup();
         this.productService.deleteProduct(prod.id).subscribe(
           (response) => {
+            this.generalHelper.closeWaitingPopup();
             this.generalHelper.handleMessage("Success", response.message);
             this.searchProductList();
             dialogRef.close();
           },
           (error) => {
+            this.generalHelper.closeWaitingPopup();
             this.generalHelper.handleError(error);
             dialogRef.close();
           }

@@ -16,8 +16,7 @@ export class SummaryProfitComponent implements OnInit {
 
   statisticsBys = [
     { id: 0, display: 'Hằng ngày'},
-    { id: 1, display: 'Hằng tháng'},
-    { id: 2, display: 'Tất cả' }
+    { id: 1, display: 'Hằng tháng'}
   ];
   selected = this.statisticsBys[0].id;
   lineChartModel: LineChartModel = null;

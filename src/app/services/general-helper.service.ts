@@ -1,7 +1,9 @@
+import { WaitingComponent } from './../sharings/waiting/waiting.component';
+import { FormGroup } from '@angular/forms';
 import { DateTime } from './../models/date-time';
 import { LineChartModel, BarChartModel } from './../models/chart-model';
 import { MessageComponent } from './../message/message.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Injectable } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
@@ -12,13 +14,50 @@ import { AutofillMonitor } from '@angular/cdk/text-field';
 })
 export class GeneralHelperService {
 
+  private dialogWaitingPopupRef: MatDialogRef<WaitingComponent>;
   constructor(private dialog: MatDialog) { }
 
+  openWaitingPopup(){
+    this.dialogWaitingPopupRef = this.dialog.open(WaitingComponent);
+  }
+  closeWaitingPopup(){
+    //this.dialogWaitingPopupRef.getState().
+    this.dialogWaitingPopupRef.close();
+  }
+
+  hasErrorInputValidation(controlName: string, errorName: string, inputFormControl: FormGroup): boolean{
+    return inputFormControl.controls[controlName].hasError(errorName);
+  }
+
   getToStringTime(time: DateTime): string{
-    if(time.second<10){
-      return time.day+'-'+time.month+'-'+time.year+' '+time.hour+':'+time.minute+':0'+time.second;
+    var result="";
+    if(time.day<10){
+      result = result+'0'+time.day+'-';
+    }else{
+      result = result+time.day+'-';
     }
-    return time.day+'-'+time.month+'-'+time.year+' '+time.hour+':'+time.minute+':'+time.second;
+    if(time.month<10){
+      result = result+'0'+time.month+'-';
+    }else{
+      result = result+time.month+'-';
+    }
+    result = result + time.year+' ';
+    if(time.hour<10){
+      result = result+'0'+time.hour+':';
+    }else{
+      result = result+time.hour+':';
+    }
+    if(time.minute<10){
+      result = result+'0'+time.minute+':';
+    }else{
+      result = result+time.minute+':';
+    }
+    if(time.second<10){
+      result=result+'0'+time.second;
+    }else{
+      result=result+time.second;
+    }
+    return result;
   }
 
   convertToLineChartModel(dataResponse: any): LineChartModel {

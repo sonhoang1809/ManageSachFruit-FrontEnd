@@ -19,6 +19,7 @@ export const UrlServerAPISummaryNumberProductInStockInMonth = UrlServer+'/api/pr
 export const UrlServerAPIStatisticsRevenueCost = UrlServer+'/api/Moneys/Statistics/Revenue/Cost';
 export const UrlServerAPIStatisticsProfit = UrlServer+'/api/Moneys/Statistics/SummaryProfits';
 export const UrlServerAPIStatisticsRevenueByCategory = UrlServer+'/api/Moneys/Statistics/Revenue/Category';
+export const UrlServerAPIStatisticsCostType = UrlServer+'/api/Moneys/Statistics/CostTypes';
 
 
 export const UrlServerAPISearchOrder = UrlServer+'/api/Orders/Search';
@@ -38,6 +39,7 @@ export const UrlServerAPIDeleteProduct = UrlServer+'/api/Products';
 export const UrlServerAPICost = UrlServer+'/api/Costs';
 
 export const UrlServerAPICostType = UrlServer+'/api/CostTypes';
+export const UrlServerAPISearchCostType = UrlServer+'/api/CostTypes/Search';
 
 export interface Options{
     headers?: HttpHeaders | {[header: string]: string | string[]},

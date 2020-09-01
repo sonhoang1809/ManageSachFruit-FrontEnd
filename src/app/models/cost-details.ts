@@ -9,6 +9,11 @@ export interface CostType{
     id: number;
     costTypeName: string;
 }
+export interface CostTypeDetails{
+    id: number;
+    costTypeName: string;
+    total: number;
+}
 export interface CostDetails {
     id: string;
     costType: CostType;

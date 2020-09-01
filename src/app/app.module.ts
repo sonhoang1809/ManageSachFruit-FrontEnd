@@ -1,3 +1,4 @@
+import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 import { ProductDetailsComponent } from './main-action/manage-products/manage-products-list/product-details/product-details.component';
 import { ManageProductsFilterComponent } from './main-action/manage-products/manage-products-list/manage-products-filter/manage-products-filter.component';
 
@@ -67,7 +68,12 @@ import { ManageCostsComponent } from './main-action/manage-costs/manage-costs.co
 import { ManageCostsListComponent } from './main-action/manage-costs/manage-costs-list/manage-costs-list.component';
 import { ManageCostDetailsComponent } from './main-action/manage-costs/manage-costs-list/manage-cost-details/manage-cost-details.component';
 import { ManageCostsFilterComponent } from './main-action/manage-costs/manage-costs-list/manage-costs-filter/manage-costs-filter.component';
-
+import { WaitingComponent } from './sharings/waiting/waiting.component';
+import { ManageCostTypesComponent } from './main-action/manage-cost-types/manage-cost-types.component';
+import { ManageCostsTypeListComponent } from './main-action/manage-cost-types/manage-costs-type-list/manage-costs-type-list.component';
+import { ManageCostTypeDetailsComponent } from './main-action/manage-cost-types/manage-costs-type-list/manage-cost-type-details/manage-cost-type-details.component';
+import { ManageCostTypesFilterComponent } from './main-action/manage-cost-types/manage-costs-type-list/manage-cost-types-filter/manage-cost-types-filter.component';
+import { SummaryCostTypeComponent } from './main-action/dashboard/summary-cost-type/summary-cost-type.component';
 
 
 
@@ -108,7 +114,13 @@ import { ManageCostsFilterComponent } from './main-action/manage-costs/manage-co
     ManageCostsComponent,
     ManageCostsListComponent,
     ManageCostDetailsComponent,
-    ManageCostsFilterComponent
+    ManageCostsFilterComponent,
+    WaitingComponent,
+    ManageCostTypesComponent,
+    ManageCostsTypeListComponent,
+    ManageCostTypeDetailsComponent,
+    ManageCostTypesFilterComponent,
+    SummaryCostTypeComponent
   ],
   imports: [
     BrowserModule,
@@ -138,7 +150,7 @@ import { ManageCostsFilterComponent } from './main-action/manage-costs/manage-co
           { path: 'dashboard', component: DashboardComponent },
           { path: 'products', component: ManageProductsComponent },
           { path: 'costs', component: ManageCostsComponent },
-          { path: 'cost-types', component: ManageCostsComponent }
+          { path: 'cost-types', component: ManageCostTypesComponent }
         ]
       }
       //{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -149,7 +161,8 @@ import { ManageCostsFilterComponent } from './main-action/manage-costs/manage-co
   ],
   providers: [
     ProductsService,
-    SummaryService
+    SummaryService,
+    {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}
   ],
   bootstrap: [AppComponent]
 })

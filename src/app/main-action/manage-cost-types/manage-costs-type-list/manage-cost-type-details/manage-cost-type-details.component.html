@@ -1,0 +1,28 @@
+<div class="card">
+    <h3 class="card-header">Chi tiết chi phí</h3>
+    <form *ngIf="costTypeDetails==null">
+        <div class="card-body">
+            <mat-spinner style="margin-left:auto; 
+                                margin-right:auto;" color="accent" diameter=30>
+            </mat-spinner>
+        </div>
+    </form>
+    <form *ngIf="costTypeDetails!=null">
+        <div class="card-body">
+            <div class="row">
+                <mat-form-field appearance="outline"
+                    class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                    <mat-label for="validationCustomUsername">Tên loại chi phí</mat-label>
+                    <input matInput type="text" readonly value="{{costTypeDetails.costTypeName}}" required>
+                    <mat-hint align="end">Chỉ xem</mat-hint>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                    <mat-label for="validationCustom03">Tổng cộng chi phí</mat-label>
+                    <input matInput type="text" required readonly value="{{costTypeDetails.total|currency:'VND'}}">
+                    <mat-hint align="end">Chỉ xem</mat-hint>
+                </mat-form-field>            
+            </div>
+        </div>
+    </form>
+
+</div>

@@ -56,7 +56,7 @@ export class ManageCostsListComponent implements OnInit {
       return;
     }
     this.pageInfo.info = responseData.info;
-    console.log(this.pageInfo);
+    //console.log(this.pageInfo);
     this.costList = responseData.data;
     //console.log(this.productList);
     this.pageInfo.numberOfPage = Math.ceil(this.pageInfo.info.totalRecord / this.pageInfo.info.limit);
@@ -125,7 +125,7 @@ export class ManageCostsListComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result != null) {
-        console.log(result);
+        //console.log(result);
         if (result == true) {
           this.searchCostList();
         }
@@ -142,13 +142,16 @@ export class ManageCostsListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       //console.log(result);
       if (result == true) {
+        this.generalHelper.openWaitingPopup();
         this.costService.deleteCost(cost.id).subscribe(
           (response) => {
+            this.generalHelper.closeWaitingPopup();
             this.generalHelper.handleMessage("Success", response.message);
             this.searchCostList();
             dialogRef.close();
           },
           (error) => {
+            this.generalHelper.closeWaitingPopup();
             this.generalHelper.handleError(error);
             dialogRef.close();
           }

@@ -1,0 +1,28 @@
+<div class="card">
+    <div class="card-header">
+        <mat-form-field appearance="outline" class="float-right">
+            <mat-label for="validationCustom05">Theo thời gian</mat-label>
+            <mat-select matNativeControl [(value)]="selected" required (selectionChange)="submit($event)">
+                <mat-option *ngFor="let statisticsBy of statisticsBys" [value]="statisticsBy.id">
+                    {{statisticsBy.display}}
+                </mat-option>
+            </mat-select>
+            <mat-hint align="end">Chọn 1</mat-hint>
+        </mat-form-field>
+        <h3 class="mb-0">Cái loại chi phí</h3>
+    </div>
+    <mat-card-content class="card-body">
+        <div class="chartjs-container" *ngIf="barChartModel==null">
+            <mat-spinner style="margin-left:auto; 
+                                margin-right:auto; margin-top: auto;margin-bottom: auto;" color="accent" diameter=30>
+            </mat-spinner>
+        </div>
+        <div class="chartjs-container" *ngIf="barChartModel!=null">
+            <canvas height="261vw" baseChart [datasets]="barChartModel.chartData" [labels]="barChartModel.chartLabels"
+                [options]="barChartModel.chartOptions" [colors]="barChartModel.chartColors"
+                [legend]="barChartModel.chartLegend" [chartType]="barChartModel.chartType"
+                [plugins]="barChartModel.chartPlugins" >
+            </canvas>
+        </div>
+    </mat-card-content>
+</div>

@@ -22,7 +22,9 @@ import {
   UrlServerAPIStatisticsRevenueByCategory,
   UrlServerAPIGetAllUnits,
   UrlServerAPICost,
-  UrlServerAPICostType
+  UrlServerAPICostType,
+  UrlServerAPISearchCostType,
+  UrlServerAPIStatisticsCostType
 } from './../models/url-api';
 import { ResponseServer } from './../models/response-server';
 
@@ -91,6 +93,11 @@ export class SummaryService {
   public getStatisticRevenueByCategory(statisticBy: number): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
     return this.http.get<ResponseServer>(UrlServerAPIStatisticsRevenueByCategory + '/' + statisticBy);
+  }
+  
+  public getStatisticCostType(statisticBy: number): Observable<ResponseServer> {
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.get<ResponseServer>(UrlServerAPIStatisticsCostType + '/' + statisticBy);
   }
 
   public getStatisticProfit(statisticBy: number): Observable<ResponseServer> {
@@ -163,6 +170,15 @@ export class SummaryService {
     return this.http.get<ResponseServer>(UrlServerAPICostType);
   }
 
+  public searchCostType(data): Observable<ResponseServer>{
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.post<ResponseServer>(UrlServerAPISearchCostType,data,);
+  }
+  
+  public searchCostTypeDetails(id: number): Observable<ResponseServer>{
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.get<ResponseServer>(UrlServerAPICostType+'/'+id);
+  }
 
 
 

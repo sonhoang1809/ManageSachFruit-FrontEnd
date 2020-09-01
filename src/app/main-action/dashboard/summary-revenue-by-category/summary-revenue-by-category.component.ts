@@ -13,8 +13,7 @@ export class SummaryRevenueByCategoryComponent implements OnInit {
   barChartModel: BarChartModel = null;
   statisticsBys = [
     { id: 0, display: 'Hằng ngày' },
-    { id: 1, display: 'Hằng tháng' },
-    { id: 2, display: 'Tất cả' }
+    { id: 1, display: 'Hằng tháng' }
   ];
   selected = this.statisticsBys[0].id;
 

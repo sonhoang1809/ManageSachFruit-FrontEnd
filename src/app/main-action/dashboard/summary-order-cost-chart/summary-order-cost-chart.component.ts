@@ -26,8 +26,7 @@ export class SummaryOrderCostChartComponent implements OnInit {
   //form: FormGroup;
   statisticsBys =[
     {id:0, display:'Hằng ngày'},
-    {id:1, display:'Hằng tháng'},
-    {id:2, display:'Tất cả'}
+    {id:1, display:'Hằng tháng'}
   ];
   selected = this.statisticsBys[0].id;
   lineChartModel: LineChartModel = null;
@@ -43,8 +42,7 @@ export class SummaryOrderCostChartComponent implements OnInit {
     
     this.statisticsBys=[
       {id:0, display:'Hằng ngày'},
-      {id:1, display:'Hằng tháng'},
-      {id:2, display:'Tất cả'}
+      {id:1, display:'Hằng tháng'}
     ]
 
     this.summaryService.getStatisticRevenueCost(0).subscribe( response=> {

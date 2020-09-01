@@ -1,33 +1,51 @@
 <div class="card" *ngIf="data!=null; else elseBlock">
     <h3 class="card-header">Chi tiết sản phẩm</h3>
-    <form *ngIf="updateForm==null">
+    <form *ngIf="inputFormControl==null">
         <div class="card-body">
             <mat-spinner style="margin-left:auto; 
                                 margin-right:auto;" color="accent" diameter=30>
             </mat-spinner>
         </div>
     </form>
-    <form *ngIf="updateForm!=null; elseNull" [formGroup]="updateForm"
-        (ngSubmit)="onUpdateProduct(updateForm.value,data.id);">
+    <form *ngIf="inputFormControl!=null; elseNull" [formGroup]="inputFormControl"
+        (ngSubmit)="onUpdateProduct(inputFormControl.value,data.id);">
         <div class="card-body">
             <div class="row">
                 <mat-form-field appearance="outline" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
                     <mat-label for="validationCustom01">Tên sản phẩm</mat-label>
                     <input matInput type="text" formControlName="productName" required>
                     <mat-hint align="end">tối đa 50 kí tự</mat-hint>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('productName','required',inputFormControl)">
+                        Tên sản phẩm <strong>không được trống</strong>
+                    </mat-error>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('productName','maxlength',inputFormControl)">
+                        Tên sản phẩm <strong>không được quá 50 ký tự</strong>
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
                     <mat-label for="exampleFormControlTextarea1">Mô tả</mat-label>
                     <textarea matInput rows="3" formControlName="description" required></textarea>
                     <mat-hint align="end">tối đa 100 kí tự</mat-hint>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('description','required',inputFormControl)">
+                        Mô tả sản phẩm <strong>không được trống</strong>
+                    </mat-error>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('description','maxlength',inputFormControl)">
+                        Mô tả sản phẩm <strong>không được quá 100 ký tự</strong>
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <mat-label for="validationCustom03">Tồn kho</mat-label>
-                    <input matInput type="number" formControlName="quantityInStock" required >
+                    <input matInput type="number" formControlName="quantityInStock" required>
                     <mat-hint align="end">Nhập số</mat-hint>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('quantityInStock','required',inputFormControl)">
+                        Số lượng nhập <strong>không được trống</strong>
+                    </mat-error>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('quantityInStock','min',inputFormControl)">
+                        Số lượng nhập <strong>không được nhỏ hơn 1</strong>
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
-                    <mat-label for="validationCustom04">Số lượng nhập</mat-label>
+                    <mat-label for="validationCustom04">Số lượng lúc nhập</mat-label>
                     <input matInput type="text" readonly value="{{data.quantityAtBegining}}">
                     <mat-hint align="end">Không nhập</mat-hint>
                 </mat-form-field>
@@ -37,13 +55,23 @@
                         <mat-option *ngFor="let unit of units" [value]="unit">
                             {{unit}}
                         </mat-option>
-                    </mat-select>
+                    </mat-select>               
                     <mat-hint align="end">Chọn 1</mat-hint>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('unit','required',inputFormControl)">
+                        Đơn vị tính <strong>không được trống</strong>
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <mat-label for="validationCustom05">Đơn giá</mat-label>
-                    <input matInput type="number" min=10000 formControlName="unitPrice" required value="{{data.unitPrice}}">
+                    <input matInput type="number" min=10000 formControlName="unitPrice" required
+                        value="{{data.unitPrice}}">
                     <mat-hint align="end">Nhập số</mat-hint>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('unitPrice','required',inputFormControl)">
+                        Đơn giá nhập <strong>không được trống</strong>
+                    </mat-error>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('unitPrice','min',inputFormControl)">
+                        Đơn giá nhập <strong>không được nhỏ hơn 1000</strong>
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <mat-label for="validationCustom05">Loại sản phẩm</mat-label>
@@ -54,8 +82,12 @@
                         </mat-option>
                     </mat-select>
                     <mat-hint align="end">Chọn 1</mat-hint>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('categoryId','required',inputFormControl)">
+                        Loại sản phẩm <strong>không được trống</strong>
+                    </mat-error>
                 </mat-form-field>
-                <mat-form-field *ngIf="data.createAt!=null" appearance="outline" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                <mat-form-field *ngIf="data.createAt!=null" appearance="outline"
+                    class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <mat-label for="validationCustom05">Thời gian tạo</mat-label>
                     <input matInput type="text" readonly value="{{getToStringTime(data.createAt)}}">
                     <mat-hint align="end">Không chọn</mat-hint>
@@ -65,6 +97,12 @@
                     <mat-label for="validationCustomUsername">{{data.cost.costDescription}}</mat-label>
                     <input matInput type="number" formControlName="importPrice" value="" required>
                     <mat-hint align="end">Nhập chi phí</mat-hint>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('importPrice','required',inputFormControl)">
+                        Chi phí nhập <strong>không được trống</strong>
+                    </mat-error>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('importPrice','min',inputFormControl)">
+                        Chi phí nhập <strong>không được nhỏ hơn 1000</strong>
+                    </mat-error>
                 </mat-form-field>
             </div>
             <button mat-raised-button color="primary">Cập nhật</button>
@@ -74,52 +112,90 @@
 </div>
 <ng-template class="card" #elseBlock>
     <h3 class="card-header">Thêm sản phẩm</h3>
-    <form [formGroup]="inputForm" (ngSubmit)="onStoreProduct(inputForm.value)">
+    <form [formGroup]="inputFormControl" (ngSubmit)="onStoreProduct(inputFormControl.value)">
         <div class="card-body">
             <div class="row">
                 <mat-form-field appearance="outline" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
                     <mat-label for="validationCustom01">Tên sản phẩm</mat-label>
-                    <input matInput type="text" formControlName="productName" value="" required>
+                    <input matInput type="text" formControlName="productName"
+                        formControlName="productName" value="" required>
                     <mat-hint align="end">tối đa 50 kí tự</mat-hint>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('productName','required',inputFormControl)">
+                        Tên sản phẩm <strong>không được trống</strong>
+                    </mat-error>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('productName','maxlength',inputFormControl)">
+                        Tên sản phẩm <strong>không được quá 50 ký tự</strong>
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
                     <mat-label for="exampleFormControlTextarea1">Mô tả</mat-label>
                     <textarea matInput rows="3" formControlName="description" required></textarea>
                     <mat-hint align="end">tối đa 100 kí tự</mat-hint>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('description','required',inputFormControl)">
+                        Mô tả sản phẩm <strong>không được trống</strong>
+                    </mat-error>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('description','maxlength',inputFormControl)">
+                        Mô tả sản phẩm <strong>không được quá 100 ký tự</strong>
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <mat-label for="validationCustom03">Số lượng nhập</mat-label>
-                    <input matInput type="number" formControlName="quantityInStock" required >
+                    <input matInput type="number" formControlName="quantityInStock" required>
                     <mat-hint align="end">Nhập số</mat-hint>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('quantityInStock','required',inputFormControl)">
+                        Số lượng nhập <strong>không được trống</strong>
+                    </mat-error>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('quantityInStock','min',inputFormControl)">
+                        Số lượng nhập <strong>không được nhỏ hơn 1</strong>
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <mat-label for="validationCustom05">Đơn vị tính</mat-label>
-                    <mat-select formControlName="unit" required [(value)]=unitSelected>
+                    <mat-select formControlName="unit" required>
+                        <mat-option>--</mat-option>
                         <mat-option *ngFor="let unit of units" [value]="unit">
                             {{unit}}
                         </mat-option>
                     </mat-select>
                     <mat-hint align="end">Chọn 1</mat-hint>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('unit','required',inputFormControl)">
+                        Đơn vị tính <strong>không được trống</strong>
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <mat-label for="validationCustom05">Đơn giá</mat-label>
                     <input matInput type="number" min=10000 formControlName="unitPrice" required>
                     <mat-hint align="end">Nhập số</mat-hint>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('unitPrice','required',inputFormControl)">
+                        Đơn giá nhập <strong>không được trống</strong>
+                    </mat-error>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('unitPrice','min',inputFormControl)">
+                        Đơn giá nhập <strong>không được nhỏ hơn 1000</strong>
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <mat-label for="validationCustom05">Loại sản phẩm</mat-label>
                     <mat-select formControlName="categoryId" required>
+                        <mat-option>--</mat-option>
                         <mat-option *ngFor="let category of categories" value="{{category.id}}">
                             {{category.categoryName}}
                         </mat-option>
                     </mat-select>
                     <mat-hint align="end">Chọn 1</mat-hint>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('categoryId','required',inputFormControl)">
+                        Loại sản phẩm <strong>không được trống</strong>
+                    </mat-error>
                 </mat-form-field>
-                <mat-form-field appearance="outline"
-                    class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                <mat-form-field appearance="outline" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
                     <mat-label for="validationCustomUsername">Chi phí nhập</mat-label>
                     <input matInput type="number" formControlName="importPrice" value="" required>
                     <mat-hint align="end">Nhập chi phí</mat-hint>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('importPrice','required',inputFormControl)">
+                        Chi phí nhập <strong>không được trống</strong>
+                    </mat-error>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('importPrice','min',inputFormControl)">
+                        Chi phí nhập <strong>không được nhỏ hơn 1000</strong>
+                    </mat-error>
                 </mat-form-field>
             </div>
             <button mat-raised-button color="primary">Thêm mới sản phẩm</button>

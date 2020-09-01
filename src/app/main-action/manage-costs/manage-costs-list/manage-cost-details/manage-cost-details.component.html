@@ -1,25 +1,37 @@
 <div class="card" *ngIf="data!=null; else elseBlock">
     <h3 class="card-header">Chi tiết chi phí</h3>
-    <form *ngIf="updateForm==null">
+    <form *ngIf="inputFormControl==null">
         <div class="card-body">
             <mat-spinner style="margin-left:auto; 
                                 margin-right:auto;" color="accent" diameter=30>
             </mat-spinner>
         </div>
     </form>
-    <form *ngIf="updateForm!=null; elseNull" [formGroup]="updateForm"
-        (ngSubmit)="onUpdateCost(updateForm.value,data.id);">
+    <form *ngIf="inputFormControl!=null; elseNull" [formGroup]="inputFormControl"
+        (ngSubmit)="onUpdateCost(inputFormControl.value,data.id);">
         <div class="card-body">
             <div class="row">
                 <mat-form-field appearance="outline" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
                     <mat-label for="exampleFormControlTextarea1">Mô tả chi phí</mat-label>
                     <textarea matInput rows="3" formControlName="costDescription" required></textarea>
                     <mat-hint align="end">tối đa 100 kí tự</mat-hint>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('costDescription','required',inputFormControl)">
+                        Mô tả chi phí <strong>không được trống</strong>
+                    </mat-error>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('costDescription','maxlength',inputFormControl)">
+                        Mô tả chi phí <strong>không được quá 100 ký tự</strong>
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <mat-label for="validationCustom03">Tổng cộng</mat-label>
                     <input matInput type="number" formControlName="total" required>
                     <mat-hint align="end">Nhập số</mat-hint>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('total','required',inputFormControl)">
+                        Tổng cộng <strong>không được trống</strong>
+                    </mat-error>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('total','min',inputFormControl)">
+                        Tổng cộng <strong>không được nhỏ hơn 1000</strong>
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <mat-label for="validationCustom05">Loại chi phí</mat-label>
@@ -29,6 +41,9 @@
                         </mat-option>
                     </mat-select>
                     <mat-hint align="end">Chọn 1</mat-hint>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('costTypeId','required',inputFormControl)">
+                        Loại chi phí <strong>không được trống</strong>
+                    </mat-error>
                 </mat-form-field>
                 
                 <mat-form-field appearance="outline"
@@ -45,18 +60,30 @@
 </div>
 <ng-template class="card" #elseBlock>
     <h3 class="card-header">Thêm sản phẩm</h3>
-    <form [formGroup]="inputForm" (ngSubmit)="onStoreCost(inputForm.value)">
+    <form [formGroup]="inputFormControl" (ngSubmit)="onStoreCost(inputFormControl.value)">
         <div class="card-body">
             <div class="row">
                 <mat-form-field appearance="outline" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
                     <mat-label for="exampleFormControlTextarea1">Mô tả chi phí</mat-label>
                     <textarea matInput rows="3" formControlName="costDescription" required></textarea>
                     <mat-hint align="end">tối đa 100 kí tự</mat-hint>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('costDescription','required',inputFormControl)">
+                        Mô tả chi phí <strong>không được trống</strong>
+                    </mat-error>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('costDescription','maxlength',inputFormControl)">
+                        Mô tả chi phí <strong>không được quá 100 ký tự</strong>
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <mat-label for="validationCustom03">Tổng cộng</mat-label>
                     <input matInput type="number" formControlName="total" required>
                     <mat-hint align="end">Nhập số</mat-hint>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('total','required',inputFormControl)">
+                        Tổng cộng <strong>không được trống</strong>
+                    </mat-error>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('total','min',inputFormControl)">
+                        Tổng cộng <strong>không được nhỏ hơn 1000</strong>
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                     <mat-label for="validationCustom05">Loại chi phí</mat-label>
@@ -66,6 +93,9 @@
                         </mat-option>
                     </mat-select>
                     <mat-hint align="end">Chọn 1</mat-hint>
+                    <mat-error *ngIf="generalService.hasErrorInputValidation('costTypeId','required',inputFormControl)">
+                        Loại chi phí <strong>không được trống</strong>
+                    </mat-error>
                 </mat-form-field>
             </div>
             <button mat-raised-button color="primary">Thêm mới chi phí</button>

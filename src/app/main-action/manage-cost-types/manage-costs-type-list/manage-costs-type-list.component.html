@@ -2,25 +2,20 @@
     <div class="col-xl-9 col-lg-12 col-md-6 col-sm-12 col-12">
         <mat-card class="card">
             <mat-card-header class="product-sidebar-widget">
-                <mat-card-title>Danh sách chi phí</mat-card-title>
+                <mat-card-title>Danh sách các loại chi phí</mat-card-title>
             </mat-card-header>
             <mat-card-content class="card-body p-0">
                 <mat-card-content class="table-responsive">
-                    <table matSort class="table" (matSortChange)="searchCostSortBy($event)">
+                    <table matSort class="table" (matSortChange)="searchCostTypeSortBy($event)">
                         <thead class="bg-light">
                             <tr class="border-0">
                                 <th class="border-0" style="font-family: 'Montserrat', sans-serif;">No.</th>
-                                <th mat-sort-header="cost_description" class="border-0"
-                                    style="font-family: 'Montserrat', sans-serif;">Mô tả chi phí</th>
-                                <th mat-sort-header="total" class="border-0"
-                                    style="font-family: 'Montserrat', sans-serif;">Tổng cộng chi phí</th>
-                                <th mat-sort-header="create_at" class="border-0"
-                                    style="font-family: 'Montserrat', sans-serif;">Thời gian tạo</th>
-                                <th class="border-0"></th>
-                                <th class="border-0"></th>
+                                <th mat-sort-header="CostTypeName" class="border-0"
+                                    style="font-family: 'Montserrat', sans-serif;">Tên loại chi phí</th>
+                                <th></th>
                             </tr>
                         </thead>
-                        <tbody *ngIf="costList==null">
+                        <tbody *ngIf="costTypeList==null">
                             <tr>
                                 <td colspan="9" style="height: 430px;">
                                     <mat-spinner style="margin-left:auto; 
@@ -28,36 +23,24 @@
                                 </td>
                             </tr>
                         </tbody>
-                        <tbody *ngIf="costList!=null">
-                            <tr *ngFor="let cost of costList;index as i">
+                        <tbody *ngIf="costTypeList!=null">
+                            <tr *ngFor="let costType of costTypeList;index as i">
                                 <td>{{i+(pageInfo.info.page*pageInfo.info.limit)-(pageInfo.info.limit-1)}}</td>
-                                <td>{{cost.costDescription}}</td>
-                                <td>{{cost.total | currency:'VND'}}</td>
-                                <td>{{getToStringTime(cost.createAt)}}</td>
+                                <td>{{costType.costTypeName}}</td>
                                 <td>
-                                    <button class="btn-outline-light" (click)='showDialogCost(cost);'
+                                    <button class="btn-outline-light" (click)='showDialogCostType(costType.id);'
                                         mat-raised-button>Chi tiết</button>
                                 </td>
-                                <td colspan="9">
-                                    <button class="btn-outline-light" (click)='deleteCost(cost);' mat-fab color="white">
-                                        <mat-icon>delete</mat-icon>
-                                    </button>
-                                </td>
                             </tr>
-                            <tr>
-                                <td colspan="9">
-                                    <button mat-raised-button class="btn-outline-light" (click)='showDialogCost(null);'
-                                        class="btn btn-outline-light float-right">Thêm chi phí</button>
-                                </td>
-                            </tr>
+
                         </tbody>
                     </table>
                 </mat-card-content>
             </mat-card-content>
         </mat-card>
 
-        <nav aria-label="Page navigation example" *ngIf="pageInfo!=null">
-            <ul class="pagination" *ngIf="pageInfo.info!=null&&pageInfo.info.totalRecord>0">
+        <nav aria-label="Page navigation example" *ngIf="pageInfo!=null&&pageInfo.info.totalRecord>0">
+            <ul class="pagination" *ngIf="pageInfo.info!=null">
                 <li *ngIf="pageInfo.isFirstPage==false" class="page-item">
                     <button mat-raised-button class="page-link" (click)="searchByPage(pageInfo.info.page-1)">
                         Previous
@@ -86,7 +69,7 @@
     </div>
 
     <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-12">
-        <app-manage-costs-filter (description)="searchCostByDescription($event)" (selectedCostTypeIds)="searchCostByCostType($event)"></app-manage-costs-filter>
+        <app-manage-cost-types-filter (costTypeName)="searchCostTypeByName($event)"></app-manage-cost-types-filter>
     </div>
 
     <br>
