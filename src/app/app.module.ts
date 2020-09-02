@@ -63,6 +63,11 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatExpansionModule } from '@angular/material/expansion';
+
+
+
 import { SummaryRevenueByCategoryComponent } from './main-action/dashboard/summary-revenue-by-category/summary-revenue-by-category.component';
 import { ManageCostsComponent } from './main-action/manage-costs/manage-costs.component';
 import { ManageCostsListComponent } from './main-action/manage-costs/manage-costs-list/manage-costs-list.component';
@@ -74,6 +79,10 @@ import { ManageCostsTypeListComponent } from './main-action/manage-cost-types/ma
 import { ManageCostTypeDetailsComponent } from './main-action/manage-cost-types/manage-costs-type-list/manage-cost-type-details/manage-cost-type-details.component';
 import { ManageCostTypesFilterComponent } from './main-action/manage-cost-types/manage-costs-type-list/manage-cost-types-filter/manage-cost-types-filter.component';
 import { SummaryCostTypeComponent } from './main-action/dashboard/summary-cost-type/summary-cost-type.component';
+import { ManageOrdersComponent } from './main-action/manage-orders/manage-orders.component';
+import { ManageOrdersListComponent } from './main-action/manage-orders/manage-orders-list/manage-orders-list.component';
+import { ManageOrderDetailsComponent } from './main-action/manage-orders/manage-orders-list/manage-order-details/manage-order-details.component';
+import { ManageOrderFiltersComponent } from './main-action/manage-orders/manage-orders-list/manage-order-filters/manage-order-filters.component';
 
 
 
@@ -120,7 +129,11 @@ import { SummaryCostTypeComponent } from './main-action/dashboard/summary-cost-t
     ManageCostsTypeListComponent,
     ManageCostTypeDetailsComponent,
     ManageCostTypesFilterComponent,
-    SummaryCostTypeComponent
+    SummaryCostTypeComponent,
+    ManageOrdersComponent,
+    ManageOrdersListComponent,
+    ManageOrderDetailsComponent,
+    ManageOrderFiltersComponent
   ],
   imports: [
     BrowserModule,
@@ -142,6 +155,8 @@ import { SummaryCostTypeComponent } from './main-action/dashboard/summary-cost-t
     MatPaginatorModule,
     MatSortModule,
     MatCheckboxModule,
+    MatSidenavModule,
+    MatExpansionModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'main', pathMatch: 'full' },
       {
@@ -150,7 +165,8 @@ import { SummaryCostTypeComponent } from './main-action/dashboard/summary-cost-t
           { path: 'dashboard', component: DashboardComponent },
           { path: 'products', component: ManageProductsComponent },
           { path: 'costs', component: ManageCostsComponent },
-          { path: 'cost-types', component: ManageCostTypesComponent }
+          { path: 'cost-types', component: ManageCostTypesComponent },
+          { path: 'orders', component: ManageOrdersComponent }
         ]
       }
       //{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -162,7 +178,7 @@ import { SummaryCostTypeComponent } from './main-action/dashboard/summary-cost-t
   providers: [
     ProductsService,
     SummaryService,
-    {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}
+    { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }
   ],
   bootstrap: [AppComponent]
 })

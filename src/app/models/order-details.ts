@@ -16,4 +16,13 @@ export interface OrderDetails {
     //     this.status = "Delivered";
     // }
 }
+export interface Order{
+    id: string;
+    customerName: string;
+    total: number;
+    //status: string; //= "Delivered";
+    createAt: DateTime;
+    address: string;
+    phone: string;
+}
 

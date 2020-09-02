@@ -138,9 +138,14 @@ export class GeneralHelperService {
     var data;
     if(error.status == 404){
       data = {title: 'Error code: ' + error.status, message: error.statusText};
-    }else{
+    }
+    else if(error.status == 0){
+      data = {title: 'Error code: '+ error.status, message: 'No Access-Control-Allow-Origin'};
+    }
+    else{
       data = { title: 'Error code: ' + error.error.statusCode, message: error.error.message };
     }
+    
     this.dialog.open(MessageComponent, {
       panelClass: 'myapp-no-padding-dialog',
       height: '210px',

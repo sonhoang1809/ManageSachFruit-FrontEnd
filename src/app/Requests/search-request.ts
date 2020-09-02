@@ -15,3 +15,12 @@ export interface SearchCostRequest{
     sortOrder: number;
     costTypeIds: string[];
 }
+export interface SearchOrderRequest{
+    limit: number;
+    page: number;
+    search: string;
+    sortField: string;
+    sortOrder: number;
+    address: string;
+    phone: string;
+}

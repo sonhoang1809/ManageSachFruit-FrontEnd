@@ -8,14 +8,12 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav flex-column">
-                    <li class="nav-divider">
-                        Menu
-                    </li>
-                    <li class="nav-item ">
+                    <li class="nav-divider">Menu</li>
+                    <li class="nav-item">
                         <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false"
-                            data-target="#submenu-1" aria-controls="submenu-1"><i
-                                class="fa fa-fw fa-user-circle"></i>Dashboard <span
-                                class="badge badge-success">6</span></a>
+                            data-target="#submenu-1" aria-controls="submenu-1">
+                            <mat-icon>dashboard</mat-icon> Dashboard <span class="badge badge-success">6</span>
+                        </a>
                         <div id="submenu-1" class="collapse submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
@@ -26,37 +24,36 @@
                                     <div id="submenu-1-2" class="collapse submenu" style="">
                                         <ul class="nav flex-column">
                                             <li class="nav-item">
-                                                <a class="nav-link" [routerLink]="['dashboard']">E Commerce Dashboard</a>
+                                                <a class="nav-link" [routerLink]="['dashboard']">E Commerce
+                                                    Dashboard</a>
                                             </li>
                                         </ul>
                                     </div>
-                                </li>                              
+                                </li>
                             </ul>
                         </div>
                     </li>
-                    
-                    <li class="nav-divider">
-                        Features
-                    </li>
+                    <li class="nav-divider">Features</li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
-                            data-target="#submenu-6" aria-controls="submenu-6">
-                            <i class="fas fa-fw fa-file"></i>
+                            data-target="#submenu-4" aria-controls="submenu-4">
+                            <mat-icon>card_giftcard</mat-icon>
                             Quản lý sản phẩm
                         </a>
-                        <div id="submenu-6" class="collapse submenu" style="">
+                        <div id="submenu-4" class="collapse submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
                                     <a class="nav-link" [routerLink]="['products']">
                                         Danh sách các sản phẩm
                                     </a>
-                                </li>                               
+                                </li>
                             </ul>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5">
-                            <i class="fas fa-fw fa-table"></i>
+                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
+                            data-target="#submenu-5" aria-controls="submenu-5">
+                            <mat-icon> money_off</mat-icon>
                             Quản lý chi phí
                         </a>
                         <div id="submenu-5" class="collapse submenu" style="">
@@ -68,6 +65,22 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" [routerLink]="['cost-types']">Danh sách các loại chi phí</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
+                            data-target="#submenu-6" aria-controls="submenu-6">
+                            <mat-icon>shopping_basket</mat-icon>
+                            Quản lý orders
+                        </a>
+                        <div id="submenu-6" class="collapse submenu" style="">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link" [routerLink]="['orders']">
+                                        Danh sách các orders
+                                    </a>
                                 </li>
                             </ul>
                         </div>

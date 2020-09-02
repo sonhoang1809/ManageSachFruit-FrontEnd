@@ -1,8 +1,14 @@
-import { HttpHeaders, HttpParams } from '@angular/common/http';
 
 //export const UrlServer = "http://localhost:9000";
 export const UrlServer = "https://managesachfruits-backend.herokuapp.com";
  
+
+export const UrlGetAllCity = "https://thongtindoanhnghiep.co/api/city";
+export const UrlGetAllDistrictInCity = "https://thongtindoanhnghiep.co/api/city";
+export const UrlGetAllWardInDistrict = "https://thongtindoanhnghiep.co/api/district";
+
+
+
 
 
 
@@ -38,14 +44,9 @@ export const UrlServerAPIDeleteProduct = UrlServer+'/api/Products';
 
 export const UrlServerAPICost = UrlServer+'/api/Costs';
 
+export const UrlServerAPIOrder = UrlServer+'/api/Orders';
+
 export const UrlServerAPICostType = UrlServer+'/api/CostTypes';
 export const UrlServerAPISearchCostType = UrlServer+'/api/CostTypes/Search';
 
-export interface Options{
-    headers?: HttpHeaders | {[header: string]: string | string[]},
-    observe?: 'body' | 'events' | 'response',
-    params?: HttpParams|{[param: string]: string | string[]},
-    reportProgress?: boolean,
-    responseType: 'json',
-    withCredentials?: boolean,
-}
+

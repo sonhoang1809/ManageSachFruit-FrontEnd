@@ -1,0 +1,39 @@
+<mat-card class="product-sidebar">
+    <mat-card-header class="product-sidebar-widget">
+        <mat-card-title>Tìm orders theo</mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content class="product-sidebar-widget">
+        <h4 class="product-sidebar-widget-title">Tên khách hàng</h4>
+        <mat-form-field appearance="outline" class="custom-control">
+            <input matInput type="text" required (input)="onChangeNameCustomer($event);">
+        </mat-form-field>
+    </mat-card-content>
+    <mat-card-content class="product-sidebar-widget">
+        <h4 class="product-sidebar-widget-title">Địa chỉ</h4>
+        <mat-form-field *ngIf="listCity!=null" appearance="outline" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+            <mat-label for="validationCustom05">Thành phố</mat-label>
+            <mat-select required>
+                <mat-option *ngFor="let city of listCity" [value]="city.ID">
+                    {{city.Title}}
+                </mat-option>
+            </mat-select>               
+            <mat-hint align="end">Chọn 1</mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="custom-control">
+            <input matInput type="text" required (input)="onChangeAddress($event);">
+        </mat-form-field>
+    </mat-card-content>
+    <mat-card-content class="product-sidebar-widget">
+        <h4 class="product-sidebar-widget-title">Số điện thoại</h4>
+        <mat-form-field appearance="outline" class="custom-control">
+            <input matInput type="text" required (input)="onChangePhone($event);">
+        </mat-form-field>
+    </mat-card-content>
+    <mat-card-content class="product-sidebar-widget">    
+    </mat-card-content>
+    <mat-card-content class="product-sidebar-widget">    
+    </mat-card-content>
+    <mat-card-content class="product-sidebar-widget">    
+    </mat-card-content>
+</mat-card>

@@ -48,8 +48,8 @@ export class ManageProductsListComponent implements OnInit {
   //@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
 
-  constructor(private dialog: MatDialog, private service: SummaryService, private productService: ProductsService,
-    private generalHelper: GeneralHelperService, private formBuilder: FormBuilder) {
+  constructor(private dialog: MatDialog, private productService: ProductsService,
+    private generalHelper: GeneralHelperService) {
     //this.dataSource = new MatTableDataSource<Product>(this.productService.getProductList());
     //this.index = this.productService.getPageInfo().info.page * this.productService.getPageInfo().info.limit;
   }

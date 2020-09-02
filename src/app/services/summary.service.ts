@@ -24,13 +24,16 @@ import {
   UrlServerAPICost,
   UrlServerAPICostType,
   UrlServerAPISearchCostType,
-  UrlServerAPIStatisticsCostType
+  UrlServerAPIStatisticsCostType,
+  UrlGetAllCity,
+  UrlGetAllDistrictInCity,
+  UrlGetAllWardInDistrict
 } from './../models/url-api';
 import { ResponseServer } from './../models/response-server';
 
 import { SummaryFrame } from './../models/summary-frame';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
@@ -80,10 +83,16 @@ export class SummaryService {
     return this.http.get<ResponseServer>(UrlServerAPIGetRemainMoney);
   }
 
-  public searchOrder(searchRequest: SearchRequest): Observable<ResponseServer> {
+  public searchOrder(searchRequest): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
     return this.http.post<ResponseServer>(UrlServerAPISearchOrder, searchRequest);
   }
+
+  public deleteOrder(id): Observable<ResponseServer> {
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.delete<ResponseServer>(UrlServerAPISearchOrder + '/' + id);
+  }
+
 
   public getStatisticRevenueCost(statisticBy: number): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
@@ -94,7 +103,7 @@ export class SummaryService {
     const headers = { 'Authorization': 'Bearer my-token' };
     return this.http.get<ResponseServer>(UrlServerAPIStatisticsRevenueByCategory + '/' + statisticBy);
   }
-  
+
   public getStatisticCostType(statisticBy: number): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
     return this.http.get<ResponseServer>(UrlServerAPIStatisticsCostType + '/' + statisticBy);
@@ -152,34 +161,78 @@ export class SummaryService {
 
   public updateCost(data, id: string): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.put<ResponseServer>(UrlServerAPICost+'/'+id, data);
+    return this.http.put<ResponseServer>(UrlServerAPICost + '/' + id, data);
   }
 
-  public deleteCost(id: string): Observable<ResponseServer>{
+  public deleteCost(id: string): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
     return this.http.delete<ResponseServer>(UrlServerAPICost + '/' + id);
   }
 
-  public getDetailsCost(id: string): Observable<ResponseServer>{
+  public getDetailsCost(id: string): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
     return this.http.get<ResponseServer>(UrlServerAPICost + '/' + id);
   }
 
-  public getAllCostType(): Observable<ResponseServer>{
+  public getAllCostType(): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
     return this.http.get<ResponseServer>(UrlServerAPICostType);
   }
 
-  public searchCostType(data): Observable<ResponseServer>{
+  public searchCostType(data): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.post<ResponseServer>(UrlServerAPISearchCostType,data,);
-  }
-  
-  public searchCostTypeDetails(id: number): Observable<ResponseServer>{
-    const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.get<ResponseServer>(UrlServerAPICostType+'/'+id);
+    return this.http.post<ResponseServer>(UrlServerAPISearchCostType, data,);
   }
 
+  public searchCostTypeDetails(id: number): Observable<ResponseServer> {
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.get<ResponseServer>(UrlServerAPICostType + '/' + id);
+  }
 
+  public getAllCity(): Observable<any> {
+    return this.http.get<any>(UrlGetAllCity, {
+      headers: new HttpHeaders(
+        {
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Methods':'*',
+          'Access-Control-Allow-Origin': '*',
+          'Accept': '*/*',
+          'Authorization': 'Bearer aaa'
+        }
+      )
+    });
+  }
 
+  public getAllDistrictInCity(idCity: number) {
+    return this.http.get<any>(UrlGetAllDistrictInCity + '/' + idCity + '/district');
+  }
+
+  public getAllWardOfDistrict(idDistrict: number) {
+    return this.http.get<any>(UrlGetAllWardInDistrict + '/' + idDistrict + '/ward');
+  }
+
+  httpOptions: Options = {
+    headers: new HttpHeaders(
+      // {
+      //   'Accept': '*/*',
+      //   'Content-Type': 'application/json',
+      //   'Authorization':'Bearer ',
+      //   'Host':'http://localhost:4200/'
+      // }
+    ),
+    observe: 'body',
+    //params: new HttpParams(),
+    //reportProgress: true,
+    responseType: 'json',
+    //withCredentials: true
+  }
+}
+
+export interface Options {
+  headers?: HttpHeaders | { [header: string]: string | string[] };
+  observe?: 'events' | 'response' | 'body';
+  params?: HttpParams | { [param: string]: string | string[] };
+  reportProgress?: boolean;
+  responseType: 'json';
+  withCredentials?: boolean;
 }
