@@ -11,17 +11,63 @@
     </mat-card-content>
     <mat-card-content class="product-sidebar-widget">
         <h4 class="product-sidebar-widget-title">Địa chỉ</h4>
-        <mat-form-field *ngIf="listCity!=null" appearance="outline" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
-            <mat-label for="validationCustom05">Thành phố</mat-label>
-            <mat-select required>
-                <mat-option *ngFor="let city of listCity" [value]="city.ID">
+        <mat-form-field *ngIf="listCity==null" appearance="outline" class="custom-control">
+            <mat-label for="validationCustom05">Thành phố</mat-label> 
+            <mat-select>
+                <mat-option>
+                    Đang load ...
+                </mat-option>
+            </mat-select>     
+            <mat-hint align="end">Chọn 1</mat-hint>
+        </mat-form-field>
+        <mat-form-field *ngIf="listCity!=null" appearance="outline" class="custom-control">
+            <mat-label for="validationCustom05">Thành phố</mat-label> 
+            <mat-select (selectionChange)="onSelectCity($event)">
+                <mat-option *ngFor="let city of listCity" [value]="city">
                     {{city.Title}}
+                </mat-option>
+            </mat-select>     
+            <mat-hint align="end">Chọn 1</mat-hint>
+        </mat-form-field>
+        <mat-form-field *ngIf="listDistrict==null" appearance="outline" class="custom-control">
+            <mat-label for="validationCustom05">Quận/Huyện</mat-label> 
+            <mat-select>
+                <mat-option>
+                    Đang load ...
+                </mat-option>
+            </mat-select>     
+            <mat-hint align="end">Chọn 1</mat-hint>
+        </mat-form-field>
+        <mat-form-field *ngIf="listDistrict!=null" appearance="outline" class="custom-control">
+            <mat-label for="validationCustom05">Quận/Huyện</mat-label>
+            <mat-select (selectionChange)="onSelectDistrict($event)">
+                <mat-option *ngFor="let district of listDistrict" [value]="district">
+                    {{district.Title}}
+                </mat-option>
+            </mat-select>               
+            <mat-hint align="end">Chọn 1</mat-hint>
+        </mat-form-field>
+        <mat-form-field *ngIf="listWard==null" appearance="outline" class="custom-control">
+            <mat-label for="validationCustom05">Phường</mat-label> 
+            <mat-select>
+                <mat-option>
+                    Đang load ...
+                </mat-option>
+            </mat-select>
+            <mat-hint align="end">Chọn 1</mat-hint>
+        </mat-form-field>
+        <mat-form-field *ngIf="listWard!=null" appearance="outline" class="custom-control">
+            <mat-label for="validationCustom05">Phường</mat-label>            
+            <mat-select (selectionChange)="onSelectWard($event)">
+                <mat-option *ngFor="let ward of listWard" [value]="ward">
+                    {{ward.Title}}
                 </mat-option>
             </mat-select>               
             <mat-hint align="end">Chọn 1</mat-hint>
         </mat-form-field>
         <mat-form-field appearance="outline" class="custom-control">
-            <input matInput type="text" required (input)="onChangeAddress($event);">
+            <mat-label for="validationCustom05">Số nhà cụ thể</mat-label>
+            <input matInput type="text" required (input)="onChangeSpecificAddress($event);">
         </mat-form-field>
     </mat-card-content>
     <mat-card-content class="product-sidebar-widget">

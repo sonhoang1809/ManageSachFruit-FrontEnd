@@ -3,9 +3,10 @@
 export const UrlServer = "https://managesachfruits-backend.herokuapp.com";
  
 
-export const UrlGetAllCity = "https://thongtindoanhnghiep.co/api/city";
-export const UrlGetAllDistrictInCity = "https://thongtindoanhnghiep.co/api/city";
-export const UrlGetAllWardInDistrict = "https://thongtindoanhnghiep.co/api/district";
+export const Proxy = "https://cors-anywhere.herokuapp.com/";
+export const UrlGetAllCity = Proxy+"https://thongtindoanhnghiep.co/api/city";
+export const UrlGetAllDistrictInCity = Proxy+"https://thongtindoanhnghiep.co/api/city";
+export const UrlGetAllWardInDistrict = Proxy+"https://thongtindoanhnghiep.co/api/district";
 
 
 

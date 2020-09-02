@@ -103,7 +103,11 @@
     <!-- filter search  -->
     <!-- ============================================================== -->
     <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-12">
-        <app-manage-order-filters searchRequest="searchOrderRequest" (searchOrderRequest)="searchOrderByFilter($event)" ></app-manage-order-filters>
+        <app-manage-order-filters 
+        (customerName)="searchOrderByCustomerName($event);"
+        (phoneCustomer)="searchOrderByPhone($event);"
+        (specificAddress)="searchOrderBySpecificAddress($event);"
+        ></app-manage-order-filters>
     </div>
     <br>
 

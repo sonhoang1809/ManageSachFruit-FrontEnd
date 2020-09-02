@@ -105,8 +105,21 @@ export class ManageOrdersListComponent implements OnInit {
       }
     }
   }
+  searchOrderByCustomerName(data){
+    this.searchOrderRequest.search = data;
+    this.searchOrderList();
+  }
+  searchOrderByPhone(data){
+    this.searchOrderRequest.phone = data;
+    this.searchOrderList();
+  }
+  searchOrderBySpecificAddress(data){
+    this.searchOrderRequest.address = data;
+    this.searchOrderList();
+  }
   searchOrderByFilter(searchOrderRequest){
     this.searchOrderRequest = searchOrderRequest;
+    //console.log(searchOrderRequest);
     this.searchOrderList();
   }
   deleteOrder(order: Order) {

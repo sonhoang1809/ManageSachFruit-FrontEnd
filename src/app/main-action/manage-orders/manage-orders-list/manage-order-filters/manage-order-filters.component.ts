@@ -11,8 +11,14 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 })
 export class ManageOrderFiltersComponent implements OnInit {
 
-  @Output() searchOrderRequest: EventEmitter<SearchOrderRequest>= new EventEmitter<SearchOrderRequest>();
-  @Input() searchRequest: SearchOrderRequest;
+  //@Output() searchOrderRequest: EventEmitter<SearchOrderRequest>= new EventEmitter<SearchOrderRequest>();
+  @Output() customerName: EventEmitter<string> = new EventEmitter<string>();
+  @Output() specificAddress: EventEmitter<string> = new EventEmitter<string>();
+  @Output() phoneCustomer: EventEmitter<string> = new EventEmitter<string>();
+
+  addressNumber: string = null;
+  search: SearchOrderRequest = null;
+
   listCity: City[] = null;
   listDistrict: District[] = null;
   listWard: Ward[] = null;
@@ -22,7 +28,7 @@ export class ManageOrderFiltersComponent implements OnInit {
   ngOnInit(): void {
     this.orderService.getAllCity().subscribe(
       (response)=>{
-        console.log(response);
+        //console.log(response);
         this.listCity = response.LtsItem;
       },
       (error)=>{
@@ -30,17 +36,49 @@ export class ManageOrderFiltersComponent implements OnInit {
       }
     )
   }
-  onChangeNameCustomer(data){
-    this.searchRequest.search=data.target.value;
-    this.searchOrderRequest.emit(this.searchRequest);
+  onSelectCity(data){
+    //console.log(data.value);
+    this.listDistrict = null;
+    this.listWard = null;
+    this.orderService.getAllDistrictInCity(data.value.ID).subscribe(
+      (response)=>{
+        this.listDistrict = response;
+      },
+      (error)=>{
+        this.generalHelper.handleError(error);
+      }
+    );
   }
-  onChangeAddress(data){
-    this.searchRequest.address=data.target.value;
-    this.searchOrderRequest.emit(this.searchRequest);
+  onSelectDistrict(data){
+    this.listWard = null;
+
+    this.orderService.getAllWardInDistrict(data.value.ID).subscribe(
+      (response)=>{
+        this.listWard = response;
+      },
+      (error)=>{
+        this.generalHelper.handleError(error);
+      }
+    );
+  }
+  onSelectWard(data){
+    //this.listWard = null;
+    console.log(data.value);
+  }
+  onChangeNameCustomer(data){
+    this.customerName.emit(data.target.value);
+  }
+  onChangeSpecificAddress(data){
+    this.addressNumber = data.target.value;
+ 
+    this.specificAddress.emit()
+    //this.searchRequest.address=data.target.value;
+    //this.searchOrderRequest.emit(this.searchRequest);
   }
 
   onChangePhone(data){
-    this.searchRequest.phone=data.target.value;
-    this.searchOrderRequest.emit(this.searchRequest);
+    this.phoneCustomer.emit(data.target.value);
+    //this.searchRequest.phone=data.target.value;
+    //this.searchOrderRequest.emit(this.searchRequest);
   }
 }

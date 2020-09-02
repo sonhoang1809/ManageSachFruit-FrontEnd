@@ -190,17 +190,17 @@ export class SummaryService {
   }
 
   public getAllCity(): Observable<any> {
-    return this.http.get<any>(UrlGetAllCity, {
-      headers: new HttpHeaders(
-        {
-          'Access-Control-Allow-Headers': 'Content-Type',
-          'Access-Control-Allow-Methods':'*',
-          'Access-Control-Allow-Origin': '*',
-          'Accept': '*/*',
-          'Authorization': 'Bearer aaa'
-        }
-      )
-    });
+    let headers = new HttpHeaders();
+
+    // {
+    //   'Access-Control-Allow-Headers': 'Content-Type',
+    //   'Access-Control-Allow-Methods':'*',
+    //   'Access-Control-Allow-Origin': 'https://thongtindoanhnghiep.co',
+    //   'Access-Control-Allow-Credentials': 'true',
+    //   'Accept': '*/*',
+    //   'Authorization': 'Bearer aaa'
+    // }
+    return this.http.get<any>(UrlGetAllCity);
   }
 
   public getAllDistrictInCity(idCity: number) {
