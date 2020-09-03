@@ -3,18 +3,19 @@ import { DateTime } from './date-time';
 export interface OrderDetails {
     id: string;
     customerName: string;
+    address: string;
+    phone: string;
     total: number;
-    orderTime: string;
-    status: string; //= "Delivered";
+    shipCost: number;
     createAt: DateTime;
-    // public constructor(id: string, customerName: string,total: number, createAt: DateTime) {
-    //     this.id = id;
-    //     this.customerName = customerName;
-    //     this.total = total;
-    //     this.createAt= createAt;
-    //     this.orderTime = createAt.toString();
-    //     this.status = "Delivered";
-    // }
+    productsDetailsInOrder: ProductsDetailsInOrder[];
+}
+export interface ProductsDetailsInOrder{
+    id: string;
+    productName: string;
+    description: string;
+    quantity: number;
+    unitPrice: number;
 }
 export interface Order{
     id: string;

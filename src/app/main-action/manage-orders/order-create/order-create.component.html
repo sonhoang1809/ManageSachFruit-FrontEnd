@@ -1,0 +1,181 @@
+<div class="row">
+    <div class="col-md-8">
+        <mat-card class="card">
+            <mat-card-header class="card-header">
+                <h4 class="mb-0">Thông tin khách hàng</h4>
+            </mat-card-header>
+            <mat-card-content class="card-body">
+                <form class="needs-validation" novalidate="" [formGroup]="inputFormControl">
+                    <div class="row">
+                        <mat-form-field appearance="outline" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                            <mat-label for="validationCustom01">Tên khách hàng</mat-label>
+                            <input matInput type="text" formControlName="productName" required>
+                            <mat-hint align="end">tối đa 50 kí tự</mat-hint>
+                            <mat-error
+                                *ngIf="generalService.hasErrorInputValidation('productName','required',inputFormControl)">
+                                Tên sản phẩm <strong>không được trống</strong>
+                            </mat-error>
+                            <mat-error
+                                *ngIf="generalService.hasErrorInputValidation('productName','maxlength',inputFormControl)">
+                                Tên sản phẩm <strong>không được quá 50 ký tự</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <hr class="mb-4">
+                    <div class="row">
+                        <mat-form-field appearance="outline" class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                            <mat-label for="validationCustom01">Số điện thoại</mat-label>
+                            <input matInput type="text" formControlName="productName" required>
+                            <mat-error
+                                *ngIf="generalService.hasErrorInputValidation('productName','required',inputFormControl)">
+                                Địa chỉ cụ thể <strong>không được trống</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <hr class="mb-4">
+                    <div class="row">
+                        <mat-form-field *ngIf="listCity==null" appearance="outline"
+                            class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                            <mat-label for="validationCustom05">Thành phố</mat-label>
+                            <mat-select>
+                                <mat-option>
+                                    Đang load ...
+                                </mat-option>
+                            </mat-select>
+                            <mat-hint align="end">Chọn 1</mat-hint>
+                        </mat-form-field>
+                        <mat-form-field *ngIf="listCity!=null" appearance="outline"
+                            class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                            <mat-label for="validationCustom05">Thành phố</mat-label>
+                            <mat-select (selectionChange)="onSelectCity($event)">
+                                <mat-option *ngFor="let city of listCity" [value]="city">
+                                    {{city.Title}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-hint align="end">Chọn 1</mat-hint>
+                        </mat-form-field>
+                        <mat-form-field *ngIf="listDistrict==null" appearance="outline"
+                            class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                            <mat-label for="validationCustom05">Quận/Huyện</mat-label>
+                            <mat-select>
+                                <mat-option>
+                                    Đang load ...
+                                </mat-option>
+                            </mat-select>
+                            <mat-hint align="end">Chọn 1</mat-hint>
+                        </mat-form-field>
+                        <mat-form-field *ngIf="listDistrict!=null" appearance="outline"
+                            class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                            <mat-label for="validationCustom05">Quận/Huyện</mat-label>
+                            <mat-select (selectionChange)="onSelectDistrict($event)">
+                                <mat-option *ngFor="let district of listDistrict" [value]="district">
+                                    {{district.Title}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-hint align="end">Chọn 1</mat-hint>
+                        </mat-form-field>
+                        <mat-form-field *ngIf="listWard==null" appearance="outline"
+                            class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                            <mat-label for="validationCustom05">Phường</mat-label>
+                            <mat-select>
+                                <mat-option>
+                                    Đang load ...
+                                </mat-option>
+                            </mat-select>
+                            <mat-hint align="end">Chọn 1</mat-hint>
+                        </mat-form-field>
+                        <mat-form-field *ngIf="listWard!=null" appearance="outline"
+                            class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                            <mat-label for="validationCustom05">Phường</mat-label>
+                            <mat-select (selectionChange)="onSelectWard($event)">
+                                <mat-option *ngFor="let ward of listWard" [value]="ward">
+                                    {{ward.Title}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-hint align="end">Chọn 1</mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field appearance="outline" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                            <mat-label for="validationCustom01">Địa chỉ cụ thể</mat-label>
+                            <input matInput type="text" formControlName="productName" required>
+                            <mat-error
+                                *ngIf="generalService.hasErrorInputValidation('productName','required',inputFormControl)">
+                                Địa chỉ cụ thể <strong>không được trống</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <hr class="mb-4">
+                    <div class="row">
+                        <mat-form-field appearance="outline" class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                            <mat-label for="validationCustom01">Phí ship</mat-label>
+                            <input matInput type="number" formControlName="productName" required>
+                            <mat-error
+                                *ngIf="generalService.hasErrorInputValidation('productName','required',inputFormControl)">
+                                Phí ship <strong>không được trống</strong>
+                            </mat-error>
+                            <mat-error
+                                *ngIf="generalService.hasErrorInputValidation('productName','min',inputFormControl)">
+                                Phí ship <strong>không được trống</strong>
+                            </mat-error>
+                            <mat-hint align="end">Nhập số</mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <hr class="mb-4">
+                    <button mat-flat-button color="primary" class="btn btn-primary btn-lg btn-block">Thêm order</button>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="col-md-4 mb-4">
+        <mat-card class="card">
+            <mat-card-header class="card-header">
+                <h4 class="mb-0" style="font-family: 'Montserrat', sans-serif;"><mat-icon>shopping_cart</mat-icon></h4>
+            </mat-card-header>
+            <div class="card-body">
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <div>
+                            <h6 class="mb-0">Product name</h6>
+                            <small class="text-muted">Brief description</small>
+                        </div>
+                        <span class="text-muted">$12</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <div>
+                            <h6 class="my-0">Second product</h6>
+                            <small class="text-muted">Brief description</small>
+                        </div>
+                        <span class="text-muted">$8</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <div>
+                            <h6 class="my-0">Third item</h6>
+                            <small class="text-muted">Brief description</small>
+                        </div>
+                        <span class="text-muted">$5</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between bg-light">
+                        <div class="text-success">
+                            <h6 class="my-0">Promo code</h6>
+                            <small>EXAMPLECODE</small>
+                        </div>
+                        <span class="text-success">-$5</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Total (USD)</span>
+                        <strong>$20</strong>
+                    </li>
+                </ul>
+                <form>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="">
+                        <div class="input-group-append">
+                            <button mat-flat-button color="accent" class="btn btn-secondary">Redeem</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </mat-card>
+    </div>
+</div>

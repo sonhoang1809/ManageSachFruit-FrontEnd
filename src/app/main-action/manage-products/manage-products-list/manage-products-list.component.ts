@@ -166,8 +166,6 @@ export class ManageProductsListComponent implements OnInit {
           this.searchProductList();
         }
       }
-
-
     });
   }
 

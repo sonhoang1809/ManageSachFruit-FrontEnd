@@ -83,6 +83,8 @@ import { ManageOrdersComponent } from './main-action/manage-orders/manage-orders
 import { ManageOrdersListComponent } from './main-action/manage-orders/manage-orders-list/manage-orders-list.component';
 import { ManageOrderDetailsComponent } from './main-action/manage-orders/manage-orders-list/manage-order-details/manage-order-details.component';
 import { ManageOrderFiltersComponent } from './main-action/manage-orders/manage-orders-list/manage-order-filters/manage-order-filters.component';
+import { OrderCreateComponent } from './main-action/manage-orders/order-create/order-create.component';
+import { OrderUpdateComponent } from './main-action/manage-orders/order-update/order-update.component';
 
 
 
@@ -133,7 +135,9 @@ import { ManageOrderFiltersComponent } from './main-action/manage-orders/manage-
     ManageOrdersComponent,
     ManageOrdersListComponent,
     ManageOrderDetailsComponent,
-    ManageOrderFiltersComponent
+    ManageOrderFiltersComponent,
+    OrderCreateComponent,
+    OrderUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -166,7 +170,14 @@ import { ManageOrderFiltersComponent } from './main-action/manage-orders/manage-
           { path: 'products', component: ManageProductsComponent },
           { path: 'costs', component: ManageCostsComponent },
           { path: 'cost-types', component: ManageCostTypesComponent },
-          { path: 'orders', component: ManageOrdersComponent }
+          {
+            path: 'orders', component: ManageOrdersComponent, children: [
+              { path: '', redirectTo: 'order-list', pathMatch: 'prefix' },
+              { path: 'order-list', component: ManageOrdersListComponent },
+              { path: 'order-create', component: OrderCreateComponent }
+            ]
+          }
+
         ]
       }
       //{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },

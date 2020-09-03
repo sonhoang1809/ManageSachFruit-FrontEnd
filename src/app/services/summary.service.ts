@@ -27,7 +27,8 @@ import {
   UrlServerAPIStatisticsCostType,
   UrlGetAllCity,
   UrlGetAllDistrictInCity,
-  UrlGetAllWardInDistrict
+  UrlGetAllWardInDistrict,
+  UrlServerAPIOrder
 } from './../models/url-api';
 import { ResponseServer } from './../models/response-server';
 
@@ -93,6 +94,10 @@ export class SummaryService {
     return this.http.delete<ResponseServer>(UrlServerAPISearchOrder + '/' + id);
   }
 
+  public getOrderDetail(id): Observable<ResponseServer> {
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.get<ResponseServer>(UrlServerAPIOrder + '/' + id);
+  }
 
   public getStatisticRevenueCost(statisticBy: number): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
@@ -213,14 +218,14 @@ export class SummaryService {
 
   httpOptions: Options = {
     headers: new HttpHeaders(
-      // {
-      //   'Accept': '*/*',
-      //   'Content-Type': 'application/json',
-      //   'Authorization':'Bearer ',
-      //   'Host':'http://localhost:4200/'
-      // }
+      {
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'Authorization':'Bearer ',
+        'Host':'http://localhost:4200/'
+      }
     ),
-    observe: 'body',
+    observe: 'response',
     //params: new HttpParams(),
     //reportProgress: true,
     responseType: 'json',

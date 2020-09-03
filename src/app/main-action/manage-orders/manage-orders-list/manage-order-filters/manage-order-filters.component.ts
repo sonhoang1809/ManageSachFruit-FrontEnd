@@ -16,7 +16,8 @@ export class ManageOrderFiltersComponent implements OnInit {
   @Output() specificAddress: EventEmitter<string> = new EventEmitter<string>();
   @Output() phoneCustomer: EventEmitter<string> = new EventEmitter<string>();
 
-  addressNumber: string = null;
+  // addressNumber: string = null;
+  address: string[] = ["","","",""];
   search: SearchOrderRequest = null;
 
   listCity: City[] = null;
@@ -36,8 +37,22 @@ export class ManageOrderFiltersComponent implements OnInit {
       }
     )
   }
+  getAddress(): string{
+    var specificAddress = "";
+    for(var ad of this.address){
+      if(this.address.indexOf(ad)<3 && ad!=""){
+        specificAddress = specificAddress + ad+', ';
+      }else{
+        specificAddress = specificAddress + ad;
+      }
+    }
+    console.log("specific: "+specificAddress);
+    return specificAddress;
+  }
   onSelectCity(data){
-    //console.log(data.value);
+    console.log(data.value);
+    this.address[3] = data.value.Title;
+    this.specificAddress.emit(this.getAddress());
     this.listDistrict = null;
     this.listWard = null;
     this.orderService.getAllDistrictInCity(data.value.ID).subscribe(
@@ -50,8 +65,11 @@ export class ManageOrderFiltersComponent implements OnInit {
     );
   }
   onSelectDistrict(data){
-    this.listWard = null;
+    console.log(data.value);
+    this.address[2] = data.value.Title;
+    this.specificAddress.emit(this.getAddress());
 
+    this.listWard = null;
     this.orderService.getAllWardInDistrict(data.value.ID).subscribe(
       (response)=>{
         this.listWard = response;
@@ -64,17 +82,18 @@ export class ManageOrderFiltersComponent implements OnInit {
   onSelectWard(data){
     //this.listWard = null;
     console.log(data.value);
+    this.address[1] = data.value.Title;
+    this.specificAddress.emit(this.getAddress());
+  }
+  onChangeSpecificAddress(data){
+    this.address[0] = data.target.value;
+    this.specificAddress.emit(this.getAddress());
+    
   }
   onChangeNameCustomer(data){
     this.customerName.emit(data.target.value);
   }
-  onChangeSpecificAddress(data){
-    this.addressNumber = data.target.value;
- 
-    this.specificAddress.emit()
-    //this.searchRequest.address=data.target.value;
-    //this.searchOrderRequest.emit(this.searchRequest);
-  }
+  
 
   onChangePhone(data){
     this.phoneCustomer.emit(data.target.value);

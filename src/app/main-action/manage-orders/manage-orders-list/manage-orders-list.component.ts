@@ -1,3 +1,4 @@
+import { ManageOrderDetailsComponent } from './manage-order-details/manage-order-details.component';
 import { VerifyActionComponent } from './../../verify-action/verify-action.component';
 import { Sort } from '@angular/material/sort';
 import { GeneralHelperService } from './../../../services/general-helper.service';
@@ -9,6 +10,7 @@ import { Order } from './../../../models/order-details';
 import { ResponseSearch } from './../../../models/response-search';
 import { SearchOrderRequest } from './../../../Requests/search-request';
 import { Component, OnInit } from '@angular/core';
+import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-manage-orders-list',
@@ -146,6 +148,24 @@ export class ManageOrdersListComponent implements OnInit {
             dialogRef.close();
           }
         );
+      }
+    });
+  }
+
+  viewDetailsOrder(order: Order): void{
+    const dialogRef = this.dialog.open<ManageOrderDetailsComponent>(ManageOrderDetailsComponent, {
+      //panelClass: 'myapp-no-padding-dialog',
+      width: '850px',
+      position:{top: '70px'},
+      data: order
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != null) {
+        //console.log(result);
+        if (result == true) {
+          this.searchOrderList();
+        }
       }
     });
   }

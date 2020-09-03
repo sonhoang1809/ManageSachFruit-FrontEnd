@@ -1,5 +1,5 @@
 import { GeneralHelperService } from './../../../services/general-helper.service';
-import { OrderDetails } from './../../../models/order-details';
+import { OrderDetails, Order } from './../../../models/order-details';
 import { SearchRequest } from './../../../Requests/search-request';
 import { SummaryService } from './../../../services/summary.service';
 import { DateTime } from './../../../models/date-time';
@@ -14,7 +14,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecentOrderComponent implements OnInit {
 
-  recentOrders: Array<OrderDetails> = null;
+  recentOrders: Array<Order> = null;
 
   constructor(private summaryService: SummaryService,private generalHelper: GeneralHelperService) { }
 

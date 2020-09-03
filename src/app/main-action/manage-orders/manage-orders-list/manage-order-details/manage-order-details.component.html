@@ -1,1 +1,81 @@
-<p>manage-order-details works!</p>
+<div class="card-header p-4">
+    <h3 class="pt-2 d-inline-block">Chi tiết order</h3>
+
+    <div class="float-right">
+        <h3 class="mb-0">OrderID #{{data.id}}</h3>
+        <p>Thời gian tạo: {{generalService.getToStringTime(data.createAt)}}</p>
+    </div>
+</div>
+<div class="card-body" *ngIf="orderDetails==null">
+    <mat-spinner style="margin-left:auto; 
+                            margin-right:auto;" color="accent" diameter=30>
+    </mat-spinner>
+</div>
+<mat-dialog-content class="card-body" *ngIf="orderDetails!=null">
+    <div class="row mb-4">
+        <div class="col-sm-6">
+            <h5 class="mb-3">From:</h5>
+            <h3 class="text-dark mb-1">Sạch Fruits Shop</h3>
+            <!--
+                                    <div>2546 Penn Street</div>
+                                    <div>Sikeston, MO 63801</div>
+                                    <div>Email: info@gerald.com.pl</div>
+                                -->
+            <div>Phone: +(84)938848362</div>
+        </div>
+        <div class="col-sm-6">
+            <h5 class="mb-3">To:</h5>
+            <h3 class="text-dark mb-1">{{orderDetails.customerName}}</h3>
+            <div>Địa chỉ: {{orderDetails.address}}</div>
+            <div>Phone: {{orderDetails.phone}}</div>
+        </div>
+    </div>
+    <div class="table-responsive-sm">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="center">#</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Mô tả</th>
+                    <th class="right">Đơn giá</th>
+                    <th class="center">Số lượng</th>
+                    <th class="right">Thành tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let productIdOrder of orderDetails.productsDetailsInOrder;index as i">
+                    <td class="center">{{i+1}}</td>
+                    <td class="left strong">{{productIdOrder.productName}}</td>
+                    <td class="left">{{productIdOrder.description}}</td>
+                    <td class="right strong" style="float: right;">{{productIdOrder.unitPrice|currency:'VND'}}</td>
+                    <td class="center">{{productIdOrder.quantity}}</td>
+                    <td class="right strong" style="float: right;">{{productIdOrder.quantity*productIdOrder.unitPrice|currency:'VND'}}</td>
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                    <td><strong class="text-dark">Tổng</strong></td>
+                    <td>
+                        <strong class="text-dark" style="float: right;">{{subTotal|currency:'VND'}}</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                    <td><strong class="text-dark">Phí ship</strong></td>
+                    <td>
+                        <strong class="text-dark" style="float: right;">{{orderDetails.shipCost|currency:'VND'}}</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                    <td><strong class="text-dark">Tổng cộng</strong></td>
+                    <td>
+                        <strong class="text-dark" style="float: right;">{{total|currency:'VND'}}</strong>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer bg-white">
+        <p class="mb-0"></p>
+    </div>
+</mat-dialog-content>

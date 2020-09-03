@@ -37,12 +37,11 @@
                             <tr *ngFor="let order of orderList;index as i">
                                 <td>{{i+(pageInfo.info.page*pageInfo.info.limit)-(pageInfo.info.limit-1)}}</td>
                                 <td>{{order.customerName}}</td>
-                                
                                 <td>{{order.phone}}</td>
                                 <td>{{generalHelper.getToStringTime(order.createAt)}}</td>
                                 <td>{{order.total | currency: 'VND'}}</td>
                                 <td>
-                                    <button class="btn-outline-light" 
+                                    <button class="btn-outline-light" (click)='viewDetailsOrder(order);'
                                         mat-raised-button>Chi tiết</button>
                                 </td>
                                 <td>

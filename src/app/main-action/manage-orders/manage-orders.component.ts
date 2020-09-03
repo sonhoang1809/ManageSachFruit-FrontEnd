@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./manage-orders.component.css']
 })
 export class ManageOrdersComponent implements OnInit {
-  titleComponent: string = 'Quản lý danh sách orders';
+  titleComponent: string = 'Quản lý orders';
   constructor() { }
 
   ngOnInit(): void {

@@ -11,6 +11,9 @@ export class OrderService {
   searchOrder(searchRequest: SearchOrderRequest){
     return this.service.searchOrder(searchRequest);
   }
+  getOrderDetails(id: string){
+    return this.service.getOrderDetail(id);
+  }
   deleteOrder(id: string){
     return this.service.deleteOrder(id);
   }

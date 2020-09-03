@@ -6,11 +6,10 @@
                 <thead class="bg-light">
                     <tr class="border-0">
                         <th class="border-0">#</th>
-                        <th class="border-0">Customer</th>
-                        <th class="border-0">Total</th>
+                        <th class="border-0">Customer</th> 
                         <th class="border-0">Order Time</th>
-                        <th class="border-0">Status</th>
-                        <th></th>
+                        <th class="border-0">Address</th>
+                        <th class="border-0">Total</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,19 +22,19 @@
                     <tr *ngFor="let recentOrder of recentOrders; index as indexNumber">
                         <td>{{indexNumber+1}}</td>
                         <td>{{recentOrder.customerName}}</td>
-                        <td>{{recentOrder.total | currency:'VND'}}</td>
                         <td>{{getToStringTime(recentOrder.createAt)}}</td>
-                        <td><span class="badge-dot badge-success mr-1"></span>{{recentOrder.status}}</td>
-                        <td colspan="9">
-                            <a href="#" class="btn btn-outline-light float-right">Xem chi tiết</a>
-                        </td>
+                        <td>{{recentOrder.address}}</td>
+                        <td>{{recentOrder.total | currency:'VND'}}</td>
                         <!--badge-dot badge-brand mr-1<td><span class="badge-dot badge-success mr-1"></span>Delivered
-                            </td>-->
+                            </td>
+                        <span class="badge-dot badge-success mr-1"></span>
+                        -->
                     </tr>
                     <tr>
-                        <!--<td colspan="9">
-                            <a href="#" class="btn btn-outline-light float-right">Xem chi tiết</a>
-                        </td>-->
+                        <td colspan="9">
+                            <a class="btn-outline-light float-right" [routerLink]="['../orders']"
+                                        mat-raised-button>Xem thêm</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
