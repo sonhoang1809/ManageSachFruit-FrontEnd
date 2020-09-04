@@ -11,10 +11,11 @@ export interface OrderDetails {
     productsDetailsInOrder: ProductsDetailsInOrder[];
 }
 export interface ProductsDetailsInOrder{
-    id: string;
+    productId: string;
     productName: string;
     description: string;
     quantity: number;
+    unit: string;
     unitPrice: number;
 }
 export interface Order{

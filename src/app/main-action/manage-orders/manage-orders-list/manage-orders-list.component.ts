@@ -24,7 +24,7 @@ export class ManageOrdersListComponent implements OnInit {
     page: 1,
     search: "",
     sortField: "create_at",
-    sortOrder: 0,
+    sortOrder: 1,
     address: null,
     phone: null
   };

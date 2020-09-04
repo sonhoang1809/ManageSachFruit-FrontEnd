@@ -11,6 +11,9 @@ export class OrderService {
   searchOrder(searchRequest: SearchOrderRequest){
     return this.service.searchOrder(searchRequest);
   }
+  storeOrder(data){
+    return this.service.storeNewOrder(data);
+  }
   getOrderDetails(id: string){
     return this.service.getOrderDetail(id);
   }
@@ -25,5 +28,11 @@ export class OrderService {
   }
   getAllWardInDistrict(idDistrict: number){
     return this.service.getAllWardOfDistrict(idDistrict);
+  }
+  getAllCategories() {
+    return this.service.getAllCategories();
+  }
+  getListProductOfCategory(id: string){
+    return this.service.getListProductOfCategory(id);
   }
 }

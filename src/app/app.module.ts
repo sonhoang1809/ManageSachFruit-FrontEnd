@@ -85,6 +85,7 @@ import { ManageOrderDetailsComponent } from './main-action/manage-orders/manage-
 import { ManageOrderFiltersComponent } from './main-action/manage-orders/manage-orders-list/manage-order-filters/manage-order-filters.component';
 import { OrderCreateComponent } from './main-action/manage-orders/order-create/order-create.component';
 import { OrderUpdateComponent } from './main-action/manage-orders/order-update/order-update.component';
+import { DialogAddProductInOrderComponent } from './main-action/manage-orders/order-create/dialog-add-product-in-order/dialog-add-product-in-order.component';
 
 
 
@@ -137,7 +138,8 @@ import { OrderUpdateComponent } from './main-action/manage-orders/order-update/o
     ManageOrderDetailsComponent,
     ManageOrderFiltersComponent,
     OrderCreateComponent,
-    OrderUpdateComponent
+    OrderUpdateComponent,
+    DialogAddProductInOrderComponent
   ],
   imports: [
     BrowserModule,

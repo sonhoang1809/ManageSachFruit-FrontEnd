@@ -1,3 +1,7 @@
+import { Category } from './../../../models/category';
+import { DialogAddProductInOrderComponent } from './dialog-add-product-in-order/dialog-add-product-in-order.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ProductsDetailsInOrder } from './../../../models/order-details';
 import { OrderService } from './../OrderServices/order.service';
 import { City, District, Ward } from './../../../models/position';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -12,67 +16,213 @@ import { Component, OnInit } from '@angular/core';
 export class OrderCreateComponent implements OnInit {
 
   public inputFormControl: FormGroup = null;
-  address: string[] = ["","","",""];
+  address: string[] = ["", "", "", ""];
   listCity: City[] = null;
   listDistrict: District[] = null;
   listWard: Ward[] = null;
-  constructor(public generalService: GeneralHelperService, private orderService: OrderService) { }
+
+  productsInOrder: ProductsDetailsInOrder[] = [];
+  total: number = 0;
+  listCategory: Category[] = null;
+  constructor(public generalService: GeneralHelperService, private orderService: OrderService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.inputFormControl = new FormGroup({
-      productName: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-      description: new FormControl('', [Validators.required, Validators.maxLength(100)]),
-      quantityInStock: new FormControl('', [Validators.required, Validators.min(1)]),
-      unit: new FormControl('', [Validators.required]),
-      unitPrice: new FormControl('', [Validators.required, Validators.min(1000)]),
-      categoryId: new FormControl('', [Validators.required]),
-      importPrice: new FormControl('', [Validators.required, Validators.min(1000)])
+      customerName: new FormControl('', [Validators.required, Validators.maxLength(100)]),
+      addressCity: new FormControl('', [Validators.required]),
+      addressDistrict: new FormControl('', [Validators.required]),
+      addressWard: new FormControl('', [Validators.required]),
+      addressSpecific: new FormControl('', [Validators.required]),
+      address: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required, Validators.maxLength(10)]),
+      total: new FormControl(0, [Validators.required, Validators.min(0)]),
+      shipCost: new FormControl(0, [Validators.required, Validators.min(0)]),
+      productsInOrder: new FormControl(this.productsInOrder)
     });
+
+
     this.orderService.getAllCity().subscribe(
-      (response)=>{
+      (response) => {
         //console.log(response);
         this.listCity = response.LtsItem;
       },
-      (error)=>{
+      (error) => {
+        this.generalService.handleError(error);
+      }
+    );
+    this.orderService.getAllCategories().subscribe(
+      (response) => {
+        this.listCategory = response.data;
+      },
+      (error) => {
         this.generalService.handleError(error);
       }
     )
   }
-  onSelectCity(data){
-    console.log(data.value);
+  getAddress(): string {
+    var specificAddress = "";
+    for (var ad of this.address) {
+      if (this.address.indexOf(ad) < 3 && ad != "") {
+        specificAddress = specificAddress + ad + ', ';
+      } else {
+        specificAddress = specificAddress + ad;
+      }
+    }
+    //console.log("specific: "+specificAddress);
+    return specificAddress;
+  }
+  onSelectCity(data) {
+    //console.log(data.value);
     this.address[3] = data.value.Title;
+    this.inputFormControl.controls["address"].setValue(this.getAddress());
+    //console.log(this.inputFormControl.controls["address"].value);
     //this.specificAddress.emit(this.getAddress());
     this.listDistrict = null;
     this.listWard = null;
     this.orderService.getAllDistrictInCity(data.value.ID).subscribe(
-      (response)=>{
+      (response) => {
         this.listDistrict = response;
       },
-      (error)=>{
+      (error) => {
         this.generalService.handleError(error);
       }
     );
   }
-  onSelectDistrict(data){
+  onSelectDistrict(data) {
     console.log(data.value);
     this.address[2] = data.value.Title;
+    this.inputFormControl.controls["address"].setValue(this.getAddress());
+    console.log(this.inputFormControl.controls["address"].value);
     //this.specificAddress.emit(this.getAddress());
 
     this.listWard = null;
     this.orderService.getAllWardInDistrict(data.value.ID).subscribe(
-      (response)=>{
+      (response) => {
         this.listWard = response;
       },
-      (error)=>{
+      (error) => {
         this.generalService.handleError(error);
       }
     );
   }
-  onSelectWard(data){
+  onSelectWard(data) {
     //this.listWard = null;
-    console.log(data.value);
+    //console.log(data.value);
     this.address[1] = data.value.Title;
+    this.inputFormControl.controls["address"].setValue(this.getAddress());
+    //console.log(this.inputFormControl.controls["address"].value);
     //this.specificAddress.emit(this.getAddress());
+  }
+  onChangeSpecificAddress(data) {
+    this.address[0] = data.target.value;
+    this.inputFormControl.controls["address"].setValue(this.getAddress());
+    //console.log(this.inputFormControl.controls["address"].value);
+
+  }
+
+  openDialogAddProductToOrder() {
+    let dialogRef = this.dialog.open(DialogAddProductInOrderComponent, {
+      width: '580px',
+      data: { listCategory: this.listCategory }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      this.addToProductsInOrder(result);
+      //console.log(this.inputFormControl.controls["shipCost"].value);
+      //console.log(this.getSubTotalInOrder());
+      this.inputFormControl.controls["total"].setValue(this.getSubTotalInOrder() + this.inputFormControl.controls["shipCost"].value);
+      //this.total = this.getSubTotalInOrder() + this.inputFormControl.controls["shipCost"].value;
+      //console.log(this.total);
+    });
+  }
+  addToProductsInOrder(data) {
+    if (this.checkContainInListProductInOrder(data)) {
+      for (var prod of this.productsInOrder) {
+        if (prod.productId == data.productId) {
+          this.productsInOrder[this.productsInOrder.indexOf(prod)].quantity =
+            this.productsInOrder[this.productsInOrder.indexOf(prod)].quantity + data.quantity;
+        }
+      }
+    } else {
+      this.productsInOrder.push(data);
+    }
+  }
+  checkContainInListProductInOrder(data): boolean {
+    for (var prod of this.productsInOrder) {
+      if (prod.productId == data.productId) {
+        return true;
+      }
+    }
+    return false;
+  }
+  getSubTotalInOrder() {
+    var result = 0;
+    for (var prod of this.productsInOrder) {
+      result = result + prod.quantity * prod.unitPrice;
+    }
+    return result;
+  }
+
+  onStoreOrder(data) {
+    console.log(data);
+    if (this.productsInOrder.length == 0) {
+      this.generalService.handleSpecificError({ title: 'Input is not correct!!', message: 'Không có sản phẩm nào trong order!! Không thể tạo' });
+    }else if(!this.inputFormControl.valid){
+      this.generalService.handleErrorInput();
+      // customerName: new FormControl('', [Validators.required, Validators.maxLength(100)]),
+      // addressCity: new FormControl('', [Validators.required]),
+      // addressDistrict: new FormControl('', [Validators.required]),
+      // addressWard: new FormControl('', [Validators.required]),
+      // addressSpecific: new FormControl('', [Validators.required]),
+      // address: new FormControl('', [Validators.required]),
+      // phone: new FormControl('', [Validators.required, Validators.maxLength(10)]),
+      // total: new FormControl(0, [Validators.required, Validators.min(0)]),
+      // shipCost: new FormControl(0, [Validators.required, Validators.min(0)]),
+      // productsInOrder: new FormControl(this.productsInOrder, [Validators.required])
+      if(!this.inputFormControl.controls['customerName'].valid){
+        console.log('customerName has error');
+      }
+      if(!this.inputFormControl.controls['addressCity'].valid){
+        console.log('addressCity has error');
+      }
+      if(!this.inputFormControl.controls['addressDistrict'].valid){
+        console.log('addressDistrict has error');
+      }
+      if(!this.inputFormControl.controls['addressWard'].valid){
+        console.log('addressWard has error');
+      }
+      if(!this.inputFormControl.controls['addressSpecific'].valid){
+        console.log('addressSpecific has error');
+      }
+      if(!this.inputFormControl.controls['address'].valid){
+        console.log('address has error');
+      }
+      if(!this.inputFormControl.controls['phone'].valid){
+        console.log('phone has error');
+      }
+      if(!this.inputFormControl.controls['total'].valid){
+        console.log('total has error');
+      }
+      if(!this.inputFormControl.controls['shipCost'].valid){
+        console.log('shipCost has error');
+      }
+      if(!this.inputFormControl.controls['productsInOrder'].valid){
+        console.log('productsInOrder has error');
+      }
+
+    }else{
+      this.generalService.openWaitingPopup();
+      this.orderService.storeOrder(data).subscribe(
+        (response)=>{
+          this.generalService.closeWaitingPopup();
+          this.generalService.handleMessage('Store Success',response.message);
+        },
+        (error)=>{
+          this.generalService.closeWaitingPopup();
+          this.generalService.handleError(error);
+        }
+      );
+    }
   }
 
 }

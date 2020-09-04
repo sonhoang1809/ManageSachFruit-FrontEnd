@@ -28,7 +28,8 @@ import {
   UrlGetAllCity,
   UrlGetAllDistrictInCity,
   UrlGetAllWardInDistrict,
-  UrlServerAPIOrder
+  UrlServerAPIOrder,
+  UrlServerAPIGetProductsOfCategory
 } from './../models/url-api';
 import { ResponseServer } from './../models/response-server';
 
@@ -44,9 +45,7 @@ import { catchError, retry } from 'rxjs/operators';
 export class SummaryService {
 
 
-  constructor(private http: HttpClient) {
-
-  }
+  constructor(private http: HttpClient) { }
 
   public getSummaryRevenueInMonth(): Observable<ResponseServer> {
     return this.http.get<ResponseServer>(UrlServerAPISummaryRevenueInMonth);
@@ -87,6 +86,11 @@ export class SummaryService {
   public searchOrder(searchRequest): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
     return this.http.post<ResponseServer>(UrlServerAPISearchOrder, searchRequest);
+  }
+
+  public storeNewOrder(data): Observable<ResponseServer> {
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.post<ResponseServer>(UrlServerAPIOrder, data);
   }
 
   public deleteOrder(id): Observable<ResponseServer> {
@@ -152,6 +156,11 @@ export class SummaryService {
   public searchProduct(searchRequest: SearchProductRequest): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
     return this.http.post<ResponseServer>(UrlServerAPISearchProduct, searchRequest);
+  }
+
+  public getListProductOfCategory(id: string):Observable<ResponseServer> {
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.get<ResponseServer>(UrlServerAPIGetProductsOfCategory+'/'+id);
   }
 
   public searchCost(searchRequest: SearchCostRequest): Observable<ResponseServer> {

@@ -46,7 +46,7 @@ export class ManageOrderFiltersComponent implements OnInit {
         specificAddress = specificAddress + ad;
       }
     }
-    console.log("specific: "+specificAddress);
+    //console.log("specific: "+specificAddress);
     return specificAddress;
   }
   onSelectCity(data){

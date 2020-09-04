@@ -140,7 +140,7 @@ export class GeneralHelperService {
       data = {title: 'Error code: ' + error.status, message: error.statusText};
     }
     else if(error.status == 0){
-      data = {title: 'Error code: '+ error.status, message: 'No Access-Control-Allow-Origin'};
+      data = {title: 'Error code: '+ error.status, message: 'Server Error!!'};
     }
     else{
       data = { title: 'Error code: ' + error.error.statusCode, message: error.error.message };
@@ -154,6 +154,29 @@ export class GeneralHelperService {
         right: ' 50px'
       },
       data: data
+    });
+  }
+  handleErrorInput(){
+    var data = {title: 'Error code: 400', message: 'Value input is error!!'};
+    this.dialog.open(MessageComponent, {
+      panelClass: 'myapp-no-padding-dialog',
+      height: '210px',
+      position: {
+        bottom: '50px',
+        right: ' 50px'
+      },
+      data: data
+    });
+  }
+  handleSpecificError(error){ 
+    this.dialog.open(MessageComponent, {
+      panelClass: 'myapp-no-padding-dialog',
+      height: '210px',
+      position: {
+        bottom: '50px',
+        right: ' 50px'
+      },
+      data: error
     });
   }
 }
