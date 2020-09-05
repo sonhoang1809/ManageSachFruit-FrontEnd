@@ -176,7 +176,8 @@ import { DialogAddProductInOrderComponent } from './main-action/manage-orders/or
             path: 'orders', component: ManageOrdersComponent, children: [
               { path: '', redirectTo: 'order-list', pathMatch: 'prefix' },
               { path: 'order-list', component: ManageOrdersListComponent },
-              { path: 'order-create', component: OrderCreateComponent }
+              { path: 'order-create', component: OrderCreateComponent },
+              { path: 'order-update/:orderId', component: OrderUpdateComponent }
             ]
           }
 

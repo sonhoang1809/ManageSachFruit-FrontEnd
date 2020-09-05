@@ -17,6 +17,9 @@ export class OrderService {
   getOrderDetails(id: string){
     return this.service.getOrderDetail(id);
   }
+  updateOrder(data,id){
+    return this.service.updateOrder(data,id);
+  }
   deleteOrder(id: string){
     return this.service.deleteOrder(id);
   }

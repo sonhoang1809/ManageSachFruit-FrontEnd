@@ -45,7 +45,7 @@
                                         mat-raised-button>Chi tiết</button>
                                 </td>
                                 <td>
-                                    <button class="btn-outline-light" 
+                                    <button class="btn-outline-light" [routerLink]="['../order-update',order.id]"
                                         mat-raised-button>Chỉnh sửa</button>
                                 </td>           
                                 <td colspan="9">
@@ -57,7 +57,7 @@
                             </tr>
                             <tr>
                                 <td colspan="9">
-                                    <button mat-raised-button class="btn-outline-light"                
+                                    <button mat-raised-button class="btn-outline-light" [routerLink]="['../order-create']"             
                                         class="btn btn-outline-light float-right">Thêm order
                                     </button>
                                 </td>

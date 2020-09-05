@@ -18,7 +18,9 @@ export class GeneralHelperService {
   constructor(private dialog: MatDialog) { }
 
   openWaitingPopup(){
-    this.dialogWaitingPopupRef = this.dialog.open(WaitingComponent);
+    this.dialogWaitingPopupRef = this.dialog.open(WaitingComponent,{
+      disableClose: true
+    });
   }
   closeWaitingPopup(){
     //this.dialogWaitingPopupRef.getState().
@@ -136,7 +138,7 @@ export class GeneralHelperService {
   handleError(error) {
     console.log(error);
     var data;
-    if(error.status == 404){
+    if(error.status == 404 || error.status == 400){
       data = {title: 'Error code: ' + error.status, message: error.statusText};
     }
     else if(error.status == 0){
@@ -148,6 +150,7 @@ export class GeneralHelperService {
     
     this.dialog.open(MessageComponent, {
       panelClass: 'myapp-no-padding-dialog',
+      disableClose: true,
       height: '210px',
       position: {
         bottom: '50px',
@@ -160,6 +163,7 @@ export class GeneralHelperService {
     var data = {title: 'Error code: 400', message: 'Value input is error!!'};
     this.dialog.open(MessageComponent, {
       panelClass: 'myapp-no-padding-dialog',
+      disableClose: true,
       height: '210px',
       position: {
         bottom: '50px',
@@ -171,6 +175,7 @@ export class GeneralHelperService {
   handleSpecificError(error){ 
     this.dialog.open(MessageComponent, {
       panelClass: 'myapp-no-padding-dialog',
+      disableClose: true,
       height: '210px',
       position: {
         bottom: '50px',

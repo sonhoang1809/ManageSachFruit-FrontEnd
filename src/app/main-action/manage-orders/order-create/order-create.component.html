@@ -5,7 +5,8 @@
                 <h4 class="mb-0">Thông tin khách hàng</h4>
             </mat-card-header>
             <mat-card-content class="card-body">
-                <form class="needs-validation" [formGroup]="inputFormControl" (ngSubmit)="onStoreOrder(inputFormControl.value);">
+                <form class="needs-validation" [formGroup]="inputFormControl"
+                    (ngSubmit)="onStoreOrder(inputFormControl.value);">
                     <div class="row">
                         <mat-form-field appearance="outline" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
                             <mat-label for="validationCustom01">Tên khách hàng</mat-label>
@@ -33,7 +34,11 @@
                             </mat-error>
                             <mat-error
                                 *ngIf="generalService.hasErrorInputValidation('phone','maxlength',inputFormControl)">
-                                Số điện thoại <strong>không được hơn 10 ký số</strong>
+                                Số điện thoại <strong>không được hơn 10 số</strong>
+                            </mat-error>
+                            <mat-error
+                                *ngIf="generalService.hasErrorInputValidation('phone','minlength',inputFormControl)">
+                                Số điện thoại <strong>không được ít hơn 10 số</strong>
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -127,7 +132,8 @@
                     <div class="row">
                         <mat-form-field appearance="outline" class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 ">
                             <mat-label for="validationCustom01">Phí ship</mat-label>
-                            <input matInput type="number" formControlName="shipCost" required>
+                            <input matInput type="number" formControlName="shipCost" required
+                                (input)="calculateTotal()">
                             <mat-error
                                 *ngIf="generalService.hasErrorInputValidation('shipCost','required',inputFormControl)">
                                 Phí ship <strong>không được trống</strong>
@@ -148,8 +154,7 @@
                                 *ngIf="generalService.hasErrorInputValidation('total','required',inputFormControl)">
                                 Tổng cộng <strong>không được trống</strong>
                             </mat-error>
-                            <mat-error
-                                *ngIf="generalService.hasErrorInputValidation('total','min',inputFormControl)">
+                            <mat-error *ngIf="generalService.hasErrorInputValidation('total','min',inputFormControl)">
                                 Phí ship <strong>không được nhỏ hơn 0</strong>
                             </mat-error>
                             <mat-hint align="end">Nhập số</mat-hint>
@@ -171,21 +176,30 @@
             <div class="card-body">
                 <ul class="list-group mb-3">
                     <li *ngFor="let prod of productsInOrder" class="list-group-item d-flex justify-content-between">
-                        <div>
+                        <div class="btn" (click)="onClickProductsInOrder(prod)">
                             <h4 class="mb-0">{{prod.productName}}</h4>
                             <small class="text-muted">Số lượng: {{prod.quantity}} ({{prod.unit}})</small>
                         </div>
-                        <span class="text-muted">{{prod.quantity*prod.unitPrice|currency:'VND'}}</span>
+                        <div>
+                            <span class="text-muted">{{prod.quantity*prod.unitPrice|currency:'VND'}}</span>
+                            <br>
+                            <button mat-icon-button aria-label="Example icon button with a vertical three dot icon"
+                                (click)="onDeleteProductInOrder(prod)">
+                                <mat-icon>delete_outline</mat-icon>
+                            </button>
+                        </div>
+
                     </li>
-                    
+
                 </ul>
                 <div class="input-group center">
-                    <button mat-flat-button color="accent" (click)="openDialogAddProductToOrder()">Thêm sản phẩm vào order</button>
+                    <button mat-flat-button color="accent" (click)="openDialogAddProductToOrder()">Thêm sản phẩm vào
+                        order</button>
                 </div>
                 <br><br>
                 <ul class="list-group mb-3">
                     <li class="list-group-item d-flex justify-content-between bg-light">
-                        <h3>Tổng </h3>
+                        <h4>Tổng </h4>
                         <strong>{{getSubTotalInOrder()|currency:'VND'}}</strong>
                     </li>
                 </ul>

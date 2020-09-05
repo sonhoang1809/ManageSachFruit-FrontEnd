@@ -8,6 +8,7 @@ export interface OrderDetails {
     total: number;
     shipCost: number;
     createAt: DateTime;
+    updateAt: DateTime;
     productsDetailsInOrder: ProductsDetailsInOrder[];
 }
 export interface ProductsDetailsInOrder{
@@ -17,6 +18,7 @@ export interface ProductsDetailsInOrder{
     quantity: number;
     unit: string;
     unitPrice: number;
+    categoryId: string;
 }
 export interface Order{
     id: string;

@@ -13,6 +13,7 @@ export class MessageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.dialogRef.disableClose;
     this.dialogRef.afterOpened().subscribe(_ => {
       setTimeout(() => {
          this.dialogRef.close();

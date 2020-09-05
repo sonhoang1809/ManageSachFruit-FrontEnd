@@ -1,1 +1,206 @@
-<p>order-update works!</p>
+<div class="row">
+    <div class="col-md-8">
+        <mat-card class="card">
+            <mat-card-header class="card-header">
+                <h4 class="mb-0">Thông tin khách hàng</h4>
+            </mat-card-header>
+            <mat-card-content class="card-body">
+                <form class="needs-validation" [formGroup]="inputFormControl" (ngSubmit)="onUpdateOrder(inputFormControl.value);">
+                    <div class="row">
+                        <mat-form-field appearance="outline" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                            <mat-label for="validationCustom01">Tên khách hàng</mat-label>
+                            <input matInput type="text" formControlName="customerName" required>
+                            <mat-hint align="end">tối đa 100 kí tự</mat-hint>
+                            <mat-error
+                                *ngIf="generalService.hasErrorInputValidation('customerName','required',inputFormControl)">
+                                Tên khách hàng <strong>không được trống</strong>
+                            </mat-error>
+                            <mat-error
+                                *ngIf="generalService.hasErrorInputValidation('customerName','maxlength',inputFormControl)">
+                                Tên khách hàng <strong>không được quá 100 ký tự</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <hr class="mb-4">
+                    <div class="row">
+                        <mat-form-field appearance="outline" class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                            <mat-label for="validationCustom01">Số điện thoại</mat-label>
+                            <input matInput type="tel" formControlName="phone" required>
+                            <mat-hint align="end">tối đa 10 kí tự</mat-hint>
+                            <mat-error
+                                *ngIf="generalService.hasErrorInputValidation('phone','required',inputFormControl)">
+                                Số điện thoại <strong>không được trống</strong>
+                            </mat-error>
+                            <mat-error
+                                *ngIf="generalService.hasErrorInputValidation('phone','maxlength',inputFormControl)">
+                                Số điện thoại <strong>không được hơn 10 số</strong>
+                            </mat-error>
+                            <mat-error
+                                *ngIf="generalService.hasErrorInputValidation('phone','minlength',inputFormControl)">
+                                Số điện thoại <strong>không được ít hơn 10 số</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <hr class="mb-4">
+                    <div class="row">
+                        <mat-form-field *ngIf="listCity==null" appearance="outline"
+                            class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                            <mat-label for="validationCustom05">Thành phố</mat-label>
+                            <mat-select>
+                                <mat-option>
+                                    Đang load ...
+                                </mat-option>
+                            </mat-select>
+                            <mat-hint align="end">Chọn 1</mat-hint>
+                        </mat-form-field>
+                        <mat-form-field *ngIf="listCity!=null" appearance="outline"
+                            class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                            <mat-label for="validationCustom05">Thành phố</mat-label>
+                            <mat-select (selectionChange)="onSelectCity($event)" formControlName="addressCity" [(value)]="selectedCity">
+                                <mat-option *ngFor="let city of listCity" [value]="city">
+                                    {{city.Title}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-hint align="end">Chọn 1</mat-hint>
+                            <mat-error
+                                *ngIf="generalService.hasErrorInputValidation('addressCity','required',inputFormControl)">
+                                Thành phố <strong>không được trống</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field *ngIf="listDistrict==null" appearance="outline"
+                            class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                            <mat-label for="validationCustom05">Quận/Huyện</mat-label>
+                            <mat-select>
+                                <mat-option>
+                                    Đang load ...
+                                </mat-option>
+                            </mat-select>
+                            <mat-hint align="end">Chọn 1</mat-hint>
+                        </mat-form-field>
+                        <mat-form-field *ngIf="listDistrict!=null" appearance="outline"
+                            class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                            <mat-label for="validationCustom05">Quận/Huyện</mat-label>
+                            <mat-select (selectionChange)="onSelectDistrict($event)" formControlName="addressDistrict">
+                                <mat-option *ngFor="let district of listDistrict" [value]="district">
+                                    {{district.Title}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-hint align="end">Chọn 1</mat-hint>
+                            <mat-error
+                                *ngIf="generalService.hasErrorInputValidation('addressDistrict','required',inputFormControl)">
+                                Quận/Huyện <strong>không được trống</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field *ngIf="listWard==null" appearance="outline"
+                            class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                            <mat-label for="validationCustom05">Phường</mat-label>
+                            <mat-select>
+                                <mat-option>
+                                    Đang load ...
+                                </mat-option>
+                            </mat-select>
+                            <mat-hint align="end">Chọn 1</mat-hint>
+                        </mat-form-field>
+                        <mat-form-field *ngIf="listWard!=null" appearance="outline"
+                            class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                            <mat-label for="validationCustom05">Phường</mat-label>
+                            <mat-select (selectionChange)="onSelectWard($event)" formControlName="addressWard">
+                                <mat-option *ngFor="let ward of listWard" [value]="ward">
+                                    {{ward.Title}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-hint align="end">Chọn 1</mat-hint>
+                            <mat-error
+                                *ngIf="generalService.hasErrorInputValidation('addressWard','required',inputFormControl)">
+                                Quận/Huyện <strong>không được trống</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field appearance="outline" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                            <mat-label for="validationCustom01">Địa chỉ cụ thể</mat-label>
+                            <input matInput type="text" formControlName="addressSpecific" required
+                                (input)="onChangeSpecificAddress($event)">
+                            <mat-error
+                                *ngIf="generalService.hasErrorInputValidation('addressSpecific','required',inputFormControl)">
+                                Địa chỉ cụ thể <strong>không được trống</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <hr class="mb-4">
+                    <div class="row">
+                        <mat-form-field appearance="outline" class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                            <mat-label for="validationCustom01">Phí ship</mat-label>
+                            <input matInput type="number" formControlName="shipCost" required (input)="calculateTotal()">
+                            <mat-error
+                                *ngIf="generalService.hasErrorInputValidation('shipCost','required',inputFormControl)">
+                                Phí ship <strong>không được trống</strong>
+                            </mat-error>
+                            <mat-error
+                                *ngIf="generalService.hasErrorInputValidation('shipCost','min',inputFormControl)">
+                                Phí ship <strong>không được nhỏ hơn 0</strong>
+                            </mat-error>
+                            <mat-hint align="end">Nhập số</mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <hr class="mb-4">
+                    <div class="row">
+                        <mat-form-field appearance="outline" class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                            <mat-label for="validationCustom01">Tổng cộng</mat-label>
+                            <input matInput type="number" formControlName="total" required>
+                            <mat-error
+                                *ngIf="generalService.hasErrorInputValidation('total','required',inputFormControl)">
+                                Tổng cộng <strong>không được trống</strong>
+                            </mat-error>
+                            <mat-error
+                                *ngIf="generalService.hasErrorInputValidation('total','min',inputFormControl)">
+                                Phí ship <strong>không được nhỏ hơn 0</strong>
+                            </mat-error>
+                            <mat-hint align="end">Nhập số</mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <hr class="mb-4">
+                    <button mat-flat-button color="primary" class="btn btn-primary btn-lg btn-block">Chỉnh sửa order</button>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="col-md-4 mb-4">
+        <mat-card class="card">
+            <mat-card-header class="card-header">
+                <h4 class="mb-0" style="font-family: 'Montserrat', sans-serif;">
+                    <mat-icon>shopping_cart</mat-icon>
+                </h4>
+            </mat-card-header>
+            <div class="card-body">
+                <ul class="list-group mb-3">
+                    <li *ngFor="let prod of productsInOrder" class="list-group-item d-flex justify-content-between">
+                        <div>
+                            <h4 class="mb-0">{{prod.productName}}</h4>
+                            <small class="text-muted">Số lượng: {{prod.quantity}} ({{prod.unit}})</small>
+                        </div>
+                        <div>
+                            <span class="text-muted">{{prod.quantity*prod.unitPrice|currency:'VND'}}</span>
+                            <br>
+                            <button mat-icon-button aria-label="Example icon button with a vertical three dot icon"
+                                (click)="onDeleteProductInOrder(prod)">
+                                <mat-icon>delete_outline</mat-icon>
+                            </button>
+                        </div>
+                    </li>
+                    
+                </ul>
+                <div class="input-group center">
+                    <button mat-flat-button color="accent" (click)="openDialogAddProductToOrder()">Thêm sản phẩm vào order</button>
+                </div>
+                <br><br>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between bg-light">
+                        <h3>Tổng </h3>
+                        <strong>{{getSubTotalInOrder()|currency:'VND'}}</strong>
+                    </li>
+                </ul>
+            </div>
+        </mat-card>
+    </div>
+</div>

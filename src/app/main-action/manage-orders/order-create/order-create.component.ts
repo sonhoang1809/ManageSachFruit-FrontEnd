@@ -27,19 +27,7 @@ export class OrderCreateComponent implements OnInit {
   constructor(public generalService: GeneralHelperService, private orderService: OrderService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.inputFormControl = new FormGroup({
-      customerName: new FormControl('', [Validators.required, Validators.maxLength(100)]),
-      addressCity: new FormControl('', [Validators.required]),
-      addressDistrict: new FormControl('', [Validators.required]),
-      addressWard: new FormControl('', [Validators.required]),
-      addressSpecific: new FormControl('', [Validators.required]),
-      address: new FormControl('', [Validators.required]),
-      phone: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-      total: new FormControl(0, [Validators.required, Validators.min(0)]),
-      shipCost: new FormControl(0, [Validators.required, Validators.min(0)]),
-      productsInOrder: new FormControl(this.productsInOrder)
-    });
-
+    this.initInputForm();
 
     this.orderService.getAllCity().subscribe(
       (response) => {
@@ -57,7 +45,7 @@ export class OrderCreateComponent implements OnInit {
       (error) => {
         this.generalService.handleError(error);
       }
-    )
+    );
   }
   getAddress(): string {
     var specificAddress = "";
@@ -126,14 +114,15 @@ export class OrderCreateComponent implements OnInit {
       data: { listCategory: this.listCategory }
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      this.addToProductsInOrder(result);
-      //console.log(this.inputFormControl.controls["shipCost"].value);
-      //console.log(this.getSubTotalInOrder());
-      this.inputFormControl.controls["total"].setValue(this.getSubTotalInOrder() + this.inputFormControl.controls["shipCost"].value);
-      //this.total = this.getSubTotalInOrder() + this.inputFormControl.controls["shipCost"].value;
-      //console.log(this.total);
+      if(result != undefined){
+        console.log(result);
+        this.addToProductsInOrder(result);
+        this.calculateTotal();
+      }
     });
+  }
+  calculateTotal(){
+    this.inputFormControl.controls["total"].setValue(this.getSubTotalInOrder() + this.inputFormControl.controls["shipCost"].value);
   }
   addToProductsInOrder(data) {
     if (this.checkContainInListProductInOrder(data)) {
@@ -169,16 +158,6 @@ export class OrderCreateComponent implements OnInit {
       this.generalService.handleSpecificError({ title: 'Input is not correct!!', message: 'Không có sản phẩm nào trong order!! Không thể tạo' });
     }else if(!this.inputFormControl.valid){
       this.generalService.handleErrorInput();
-      // customerName: new FormControl('', [Validators.required, Validators.maxLength(100)]),
-      // addressCity: new FormControl('', [Validators.required]),
-      // addressDistrict: new FormControl('', [Validators.required]),
-      // addressWard: new FormControl('', [Validators.required]),
-      // addressSpecific: new FormControl('', [Validators.required]),
-      // address: new FormControl('', [Validators.required]),
-      // phone: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-      // total: new FormControl(0, [Validators.required, Validators.min(0)]),
-      // shipCost: new FormControl(0, [Validators.required, Validators.min(0)]),
-      // productsInOrder: new FormControl(this.productsInOrder, [Validators.required])
       if(!this.inputFormControl.controls['customerName'].valid){
         console.log('customerName has error');
       }
@@ -214,6 +193,7 @@ export class OrderCreateComponent implements OnInit {
       this.generalService.openWaitingPopup();
       this.orderService.storeOrder(data).subscribe(
         (response)=>{
+          this.clearInputForm();
           this.generalService.closeWaitingPopup();
           this.generalService.handleMessage('Store Success',response.message);
         },
@@ -223,6 +203,41 @@ export class OrderCreateComponent implements OnInit {
         }
       );
     }
+  }
+  initInputForm(){
+    this.productsInOrder = [];
+    this.inputFormControl = new FormGroup({
+      customerName: new FormControl('', [Validators.required, Validators.maxLength(100)]),
+      addressCity: new FormControl('', [Validators.required]),
+      addressDistrict: new FormControl('', [Validators.required]),
+      addressWard: new FormControl('', [Validators.required]),
+      addressSpecific: new FormControl('', [Validators.required]),
+      address: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required,Validators.minLength(10), Validators.maxLength(10)]),
+      total: new FormControl(0, [Validators.required, Validators.min(0)]),
+      shipCost: new FormControl(0, [Validators.required, Validators.min(0)]),
+      productsInOrder: new FormControl(this.productsInOrder)
+    });
+  }
+  clearInputForm(){
+    this.productsInOrder = [];
+    this.inputFormControl.controls['customerName'].setValue('');
+    this.inputFormControl.controls['addressCity'].setValue('');
+    this.inputFormControl.controls['addressDistrict'].setValue('');
+    this.inputFormControl.controls['addressWard'].setValue('');
+    this.inputFormControl.controls['addressSpecific'].setValue('');
+    this.inputFormControl.controls['address'].setValue('');
+    this.inputFormControl.controls['phone'].setValue('');
+    this.inputFormControl.controls['total'].setValue('');
+    this.inputFormControl.controls['shipCost'].setValue('');
+    this.inputFormControl.controls['productsInOrder'].setValue(this.productsInOrder);
+  }
+  onClickProductsInOrder(data){
+    console.log('Click prod');
+  }
+  onDeleteProductInOrder(data){
+    //console.log(this.productsInOrder.indexOf(data));
+    this.productsInOrder.splice(this.productsInOrder.indexOf(data),1);
   }
 
 }

@@ -93,6 +93,11 @@ export class SummaryService {
     return this.http.post<ResponseServer>(UrlServerAPIOrder, data);
   }
 
+  public updateOrder(data,id): Observable<ResponseServer> {
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.put<ResponseServer>(UrlServerAPIOrder+'/'+id, data);
+  }
+
   public deleteOrder(id): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
     return this.http.delete<ResponseServer>(UrlServerAPISearchOrder + '/' + id);
