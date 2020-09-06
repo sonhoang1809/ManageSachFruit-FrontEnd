@@ -1,3 +1,4 @@
+import { CenterPopupMessageComponent } from './../sharings/center-popup-message/center-popup-message.component';
 import { WaitingComponent } from './../sharings/waiting/waiting.component';
 import { FormGroup } from '@angular/forms';
 import { DateTime } from './../models/date-time';
@@ -16,6 +17,13 @@ export class GeneralHelperService {
 
   private dialogWaitingPopupRef: MatDialogRef<WaitingComponent>;
   constructor(private dialog: MatDialog) { }
+
+  openCenterPopupMessage(title,message){
+    this.dialog.open<CenterPopupMessageComponent>(CenterPopupMessageComponent,{
+      disableClose: true,
+      data: {title: title,message: message}
+    });
+  }
 
   openWaitingPopup(){
     this.dialogWaitingPopupRef = this.dialog.open(WaitingComponent,{
@@ -138,8 +146,10 @@ export class GeneralHelperService {
   handleError(error) {
     console.log(error);
     var data;
-    if(error.status == 404 || error.status == 400){
+    if(error.status == 404){
       data = {title: 'Error code: ' + error.status, message: error.statusText};
+    }else if(error.status == 400){
+      data = {title: 'Error cost: '+error.status, message: error.error.message};
     }
     else if(error.status == 0){
       data = {title: 'Error code: '+ error.status, message: 'Server Error!!'};

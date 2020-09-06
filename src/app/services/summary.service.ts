@@ -15,10 +15,7 @@ import {
   UrlServerAPIStatisticsProfit,
   UrlServerAPISearchProduct,
   UrlServerAPIGetAllCategory,
-  UrlServerAPIStoreNewProduct,
-  UrlServerAPIGetDetailsProduct,
-  UrlServerAPIUpdateProduct,
-  UrlServerAPIDeleteProduct,
+  UrlServerAPIProduct,
   UrlServerAPIStatisticsRevenueByCategory,
   UrlServerAPIGetAllUnits,
   UrlServerAPICost,
@@ -29,7 +26,9 @@ import {
   UrlGetAllDistrictInCity,
   UrlGetAllWardInDistrict,
   UrlServerAPIOrder,
-  UrlServerAPIGetProductsOfCategory
+  UrlServerAPIGetProductsOfCategory,
+  UrlServerAPISearchInvest,
+  UrlServerAPIInvest
 } from './../models/url-api';
 import { ResponseServer } from './../models/response-server';
 
@@ -100,7 +99,7 @@ export class SummaryService {
 
   public deleteOrder(id): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.delete<ResponseServer>(UrlServerAPISearchOrder + '/' + id);
+    return this.http.delete<ResponseServer>(UrlServerAPIOrder + '/' + id);
   }
 
   public getOrderDetail(id): Observable<ResponseServer> {
@@ -140,22 +139,22 @@ export class SummaryService {
 
   public storeNewProduct(data): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.post<ResponseServer>(UrlServerAPIStoreNewProduct, data);
+    return this.http.post<ResponseServer>(UrlServerAPIProduct, data);
   }
 
   public getDetailsProduct(id: string): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.get<ResponseServer>(UrlServerAPIGetDetailsProduct + '/' + id);
+    return this.http.get<ResponseServer>(UrlServerAPIProduct + '/' + id);
   }
 
   public updateProduct(data, id: string): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.put<ResponseServer>(UrlServerAPIUpdateProduct + '/' + id, data);
+    return this.http.put<ResponseServer>(UrlServerAPIProduct + '/' + id, data);
   }
 
   public deleteProduct(id: string): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.delete<ResponseServer>(UrlServerAPIDeleteProduct + '/' + id);
+    return this.http.delete<ResponseServer>(UrlServerAPIProduct + '/' + id);
   }
 
   public searchProduct(searchRequest: SearchProductRequest): Observable<ResponseServer> {
@@ -166,6 +165,26 @@ export class SummaryService {
   public getListProductOfCategory(id: string):Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
     return this.http.get<ResponseServer>(UrlServerAPIGetProductsOfCategory+'/'+id);
+  }
+
+  public searchInvest(searchRequest): Observable<ResponseServer> {
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.post<ResponseServer>(UrlServerAPISearchInvest, searchRequest);
+  }
+
+  public storeNewInvest(data): Observable<ResponseServer> {
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.post<ResponseServer>(UrlServerAPIInvest, data);
+  }
+
+  public updateInvest(data,id): Observable<ResponseServer> {
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.put<ResponseServer>(UrlServerAPIInvest+'/'+id, data);
+  }
+
+  public deleteInvest(id): Observable<ResponseServer> {
+    const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.delete<ResponseServer>(UrlServerAPIInvest+'/'+id);
   }
 
   public searchCost(searchRequest: SearchCostRequest): Observable<ResponseServer> {

@@ -13,8 +13,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 })
 export class ManageCostDetailsComponent implements OnInit {
 
-  inputForm = null;
-  updateForm = null;
+  //inputForm = null;
+  //updateForm = null;
   public inputFormControl: FormGroup = null;
   costDetails: CostDetails = null;
   costTypeSelected: number;
@@ -31,11 +31,6 @@ export class ManageCostDetailsComponent implements OnInit {
           //console.log(response);
           this.data = response.data;
           this.costTypeSelected = this.data.costType.id;
-          // this.updateForm = this.formBuilder.group({
-          //   costDescription: this.data.costDescription,
-          //   total: this.data.total,
-          //   costTypeId: this.data.costType.id
-          // });
           this.inputFormControl = new FormGroup({
             costDescription: new FormControl(this.data.costDescription, [Validators.required, Validators.maxLength(100)]),
             total: new FormControl(this.data.total, [Validators.required, Validators.min(1000)]),
@@ -47,11 +42,6 @@ export class ManageCostDetailsComponent implements OnInit {
         }
       );
     } else if (this.data == null) {
-      // this.inputForm = this.formBuilder.group({
-      //   costDescription: '',
-      //   total: '',
-      //   costTypeId: ''
-      // });
       this.inputFormControl = new FormGroup({
         costDescription: new FormControl('', [Validators.required, Validators.maxLength(100)]),
         total: new FormControl('', [Validators.required, Validators.min(1000)]),
@@ -76,10 +66,12 @@ export class ManageCostDetailsComponent implements OnInit {
       this.generalService.openWaitingPopup();
       this.costService.updateCost(data, id).subscribe(
         (response) => {
+          this.generalService.closeWaitingPopup();
           this.generalService.handleMessage("Success", response.message);
           this.dialogRef.close(true);
         },
         (error) => {
+          this.generalService.closeWaitingPopup();
           console.log(error);
           this.generalService.handleError(error);
         }

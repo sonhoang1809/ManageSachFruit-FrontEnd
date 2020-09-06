@@ -41,7 +41,7 @@ export class ProductDetailsComponent implements OnInit {
         this.data = response.data;
         this.categorySelected = this.data.category.id;
         this.unitSelected = this.data.unit;
-
+        
         this.inputFormControl = new FormGroup({
           productName: new FormControl(this.data.productName, [Validators.required, Validators.maxLength(50)]),
           description: new FormControl(this.data.description, [Validators.required, Validators.maxLength(100)]),

@@ -38,10 +38,8 @@ export const UrlServerAPIGetAllCategory = UrlServer+'/api/Categories';
 export const UrlServerAPIGetAllUnits = UrlServer+'/api/Products/Units';
 
 
-export const UrlServerAPIStoreNewProduct = UrlServer+'/api/Products';
-export const UrlServerAPIGetDetailsProduct = UrlServer+'/api/Products';
-export const UrlServerAPIUpdateProduct = UrlServer+'/api/Products';
-export const UrlServerAPIDeleteProduct = UrlServer+'/api/Products';
+export const UrlServerAPIProduct = UrlServer+'/api/Products';
+
 export const UrlServerAPIGetProductsOfCategory = UrlServer+'/api/Products/Category';
 
 export const UrlServerAPICost = UrlServer+'/api/Costs';
@@ -52,3 +50,5 @@ export const UrlServerAPICostType = UrlServer+'/api/CostTypes';
 export const UrlServerAPISearchCostType = UrlServer+'/api/CostTypes/Search';
 
 
+export const UrlServerAPIInvest = UrlServer+'/api/Invests';
+export const UrlServerAPISearchInvest = UrlServer+'/api/Invests/Search';

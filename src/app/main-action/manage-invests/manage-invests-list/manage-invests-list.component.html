@@ -2,20 +2,25 @@
     <div class="col-xl-9 col-lg-12 col-md-6 col-sm-12 col-12">
         <mat-card class="card">
             <mat-card-header class="product-sidebar-widget">
-                <mat-card-title>Danh sách các loại chi phí</mat-card-title>
+                <mat-card-title>Danh sách vốn đầu tư</mat-card-title>
             </mat-card-header>
             <mat-card-content class="card-body p-0">
                 <mat-card-content class="table-responsive">
-                    <table matSort class="table" (matSortChange)="searchCostTypeSortBy($event)">
+                    <table matSort class="table" (matSortChange)="searchSortBy($event)">
                         <thead class="bg-light">
                             <tr class="border-0">
                                 <th class="border-0" style="font-family: 'Montserrat', sans-serif;">No.</th>
-                                <th mat-sort-header="CostTypeName" class="border-0"
-                                    style="font-family: 'Montserrat', sans-serif;">Tên loại chi phí</th>
+                                <th mat-sort-header="invest_description" class="border-0"
+                                    style="font-family: 'Montserrat', sans-serif;">Mô tả </th>
+                                <th mat-sort-header="create_at" class="border-0"
+                                    style="font-family: 'Montserrat', sans-serif;">Ngày tạo </th>
+                                <th mat-sort-header="invest_total" class="border-0"
+                                    style="font-family: 'Montserrat', sans-serif;">Tổng cộng </th>
+                                <th></th>
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody *ngIf="costTypeList==null">
+                        <tbody *ngIf="investList==null">
                             <tr>
                                 <td colspan="9" style="height: 430px;">
                                     <mat-spinner style="margin-left:auto; 
@@ -23,16 +28,28 @@
                                 </td>
                             </tr>
                         </tbody>
-                        <tbody *ngIf="costTypeList!=null">
-                            <tr *ngFor="let costType of costTypeList;index as i">
+                        <tbody *ngIf="investList!=null">
+                            <tr *ngFor="let invest of investList;index as i">
                                 <td>{{i+(pageInfo.info.page*pageInfo.info.limit)-(pageInfo.info.limit-1)}}</td>
-                                <td>{{costType.costTypeName}}</td>
+                                <td>{{invest.description}}</td>
+                                <td>{{generalHelper.getToStringTime(invest.createAt)}}</td>
+                                <td>{{invest.total|currency:'VND'}}</td>
                                 <td>
-                                    <button class="btn-outline-light" (click)='showDialogCostType(costType.id);'
+                                    <button class="btn-outline-light" (click)='showDialogInvest(invest);'
                                         mat-raised-button>Chi tiết</button>
                                 </td>
+                                <td colspan="9">
+                                    <button class="btn-outline-light" (click)='deleteInvest(invest);' mat-fab color="white">
+                                        <mat-icon>delete_outline</mat-icon>
+                                    </button>
+                                </td>
                             </tr>
-
+                            <tr>
+                                <td colspan="9">
+                                    <button mat-raised-button (click)='showDialogInvest(null);'
+                                        class="btn btn-outline-light float-right">Thêm vốn đầu tư</button>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </mat-card-content>
@@ -69,7 +86,7 @@
     </div>
 
     <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-12">
-        <app-manage-cost-types-filter (costTypeName)="searchCostTypeByName($event)"></app-manage-cost-types-filter>
+        <app-manage-invests-filter (description)="searchInvestByDescription($event)"></app-manage-invests-filter>
     </div>
 
     <br>

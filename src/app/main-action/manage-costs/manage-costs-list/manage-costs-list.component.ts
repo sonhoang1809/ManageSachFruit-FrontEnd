@@ -17,7 +17,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./manage-costs-list.component.css']
 })
 export class ManageCostsListComponent implements OnInit {
-  
+
   searchCostRequest: SearchCostRequest = {
     limit: 5,
     page: 1,
@@ -29,21 +29,21 @@ export class ManageCostsListComponent implements OnInit {
   searchResult: ResponseSearch = null;
   costList: Cost[] = null;
   pageInfo: PageInfo = { isFirstPage: true, isLastPage: false, numberOfPage: 1, info: null };
-  constructor(private dialog: MatDialog,private costService: CostsService, private generalHelper: GeneralHelperService) { }
+  constructor(private dialog: MatDialog, private costService: CostsService, private generalHelper: GeneralHelperService) { }
 
   ngOnInit(): void {
     this.searchCostList();
   }
-  getToStringTime(time: DateTime){
+  getToStringTime(time: DateTime) {
     return this.generalHelper.getToStringTime(time);
   }
-  searchCostList(){
+  searchCostList() {
     this.costList = null;
     this.costService.searchCost(this.searchCostRequest).subscribe(
-      (response)=>{
+      (response) => {
         this.getData(response.data);
       },
-      (error)=>{
+      (error) => {
         this.generalHelper.handleError(error);
       }
     );
@@ -71,7 +71,7 @@ export class ManageCostsListComponent implements OnInit {
       this.pageInfo.isLastPage = false;
     }
   }
-  searchByPage(page: number){
+  searchByPage(page: number) {
     this.searchCostRequest.page = page;
     this.searchCostList();
   }
@@ -104,14 +104,14 @@ export class ManageCostsListComponent implements OnInit {
     }
 
   }
-  searchCostByDescription(search: string){
+  searchCostByDescription(search: string) {
     this.searchCostRequest.search = search;
     this.searchCostList();
   }
-  searchCostByCostType(costTypeIds: string[]){
-    if(costTypeIds==null||costTypeIds.length==0){
+  searchCostByCostType(costTypeIds: string[]) {
+    if (costTypeIds == null || costTypeIds.length == 0) {
       this.searchCostRequest.costTypeIds = null;
-    }else{
+    } else {
       this.searchCostRequest.costTypeIds = costTypeIds;
     }
     this.searchCostList();
@@ -133,6 +133,7 @@ export class ManageCostsListComponent implements OnInit {
     });
   }
   deleteCost(cost: Cost) {
+
     let dialogRef = this.dialog.open(VerifyActionComponent, {
       panelClass: 'myapp-no-padding-dialog',
       width: '300px',
@@ -158,5 +159,6 @@ export class ManageCostsListComponent implements OnInit {
         );
       }
     });
+
   }
 }

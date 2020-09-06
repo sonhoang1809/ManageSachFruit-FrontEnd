@@ -86,6 +86,11 @@ import { ManageOrderFiltersComponent } from './main-action/manage-orders/manage-
 import { OrderCreateComponent } from './main-action/manage-orders/order-create/order-create.component';
 import { OrderUpdateComponent } from './main-action/manage-orders/order-update/order-update.component';
 import { DialogAddProductInOrderComponent } from './main-action/manage-orders/order-create/dialog-add-product-in-order/dialog-add-product-in-order.component';
+import { ManageInvestsComponent } from './main-action/manage-invests/manage-invests.component';
+import { ManageInvestsListComponent } from './main-action/manage-invests/manage-invests-list/manage-invests-list.component';
+import { ManageInvestDetailsComponent } from './main-action/manage-invests/manage-invests-list/manage-invest-details/manage-invest-details.component';
+import { ManageInvestsFilterComponent } from './main-action/manage-invests/manage-invests-list/manage-invests-filter/manage-invests-filter.component';
+import { CenterPopupMessageComponent } from './sharings/center-popup-message/center-popup-message.component';
 
 
 
@@ -139,7 +144,12 @@ import { DialogAddProductInOrderComponent } from './main-action/manage-orders/or
     ManageOrderFiltersComponent,
     OrderCreateComponent,
     OrderUpdateComponent,
-    DialogAddProductInOrderComponent
+    DialogAddProductInOrderComponent,
+    ManageInvestsComponent,
+    ManageInvestsListComponent,
+    ManageInvestDetailsComponent,
+    ManageInvestsFilterComponent,
+    CenterPopupMessageComponent
   ],
   imports: [
     BrowserModule,
@@ -179,8 +189,8 @@ import { DialogAddProductInOrderComponent } from './main-action/manage-orders/or
               { path: 'order-create', component: OrderCreateComponent },
               { path: 'order-update/:orderId', component: OrderUpdateComponent }
             ]
-          }
-
+          },
+          { path: 'invests', component: ManageInvestsComponent }
         ]
       }
       //{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },

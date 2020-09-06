@@ -3,6 +3,7 @@ export interface Cost{
     id: string;
     costDescription: string;
     total: number;
+    costTypeId: number;
     createAt: DateTime;
 }
 export interface CostType{
