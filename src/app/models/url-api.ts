@@ -1,6 +1,6 @@
 
-export const UrlServer = "http://localhost:9000";
-//export const UrlServer = "https://managesachfruits-backend.herokuapp.com";
+//export const UrlServer = "http://localhost:9000";
+export const UrlServer = "https://managesachfruits-backend.herokuapp.com";
  
 
 export const Proxy = "https://cors-anywhere.herokuapp.com/";
