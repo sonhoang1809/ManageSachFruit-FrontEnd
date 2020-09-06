@@ -28,7 +28,8 @@ import {
   UrlServerAPIOrder,
   UrlServerAPIGetProductsOfCategory,
   UrlServerAPISearchInvest,
-  UrlServerAPIInvest
+  UrlServerAPIInvest,
+  UrlServerAPIAccountLoginSocial
 } from './../models/url-api';
 import { ResponseServer } from './../models/response-server';
 
@@ -45,6 +46,11 @@ export class SummaryService {
 
 
   constructor(private http: HttpClient) { }
+
+  public loginSocial(data): Observable<ResponseServer> {
+    return this.http.post<ResponseServer>(UrlServerAPIAccountLoginSocial,data);
+  }
+
 
   public getSummaryRevenueInMonth(): Observable<ResponseServer> {
     return this.http.get<ResponseServer>(UrlServerAPISummaryRevenueInMonth);

@@ -79,7 +79,7 @@ export class ManageInvestsListComponent implements OnInit {
           this.searchInvestRequest.sortOrder = 0;
           this.searchList();
           break;
-        };
+        }
         case "desc": {
           this.searchInvestRequest.sortField = sort.active;
           this.searchInvestRequest.sortOrder = 1;

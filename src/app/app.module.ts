@@ -65,7 +65,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatExpansionModule } from '@angular/material/expansion';
-
+import { SocialLoginModule, SocialAuthService, FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 
 
 import { SummaryRevenueByCategoryComponent } from './main-action/dashboard/summary-revenue-by-category/summary-revenue-by-category.component';
@@ -93,7 +93,28 @@ import { ManageInvestsFilterComponent } from './main-action/manage-invests/manag
 import { CenterPopupMessageComponent } from './sharings/center-popup-message/center-popup-message.component';
 
 
+const config = new SocialAuthService(
+  {
+    autoLogin: false,
+    providers: [
+      {
+        id: GoogleLoginProvider.PROVIDER_ID,
+        provider: new GoogleLoginProvider("919491659014-03oqve4tlpoej91k3lce4a4006lic3gu.apps.googleusercontent.com", {
+          scope: 'profile email'
+        }
+        )
+      },
+      // {
+      //   id: FacebookLoginProvider.PROVIDER_ID,
+      //   provider: new FacebookLoginProvider('YOUR-APP-ID')
+      // }
+    ]
+  }
+);
 
+export function provideConfig() {
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -174,7 +195,8 @@ import { CenterPopupMessageComponent } from './sharings/center-popup-message/cen
     MatSidenavModule,
     MatExpansionModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: 'main', pathMatch: 'full' },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
+      { path: 'login', component: LoginComponent },
       {
         path: 'main', component: MainActionComponent, children: [
           { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -202,7 +224,8 @@ import { CenterPopupMessageComponent } from './sharings/center-popup-message/cen
   providers: [
     ProductsService,
     SummaryService,
-    { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }
+    { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
+    { provide: SocialAuthService, useFactory: provideConfig }
   ],
   bootstrap: [AppComponent]
 })
