@@ -151,6 +151,9 @@ export class GeneralHelperService {
     }else if(error.status == 400){
       data = {title: 'Error cost: '+error.status, message: error.error.message};
     }
+    else if(error.status == 401){
+      data = {title: 'Error cost: '+error.status, message: error.statusText};
+    }
     else if(error.status == 0){
       data = {title: 'Error code: '+ error.status, message: 'Server Error!!'};
     }

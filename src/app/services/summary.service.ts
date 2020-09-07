@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { SearchRequest, SearchCostRequest } from './../Requests/search-request';
 import { SearchProductRequest } from './../Requests/search-product-request';
 import {
@@ -45,192 +46,263 @@ import { catchError, retry } from 'rxjs/operators';
 export class SummaryService {
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   public loginSocial(data): Observable<ResponseServer> {
-    return this.http.post<ResponseServer>(UrlServerAPIAccountLoginSocial,data);
+    return this.http.post<ResponseServer>(UrlServerAPIAccountLoginSocial, data);
   }
 
 
   public getSummaryRevenueInMonth(): Observable<ResponseServer> {
-    return this.http.get<ResponseServer>(UrlServerAPISummaryRevenueInMonth);
+    if (this.headers.get("Authorization") == null) {
+      this.router.navigate(['login']);
+    }
+    return this.http.get<ResponseServer>(UrlServerAPISummaryRevenueInMonth, { headers: this.headers });
   }
 
   public getSummaryCostInMonth(): Observable<ResponseServer> {
-    return this.http.get<ResponseServer>(UrlServerAPISummaryCostInMonth);
+    if (this.headers.get("Authorization") == null) {
+      this.router.navigate(['login']);
+    }
+    return this.http.get<ResponseServer>(UrlServerAPISummaryCostInMonth, { headers: this.headers });
   }
 
   public getSummaryProfitInMonth(): Observable<ResponseServer> {
-    return this.http.get<ResponseServer>(UrlServerAPISummaryProfitInMonth);
+    if (this.headers.get("Authorization") == null) {
+      this.router.navigate(['login']);
+    }
+    return this.http.get<ResponseServer>(UrlServerAPISummaryProfitInMonth, { headers: this.headers });
   }
 
   public getSummaryRevenuePerOrderInMonth(): Observable<ResponseServer> {
-    return this.http.get<ResponseServer>(UrlServerAPISummaryRevenuePerOrderInMonth);
+    if (this.headers.get("Authorization") == null) {
+      this.router.navigate(['login']);
+    }
+    return this.http.get<ResponseServer>(UrlServerAPISummaryRevenuePerOrderInMonth, { headers: this.headers });
   }
 
   public getSummaryNumberNewCustomerInMonth(): Observable<ResponseServer> {
-    return this.http.get<ResponseServer>(UrlServerAPISummaryNumberOrderInMonth);
+    if (this.headers.get("Authorization") == null) {
+      this.router.navigate(['login']);
+    }
+    return this.http.get<ResponseServer>(UrlServerAPISummaryNumberOrderInMonth, { headers: this.headers });
   }
 
   public getSummaryNumberOrderInMonth(): Observable<ResponseServer> {
-    return this.http.get<ResponseServer>(UrlServerAPISummaryNumberOrderInMonth);
+    if (this.headers.get("Authorization") == null) {
+      this.router.navigate(['login']);
+    }
+    return this.http.get<ResponseServer>(UrlServerAPISummaryNumberOrderInMonth, { headers: this.headers });
   }
 
   public getSummaryNumberCostInMonth(): Observable<ResponseServer> {
-    return this.http.get<ResponseServer>(UrlServerAPISummaryNumberCostInMonth);
+    if (this.headers.get("Authorization") == null) {
+      this.router.navigate(['login']);
+    }
+    return this.http.get<ResponseServer>(UrlServerAPISummaryNumberCostInMonth, { headers: this.headers });
   }
 
   public getSummaryNumberProductInStockInMonth(): Observable<ResponseServer> {
-    return this.http.get<ResponseServer>(UrlServerAPISummaryNumberProductInStockInMonth);
+    if (this.headers.get("Authorization") == null) {
+      this.router.navigate(['login']);
+    }
+    return this.http.get<ResponseServer>(UrlServerAPISummaryNumberProductInStockInMonth, { headers: this.headers });
   }
 
   public getRemainMoney(): Observable<ResponseServer> {
-    return this.http.get<ResponseServer>(UrlServerAPIGetRemainMoney);
+    return this.http.get<ResponseServer>(UrlServerAPIGetRemainMoney, { headers: this.headers });
   }
 
   public searchOrder(searchRequest): Observable<ResponseServer> {
-    const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.post<ResponseServer>(UrlServerAPISearchOrder, searchRequest);
+    //const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.post<ResponseServer>(UrlServerAPISearchOrder, searchRequest, { headers: this.headers });
   }
 
   public storeNewOrder(data): Observable<ResponseServer> {
-    const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.post<ResponseServer>(UrlServerAPIOrder, data);
+    //const headers = { 'Authorization': 'Bearer my-token' };
+    return this.http.post<ResponseServer>(UrlServerAPIOrder, data, { headers: this.headers });
   }
 
-  public updateOrder(data,id): Observable<ResponseServer> {
-    const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.put<ResponseServer>(UrlServerAPIOrder+'/'+id, data);
+  public updateOrder(data, id): Observable<ResponseServer> {
+    //const headers = { 'Authorization': 'Bearer my-token' };
+    if (this.headers.get("Authorization") == null) {
+      this.router.navigate(['login']);
+    }
+    return this.http.put<ResponseServer>(UrlServerAPIOrder + '/' + id, data, { headers: this.headers });
   }
 
   public deleteOrder(id): Observable<ResponseServer> {
-    const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.delete<ResponseServer>(UrlServerAPIOrder + '/' + id);
+    //const headers = { 'Authorization': 'Bearer my-token' };
+    if (this.headers.get("Authorization") == null) {
+      this.router.navigate(['login']);
+    }
+    return this.http.delete<ResponseServer>(UrlServerAPIOrder + '/' + id, { headers: this.headers });
   }
 
   public getOrderDetail(id): Observable<ResponseServer> {
-    const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.get<ResponseServer>(UrlServerAPIOrder + '/' + id);
+    //const headers = { 'Authorization': 'Bearer my-token' };
+    if (this.headers.get("Authorization") == null) {
+      this.router.navigate(['login']);
+    }
+    return this.http.get<ResponseServer>(UrlServerAPIOrder + '/' + id, { headers: this.headers });
   }
 
   public getStatisticRevenueCost(statisticBy: number): Observable<ResponseServer> {
-    const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.get<ResponseServer>(UrlServerAPIStatisticsRevenueCost + '/' + statisticBy);
+    //const headers = { 'Authorization': 'Bearer my-token' };
+    if (this.headers.get("Authorization") == null) {
+      this.router.navigate(['login']);
+    }
+    return this.http.get<ResponseServer>(UrlServerAPIStatisticsRevenueCost + '/' + statisticBy, { headers: this.headers });
   }
 
   public getStatisticRevenueByCategory(statisticBy: number): Observable<ResponseServer> {
-    const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.get<ResponseServer>(UrlServerAPIStatisticsRevenueByCategory + '/' + statisticBy);
+    //const headers = { 'Authorization': 'Bearer my-token' };
+    if (this.headers.get("Authorization") == null) {
+      this.router.navigate(['login']);
+    }
+    return this.http.get<ResponseServer>(UrlServerAPIStatisticsRevenueByCategory + '/' + statisticBy, { headers: this.headers });
   }
 
   public getStatisticCostType(statisticBy: number): Observable<ResponseServer> {
-    const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.get<ResponseServer>(UrlServerAPIStatisticsCostType + '/' + statisticBy);
+    //const headers = { 'Authorization': 'Bearer my-token' };
+    if (this.headers.get("Authorization") == null) {
+      this.router.navigate(['login']);
+    }
+    return this.http.get<ResponseServer>(UrlServerAPIStatisticsCostType + '/' + statisticBy, { headers: this.headers });
   }
 
   public getStatisticProfit(statisticBy: number): Observable<ResponseServer> {
-    const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.get<ResponseServer>(UrlServerAPIStatisticsProfit + '/' + statisticBy);
+    //const headers = { 'Authorization': 'Bearer my-token' };
+    if (this.headers.get("Authorization") == null) {
+      this.router.navigate(['login']);
+    }
+    return this.http.get<ResponseServer>(UrlServerAPIStatisticsProfit + '/' + statisticBy, { headers: this.headers });
   }
 
   public getAllCategories(): Observable<ResponseServer> {
-    const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.get<ResponseServer>(UrlServerAPIGetAllCategory);
+    //const headers = { 'Authorization': 'Bearer my-token' };
+    if (this.headers.get("Authorization") == null) {
+      this.router.navigate(['login']);
+    }
+    return this.http.get<ResponseServer>(UrlServerAPIGetAllCategory, { headers: this.headers });
   }
 
   public getAllUnits(): Observable<ResponseServer> {
-    const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.get<ResponseServer>(UrlServerAPIGetAllUnits);
+    //const headers = { 'Authorization': 'Bearer my-token' };
+    if (this.headers.get("Authorization") == null) {
+      this.router.navigate(['login']);
+    }
+    return this.http.get<ResponseServer>(UrlServerAPIGetAllUnits, { headers: this.headers });
   }
 
   public storeNewProduct(data): Observable<ResponseServer> {
-    const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.post<ResponseServer>(UrlServerAPIProduct, data);
+    //const headers = { 'Authorization': 'Bearer my-token' };
+    if (this.headers.get("Authorization") == null) {
+      this.router.navigate(['login']);
+    }
+    return this.http.post<ResponseServer>(UrlServerAPIProduct, data, { headers: this.headers });
   }
 
   public getDetailsProduct(id: string): Observable<ResponseServer> {
-    const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.get<ResponseServer>(UrlServerAPIProduct + '/' + id);
+    //const headers = { 'Authorization': 'Bearer my-token' };
+    if (this.headers.get("Authorization") == null) {
+      this.router.navigate(['login']);
+    }
+    return this.http.get<ResponseServer>(UrlServerAPIProduct + '/' + id, { headers: this.headers });
   }
 
   public updateProduct(data, id: string): Observable<ResponseServer> {
-    const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.put<ResponseServer>(UrlServerAPIProduct + '/' + id, data);
+    if (this.headers.get("Authorization") == null) {
+      this.router.navigate(['login']);
+    }
+    return this.http.put<ResponseServer>(UrlServerAPIProduct + '/' + id, data, { headers: this.headers });
   }
 
   public deleteProduct(id: string): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.delete<ResponseServer>(UrlServerAPIProduct + '/' + id);
+    if (this.headers.get("Authorization") == null) {
+      this.router.navigate(['login']);
+    }
+    return this.http.delete<ResponseServer>(UrlServerAPIProduct + '/' + id, { headers: this.headers });
   }
 
   public searchProduct(searchRequest: SearchProductRequest): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.post<ResponseServer>(UrlServerAPISearchProduct, searchRequest);
+    if (this.headers.get("Authorization") == null) {
+      this.router.navigate(['login']);
+    }
+    return this.http.post<ResponseServer>(UrlServerAPISearchProduct, searchRequest, { headers: this.headers });
   }
 
-  public getListProductOfCategory(id: string):Observable<ResponseServer> {
+  public getListProductOfCategory(id: string): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.get<ResponseServer>(UrlServerAPIGetProductsOfCategory+'/'+id);
+    if (this.headers.get("Authorization") == null) {
+      this.router.navigate(['login']);
+    }
+    return this.http.get<ResponseServer>(UrlServerAPIGetProductsOfCategory + '/' + id, { headers: this.headers });
   }
 
   public searchInvest(searchRequest): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.post<ResponseServer>(UrlServerAPISearchInvest, searchRequest);
+    if (this.headers.get("Authorization") == null) {
+      this.router.navigate(['login']);
+    }
+    return this.http.post<ResponseServer>(UrlServerAPISearchInvest, searchRequest, { headers: this.headers });
   }
 
   public storeNewInvest(data): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.post<ResponseServer>(UrlServerAPIInvest, data);
+    return this.http.post<ResponseServer>(UrlServerAPIInvest, data, { headers: this.headers });
   }
 
-  public updateInvest(data,id): Observable<ResponseServer> {
+  public updateInvest(data, id): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.put<ResponseServer>(UrlServerAPIInvest+'/'+id, data);
+    return this.http.put<ResponseServer>(UrlServerAPIInvest + '/' + id, data, { headers: this.headers });
   }
 
   public deleteInvest(id): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.delete<ResponseServer>(UrlServerAPIInvest+'/'+id);
+    return this.http.delete<ResponseServer>(UrlServerAPIInvest + '/' + id, { headers: this.headers });
   }
 
   public searchCost(searchRequest: SearchCostRequest): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.post<ResponseServer>(UrlServerAPISearchCost, searchRequest);
+    return this.http.post<ResponseServer>(UrlServerAPISearchCost, searchRequest, { headers: this.headers });
   }
 
   public storeNewCost(data): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.post<ResponseServer>(UrlServerAPICost, data);
+    return this.http.post<ResponseServer>(UrlServerAPICost, data, { headers: this.headers });
   }
 
   public updateCost(data, id: string): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.put<ResponseServer>(UrlServerAPICost + '/' + id, data);
+    return this.http.put<ResponseServer>(UrlServerAPICost + '/' + id, data, { headers: this.headers });
   }
 
   public deleteCost(id: string): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.delete<ResponseServer>(UrlServerAPICost + '/' + id);
+    return this.http.delete<ResponseServer>(UrlServerAPICost + '/' + id, { headers: this.headers });
   }
 
   public getDetailsCost(id: string): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.get<ResponseServer>(UrlServerAPICost + '/' + id);
+    return this.http.get<ResponseServer>(UrlServerAPICost + '/' + id, { headers: this.headers });
   }
 
   public getAllCostType(): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.get<ResponseServer>(UrlServerAPICostType);
+    return this.http.get<ResponseServer>(UrlServerAPICostType, { headers: this.headers });
   }
 
   public searchCostType(data): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.post<ResponseServer>(UrlServerAPISearchCostType, data,);
+    return this.http.post<ResponseServer>(UrlServerAPISearchCostType, data, { headers: this.headers });
   }
 
   public searchCostTypeDetails(id: number): Observable<ResponseServer> {
     const headers = { 'Authorization': 'Bearer my-token' };
-    return this.http.get<ResponseServer>(UrlServerAPICostType + '/' + id);
+    return this.http.get<ResponseServer>(UrlServerAPICostType + '/' + id, { headers: this.headers });
   }
 
   public getAllCity(): Observable<any> {
@@ -255,13 +327,26 @@ export class SummaryService {
     return this.http.get<any>(UrlGetAllWardInDistrict + '/' + idDistrict + '/ward');
   }
 
+  public setTokenHeader(token: string) {
+    if(token==null){
+      this.headers.delete('Authorization');
+      return;
+    }
+    this.headers = this.headers.set('Authorization', 'Bearer ' + token);
+    //console.log(this.headers);
+  }
+
+  private headers: HttpHeaders = new HttpHeaders({
+    'Accept': '*/*',
+    'Content-Type': 'application/json'
+  });
+
   httpOptions: Options = {
     headers: new HttpHeaders(
       {
         'Accept': '*/*',
         'Content-Type': 'application/json',
-        'Authorization':'Bearer ',
-        'Host':'http://localhost:4200/'
+        'Authorization': 'Bearer '
       }
     ),
     observe: 'response',
@@ -271,7 +356,7 @@ export class SummaryService {
     //withCredentials: true
   }
 }
-
+const TOKEN = 'TOKEN';
 export interface Options {
   headers?: HttpHeaders | { [header: string]: string | string[] };
   observe?: 'events' | 'response' | 'body';

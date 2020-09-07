@@ -27,7 +27,7 @@ export class SummaryRevenueByCategoryComponent implements OnInit {
         //console.log(response);
         this.barChartModel = this.generalHelper.convertToBarChartModel(response.data);
       },
-      (error)=>{
+      (error) => {
         this.generalHelper.handleError(error);
       }
     );
@@ -35,9 +35,14 @@ export class SummaryRevenueByCategoryComponent implements OnInit {
   submit(event: any) {
     this.barChartModel = null;
     //console.log(event.target.value);
-    this.summaryService.getStatisticRevenueByCategory(event.value).subscribe(response=>{
-      this.barChartModel = this.generalHelper.convertToBarChartModel(response.data);
-    });
+    this.summaryService.getStatisticRevenueByCategory(event.value).subscribe(
+      (response) => {
+        this.barChartModel = this.generalHelper.convertToBarChartModel(response.data);
+      },
+      (error) => {
+        this.generalHelper.handleError(error);
+      }
+    );
   }
 
 }

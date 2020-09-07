@@ -24,9 +24,9 @@ import { KeyValue } from '@angular/common';
 export class SummaryOrderCostChartComponent implements OnInit {
 
   //form: FormGroup;
-  statisticsBys =[
-    {id:0, display:'Hằng ngày'},
-    {id:1, display:'Hằng tháng'}
+  statisticsBys = [
+    { id: 0, display: 'Hằng ngày' },
+    { id: 1, display: 'Hằng tháng' }
   ];
   selected = this.statisticsBys[0].id;
   lineChartModel: LineChartModel = null;
@@ -39,26 +39,36 @@ export class SummaryOrderCostChartComponent implements OnInit {
     // this.form = this.formBuilder.group({
     //   statisticsBys:['']
     // });
-    
-    this.statisticsBys=[
-      {id:0, display:'Hằng ngày'},
-      {id:1, display:'Hằng tháng'}
+
+    this.statisticsBys = [
+      { id: 0, display: 'Hằng ngày' },
+      { id: 1, display: 'Hằng tháng' }
     ]
 
-    this.summaryService.getStatisticRevenueCost(0).subscribe( response=> {
-      this.lineChartModel = this.generalHelper.convertToLineChartModel(response.data);
-    });
+    this.summaryService.getStatisticRevenueCost(0).subscribe(
+      (response) => {
+        this.lineChartModel = this.generalHelper.convertToLineChartModel(response.data);
+      },
+      (error) => {
+        this.generalHelper.handleError(error);
+      }
+    );
 
   }
 
-  submit(event: any){
+  submit(event: any) {
 
     //console.log(event);
     this.lineChartModel = null;
     console.log(event.target.value);
-    this.summaryService.getStatisticRevenueCost(event.value).subscribe(response=>{
-      this.lineChartModel = this.generalHelper.convertToLineChartModel(response.data);
-    });
+    this.summaryService.getStatisticRevenueCost(event.value).subscribe(
+      (response) => {
+        this.lineChartModel = this.generalHelper.convertToLineChartModel(response.data);
+      },
+      (error) => {
+        this.generalHelper.handleError(error);
+      }
+    );
   }
 
 }

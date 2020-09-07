@@ -1,3 +1,4 @@
+import { GeneralHelperService } from './../../../services/general-helper.service';
 import { SearchRequest, SearchCostRequest } from './../../../Requests/search-request';
 import { CostDetails } from './../../../models/cost-details';
 import { SummaryService } from './../../../services/summary.service';
@@ -15,7 +16,7 @@ export class RecentCostComponent implements OnInit {
 
   recentCosts: Array<CostDetails> = null;
 
-  constructor(private summaryService: SummaryService) { }
+  constructor(private summaryService: SummaryService, private generalHelper: GeneralHelperService) { }
 
   ngOnInit(): void {
     var searchCost: SearchCostRequest = {
@@ -27,10 +28,15 @@ export class RecentCostComponent implements OnInit {
       costTypeIds: null
     };
     this.summaryService.searchCost(searchCost)
-    .subscribe( response => {
-      this.recentCosts = response.data.data;
-      //console.log(this.recentCosts);
-    });
+      .subscribe(
+        (response) => {
+          this.recentCosts = response.data.data;
+          //console.log(this.recentCosts);
+        },
+        (error) => {
+          this.generalHelper.handleError(error);
+        }
+      );
   }
 
 }

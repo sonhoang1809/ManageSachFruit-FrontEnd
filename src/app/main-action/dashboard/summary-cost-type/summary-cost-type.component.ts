@@ -12,27 +12,37 @@ import { Component, OnInit } from '@angular/core';
 export class SummaryCostTypeComponent implements OnInit {
 
 
-  statisticsBys =[
-    {id:0, display:'Hằng ngày'},
-    {id:1, display:'Hằng tháng'}
+  statisticsBys = [
+    { id: 0, display: 'Hằng ngày' },
+    { id: 1, display: 'Hằng tháng' }
   ];
   selected = this.statisticsBys[0].id;
   barChartModel: BarChartModel = null;
-  constructor(private summaryService: SummaryService,private generalHelper: GeneralHelperService) { }
+  constructor(private summaryService: SummaryService, private generalHelper: GeneralHelperService) { }
 
   ngOnInit(): void {
-    this.summaryService.getStatisticCostType(0).subscribe( response=> {
-      this.barChartModel = this.generalHelper.convertToBarChartModel(response.data);
-    });
+    this.summaryService.getStatisticCostType(0).subscribe(
+      (response) => {
+        this.barChartModel = this.generalHelper.convertToBarChartModel(response.data);
+      },
+      (error) => {
+        this.generalHelper.handleError(error);
+      }
+    );
   }
-  submit(event: any){
+  submit(event: any) {
 
     //console.log(event);
-     this.barChartModel = null;
+    this.barChartModel = null;
     // console.log(event.target.value);
-    this.summaryService.getStatisticCostType(event.value).subscribe(response=>{
-      this.barChartModel = this.generalHelper.convertToBarChartModel(response.data);
-    });
+    this.summaryService.getStatisticCostType(event.value).subscribe(
+      (response) => {
+        this.barChartModel = this.generalHelper.convertToBarChartModel(response.data);
+      },
+      (error) => {
+        this.generalHelper.handleError(error);
+      }
+    );
   }
 
 }

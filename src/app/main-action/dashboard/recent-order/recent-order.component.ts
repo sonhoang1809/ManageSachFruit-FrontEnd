@@ -16,23 +16,28 @@ export class RecentOrderComponent implements OnInit {
 
   recentOrders: Array<Order> = null;
 
-  constructor(private summaryService: SummaryService,private generalHelper: GeneralHelperService) { }
+  constructor(private summaryService: SummaryService, private generalHelper: GeneralHelperService) { }
 
   ngOnInit(): void {
     var searchOrder: SearchRequest = {
       limit: 5,
       page: 1,
-      search:"",
-      sortField:"create_at",
+      search: "",
+      sortField: "create_at",
       sortOrder: 1
     };
 
     this.summaryService.searchOrder(searchOrder)
-    .subscribe( response => {
-      this.recentOrders = response.data.data;
-    });
+      .subscribe(
+        (response) => {
+          this.recentOrders = response.data.data;
+        },
+        (error) => {
+          this.generalHelper.handleError(error);
+        }
+      );
   }
-  getToStringTime(time: DateTime): string{
+  getToStringTime(time: DateTime): string {
     return this.generalHelper.getToStringTime(time);
   }
 
