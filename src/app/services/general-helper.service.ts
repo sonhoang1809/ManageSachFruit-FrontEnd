@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { CenterPopupMessageComponent } from './../sharings/center-popup-message/center-popup-message.component';
 import { WaitingComponent } from './../sharings/waiting/waiting.component';
 import { FormGroup } from '@angular/forms';
@@ -16,7 +17,7 @@ import { AutofillMonitor } from '@angular/cdk/text-field';
 export class GeneralHelperService {
 
   private dialogWaitingPopupRef: MatDialogRef<WaitingComponent>;
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog,private router: Router) { }
 
   openCenterPopupMessage(title,message){
     this.dialog.open<CenterPopupMessageComponent>(CenterPopupMessageComponent,{

@@ -327,13 +327,9 @@ export class SummaryService {
     return this.http.get<any>(UrlGetAllWardInDistrict + '/' + idDistrict + '/ward');
   }
 
-  public setTokenHeader(token: string) {
-    if(token==null){
-      this.headers.delete('Authorization');
-      return;
-    }
-    this.headers = this.headers.set('Authorization', 'Bearer ' + token);
-    //console.log(this.headers);
+  public setTokenHeader() {
+    this.headers = this.headers.set('Authorization', 'Bearer ' + localStorage.getItem("token"));
+    console.log(localStorage.getItem("token"));
   }
 
   private headers: HttpHeaders = new HttpHeaders({

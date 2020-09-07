@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   public isLogin(): boolean{
-    if(this.account==null){
+    if(localStorage.getItem("token")==null){
       return false;
     }
     return true;
@@ -36,9 +36,12 @@ export class AuthService {
 
   public logOut(){
     this.account == null;
-    this.socialAuthService.signOut().then().catch();
-    this.summaryService.setTokenHeader(null);
-    this.router.navigate(['login']);
+    this.socialAuthService.signOut().then(
+      (result)=>{
+        localStorage.removeItem("token");
+        this.router.navigate(['login']);
+      }
+    );
   }
 
   public getAccount(){
@@ -53,8 +56,7 @@ export class AuthService {
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
       (response) => {
         this.user = response;
-        //console.log(response);
-        //return response;
+        
         this.login();
       }
     ).catch(
@@ -75,7 +77,8 @@ export class AuthService {
       (response) => {
         console.log(response);
         this.setAccount(response.data);
-        this.summaryService.setTokenHeader(response.data.token);
+        localStorage.setItem("token",response.data.token);
+        this.summaryService.setTokenHeader();
         this.generalService.closeWaitingPopup();
         this.router.navigate(['main']);
       },
