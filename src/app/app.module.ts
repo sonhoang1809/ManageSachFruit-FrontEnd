@@ -91,6 +91,7 @@ import { ManageInvestsListComponent } from './main-action/manage-invests/manage-
 import { ManageInvestDetailsComponent } from './main-action/manage-invests/manage-invests-list/manage-invest-details/manage-invest-details.component';
 import { ManageInvestsFilterComponent } from './main-action/manage-invests/manage-invests-list/manage-invests-filter/manage-invests-filter.component';
 import { CenterPopupMessageComponent } from './sharings/center-popup-message/center-popup-message.component';
+import { ManageProfileComponent } from './main-action/manage-profile/manage-profile.component';
 
 
 const config = new SocialAuthService(
@@ -170,7 +171,8 @@ export function provideConfig() {
     ManageInvestsListComponent,
     ManageInvestDetailsComponent,
     ManageInvestsFilterComponent,
-    CenterPopupMessageComponent
+    CenterPopupMessageComponent,
+    ManageProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -212,7 +214,8 @@ export function provideConfig() {
               { path: 'order-update/:orderId', component: OrderUpdateComponent }
             ]
           },
-          { path: 'invests', component: ManageInvestsComponent }
+          { path: 'invests', component: ManageInvestsComponent },
+          { path: 'profile', component: ManageProfileComponent }
         ]
       }
       //{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },

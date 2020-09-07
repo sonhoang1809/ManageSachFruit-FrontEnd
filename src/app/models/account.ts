@@ -4,4 +4,5 @@ export interface Account{
     photoUrl: string;
     displayName: string;
     token: string;
+    phone: string;
 }
