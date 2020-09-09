@@ -93,6 +93,7 @@ import { ManageInvestsFilterComponent } from './main-action/manage-invests/manag
 import { CenterPopupMessageComponent } from './sharings/center-popup-message/center-popup-message.component';
 import { ManageProfileComponent } from './main-action/manage-profile/manage-profile.component';
 
+import 'hammerjs';
 
 const config = new SocialAuthService(
   {
