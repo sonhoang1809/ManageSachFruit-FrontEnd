@@ -8,15 +8,15 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
-import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatExpansionModule} from '@angular/material/expansion';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   exports: [FormsModule, MatDialogModule, MatFormFieldModule, MatButtonModule, MatInputModule,
-     MatProgressSpinnerModule, MatSelectModule, MatIconModule, MatTableModule,MatPaginatorModule,
-     MatCheckboxModule,MatSidenavModule,MatExpansionModule]
+    MatProgressSpinnerModule, MatSelectModule, MatIconModule, MatTableModule, MatPaginatorModule,
+    MatCheckboxModule, MatSidenavModule, MatExpansionModule, MatSnackBarModule]
 })
 export class MaterialModule { }

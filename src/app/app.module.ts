@@ -66,7 +66,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { SocialLoginModule, SocialAuthService, FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { SummaryRevenueByCategoryComponent } from './main-action/dashboard/summary-revenue-by-category/summary-revenue-by-category.component';
 import { ManageCostsComponent } from './main-action/manage-costs/manage-costs.component';
@@ -196,6 +196,7 @@ export function provideConfig() {
     MatCheckboxModule,
     MatSidenavModule,
     MatExpansionModule,
+    MatSnackBarModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent },

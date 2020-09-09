@@ -55,3 +55,7 @@ export const UrlServerAPISearchCostType = UrlServer+'/api/CostTypes/Search';
 
 export const UrlServerAPIInvest = UrlServer+'/api/Invests';
 export const UrlServerAPISearchInvest = UrlServer+'/api/Invests/Search';
+
+
+
+export const UrlServerAPINotification = UrlServer+'/api/Notifications/New';

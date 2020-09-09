@@ -30,7 +30,7 @@ import {
   UrlServerAPIGetProductsOfCategory,
   UrlServerAPISearchInvest,
   UrlServerAPIInvest,
-  UrlServerAPIAccountLoginSocial
+  UrlServerAPIAccountLoginSocial,UrlServerAPINotification
 } from './../models/url-api';
 import { ResponseServer } from './../models/response-server';
 
@@ -327,9 +327,13 @@ export class SummaryService {
     return this.http.get<any>(UrlGetAllWardInDistrict + '/' + idDistrict + '/ward');
   }
 
+  public getNewNotification(oldNotifyId: string): Observable<ResponseServer>{
+    return this.http.get<ResponseServer>(UrlServerAPINotification + '/' + oldNotifyId, { headers: this.headers });
+  }
+
   public setTokenHeader() {
     this.headers = this.headers.set('Authorization', 'Bearer ' + localStorage.getItem("token"));
-    console.log(localStorage.getItem("token"));
+    //console.log(localStorage.getItem("token"));
   }
 
   private headers: HttpHeaders = new HttpHeaders({
@@ -352,7 +356,7 @@ export class SummaryService {
     //withCredentials: true
   }
 }
-const TOKEN = 'TOKEN';
+
 export interface Options {
   headers?: HttpHeaders | { [header: string]: string | string[] };
   observe?: 'events' | 'response' | 'body';

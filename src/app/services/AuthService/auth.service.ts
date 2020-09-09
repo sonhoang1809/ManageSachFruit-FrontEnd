@@ -75,8 +75,11 @@ export class AuthService {
     }
     this.summaryService.loginSocial(this.loginSocialRequest).subscribe(
       (response) => {
-        console.log(response);
+        //console.log(response);
         this.setAccount(response.data);
+        this.account.id = response.data.accountId;
+        //console.log(this.account);
+        localStorage.setItem("accountId",response.data.accountId);
         localStorage.setItem("token",response.data.token);
         this.summaryService.setTokenHeader();
         this.generalService.closeWaitingPopup();
