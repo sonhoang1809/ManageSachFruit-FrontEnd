@@ -53,9 +53,9 @@ export class MainActionComponent implements OnInit {
     if (this.authService.isLogin() == false) {
       this.router.navigate(['login']);
     } else {
-      interval(15000).subscribe(
-        val => this.getNotify()
-      );
+      // interval(15000).subscribe(
+      //   val => this.getNotify()
+      // );
     }
     //setInterval(this.getNotify(), 2500 );
 

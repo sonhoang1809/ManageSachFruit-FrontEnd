@@ -1,3 +1,4 @@
+import { Account } from './models/account';
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 import { ProductDetailsComponent } from './main-action/manage-products/manage-products-list/product-details/product-details.component';
 import { ManageProductsFilterComponent } from './main-action/manage-products/manage-products-list/manage-products-filter/manage-products-filter.component';
@@ -66,7 +67,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { SocialLoginModule, SocialAuthService, FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { SummaryRevenueByCategoryComponent } from './main-action/dashboard/summary-revenue-by-category/summary-revenue-by-category.component';
 import { ManageCostsComponent } from './main-action/manage-costs/manage-costs.component';
@@ -92,7 +93,10 @@ import { ManageInvestDetailsComponent } from './main-action/manage-invests/manag
 import { ManageInvestsFilterComponent } from './main-action/manage-invests/manage-invests-list/manage-invests-filter/manage-invests-filter.component';
 import { CenterPopupMessageComponent } from './sharings/center-popup-message/center-popup-message.component';
 import { ManageProfileComponent } from './main-action/manage-profile/manage-profile.component';
-
+import { ManageCategoriesComponent } from './main-action/manage-categories/manage-categories.component';
+import { ManageCategoriesListComponent } from './main-action/manage-categories/manage-categories-list/manage-categories-list.component';
+import { ManageCategoryDetailsComponent } from './main-action/manage-categories/manage-categories-list/manage-category-details/manage-category-details.component';
+import { ManageCategoriesFilterComponent } from './main-action/manage-categories/manage-categories-list/manage-categories-filter/manage-categories-filter.component';
 import 'hammerjs';
 
 const config = new SocialAuthService(
@@ -101,15 +105,19 @@ const config = new SocialAuthService(
     providers: [
       {
         id: GoogleLoginProvider.PROVIDER_ID,
-        provider: new GoogleLoginProvider("919491659014-03oqve4tlpoej91k3lce4a4006lic3gu.apps.googleusercontent.com", {
+        provider: new GoogleLoginProvider('919491659014-03oqve4tlpoej91k3lce4a4006lic3gu.apps.googleusercontent.com', {
           scope: 'profile email'
-        }
-        )
+        })
       },
-      // {
-      //   id: FacebookLoginProvider.PROVIDER_ID,
-      //   provider: new FacebookLoginProvider('YOUR-APP-ID')
-      // }
+      {
+        id: FacebookLoginProvider.PROVIDER_ID,
+        provider: new FacebookLoginProvider('365245134862654',{
+          cookie: true,
+          xfbml: true,
+          scope: 'public_profile,email',
+          version:'v8.0'
+        })
+      }
     ]
   }
 );
@@ -173,7 +181,11 @@ export function provideConfig() {
     ManageInvestDetailsComponent,
     ManageInvestsFilterComponent,
     CenterPopupMessageComponent,
-    ManageProfileComponent
+    ManageProfileComponent,
+    ManageCategoriesComponent,
+    ManageCategoriesListComponent,
+    ManageCategoryDetailsComponent,
+    ManageCategoriesFilterComponent
   ],
   imports: [
     BrowserModule,
@@ -206,6 +218,7 @@ export function provideConfig() {
           { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
           { path: 'dashboard', component: DashboardComponent },
           { path: 'products', component: ManageProductsComponent },
+          { path: 'catagories', component: ManageCategoriesComponent },
           { path: 'costs', component: ManageCostsComponent },
           { path: 'cost-types', component: ManageCostTypesComponent },
           {
