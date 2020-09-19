@@ -30,7 +30,7 @@ import {
   UrlServerAPIGetProductsOfCategory,
   UrlServerAPISearchInvest,
   UrlServerAPIInvest,
-  UrlServerAPIAccountLoginSocial,UrlServerAPINotification
+  UrlServerAPIAccountLoginSocial, UrlServerAPINotification, UrlServerAPISearchCategory, UrlServerAPICategory
 } from './../models/url-api';
 import { ResponseServer } from './../models/response-server';
 
@@ -327,8 +327,28 @@ export class SummaryService {
     return this.http.get<any>(UrlGetAllWardInDistrict + '/' + idDistrict + '/ward');
   }
 
-  public getNewNotification(oldNotifyId: string): Observable<ResponseServer>{
+  public getNewNotification(oldNotifyId: string): Observable<ResponseServer> {
     return this.http.get<ResponseServer>(UrlServerAPINotification + '/' + oldNotifyId, { headers: this.headers });
+  }
+
+  public searchCategories(searchRequest): Observable<ResponseServer> {
+    return this.http.post<ResponseServer>(UrlServerAPISearchCategory, searchRequest, { headers: this.headers });
+  }
+
+  public getDetailsCategory(id): Observable<ResponseServer> {
+    return this.http.get<ResponseServer>(UrlServerAPICategory + '/' + id, { headers: this.headers });
+  }
+
+  public storeNewCategory(data): Observable<ResponseServer> {
+    return this.http.post<ResponseServer>(UrlServerAPICategory, data, { headers: this.headers });
+  }
+
+  public updateCategory(data, id): Observable<ResponseServer> {
+    return this.http.put<ResponseServer>(UrlServerAPICategory + '/' + id, data, { headers: this.headers });
+  }
+
+  public deleteCategory(id): Observable<ResponseServer> {
+    return this.http.delete<ResponseServer>(UrlServerAPICategory + '/' + id, { headers: this.headers });
   }
 
   public setTokenHeader() {

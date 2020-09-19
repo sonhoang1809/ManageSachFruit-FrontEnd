@@ -112,6 +112,7 @@ export class AuthService {
         //console.log(this.account);
         localStorage.setItem("accountId", response.data.accountId);
         localStorage.setItem("token", response.data.token);
+        console.log(localStorage.getItem("token"));
         this.summaryService.setTokenHeader();
         this.generalService.closeWaitingPopup();
         this.router.navigate(['main']);

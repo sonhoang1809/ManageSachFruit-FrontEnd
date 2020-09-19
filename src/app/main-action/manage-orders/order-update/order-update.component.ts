@@ -128,10 +128,10 @@ export class OrderUpdateComponent implements OnInit {
     );
   }
   onSelectDistrict(data) {
-    console.log(data.value);
+    //console.log(data.value);
     this.address[2] = data.value.Title;
     this.inputFormControl.controls["address"].setValue(this.getAddress());
-    console.log(this.inputFormControl.controls["address"].value);
+    //console.log(this.inputFormControl.controls["address"].value);
     //this.specificAddress.emit(this.getAddress());
 
     this.listWard = null;
@@ -172,7 +172,7 @@ export class OrderUpdateComponent implements OnInit {
               //console.log(response);
               this.listCity = response.LtsItem;       
               this.productsInOrder = this.orderDetails.productsDetailsInOrder;
-              console.log(this.productsInOrder);
+              //console.log(this.productsInOrder);
               this.address = this.orderDetails.address.split(',');
 
               this.selectedCity = this.getSelectedCity(this.address[3].trim());
@@ -242,7 +242,7 @@ export class OrderUpdateComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result != undefined) {
-        console.log(result);
+        //console.log(result);
         this.addToProductsInOrder(result);
         this.calculateTotal();
       }
@@ -273,7 +273,7 @@ export class OrderUpdateComponent implements OnInit {
     return false;
   }
   onUpdateOrder(data) {
-    console.log(data);
+    //console.log(data);
     if (this.productsInOrder.length == 0) {
       this.generalService.handleSpecificError({ title: 'Input is not correct!!', message: 'Không có sản phẩm nào trong order!! Không thể tạo' });
     } else if (!this.inputFormControl.valid) {

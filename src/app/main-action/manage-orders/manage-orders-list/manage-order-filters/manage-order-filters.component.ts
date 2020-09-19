@@ -17,85 +17,85 @@ export class ManageOrderFiltersComponent implements OnInit {
   @Output() phoneCustomer: EventEmitter<string> = new EventEmitter<string>();
 
   // addressNumber: string = null;
-  address: string[] = ["","","",""];
+  address: string[] = ["", "", "", ""];
   search: SearchOrderRequest = null;
 
   listCity: City[] = null;
   listDistrict: District[] = null;
   listWard: Ward[] = null;
 
-  constructor(private orderService: OrderService,private generalHelper: GeneralHelperService) { }
+  constructor(private orderService: OrderService, private generalHelper: GeneralHelperService) { }
 
   ngOnInit(): void {
     this.orderService.getAllCity().subscribe(
-      (response)=>{
+      (response) => {
         //console.log(response);
         this.listCity = response.LtsItem;
       },
-      (error)=>{
+      (error) => {
         this.generalHelper.handleError(error);
       }
     )
   }
-  getAddress(): string{
+  getAddress(): string {
     var specificAddress = "";
-    for(var ad of this.address){
-      if(this.address.indexOf(ad)<3 && ad!=""){
-        specificAddress = specificAddress + ad+', ';
-      }else{
+    for (var ad of this.address) {
+      if (this.address.indexOf(ad) < 3 && ad != "") {
+        specificAddress = specificAddress + ad + ', ';
+      } else {
         specificAddress = specificAddress + ad;
       }
     }
     //console.log("specific: "+specificAddress);
     return specificAddress;
   }
-  onSelectCity(data){
-    console.log(data.value);
+  onSelectCity(data) {
+    //console.log(data.value);
     this.address[3] = data.value.Title;
     this.specificAddress.emit(this.getAddress());
     this.listDistrict = null;
     this.listWard = null;
     this.orderService.getAllDistrictInCity(data.value.ID).subscribe(
-      (response)=>{
+      (response) => {
         this.listDistrict = response;
       },
-      (error)=>{
+      (error) => {
         this.generalHelper.handleError(error);
       }
     );
   }
-  onSelectDistrict(data){
+  onSelectDistrict(data) {
     console.log(data.value);
     this.address[2] = data.value.Title;
     this.specificAddress.emit(this.getAddress());
 
     this.listWard = null;
     this.orderService.getAllWardInDistrict(data.value.ID).subscribe(
-      (response)=>{
+      (response) => {
         this.listWard = response;
       },
-      (error)=>{
+      (error) => {
         this.generalHelper.handleError(error);
       }
     );
   }
-  onSelectWard(data){
+  onSelectWard(data) {
     //this.listWard = null;
-    console.log(data.value);
+    //console.log(data.value);
     this.address[1] = data.value.Title;
     this.specificAddress.emit(this.getAddress());
   }
-  onChangeSpecificAddress(data){
+  onChangeSpecificAddress(data) {
     this.address[0] = data.target.value;
     this.specificAddress.emit(this.getAddress());
-    
+
   }
-  onChangeNameCustomer(data){
+  onChangeNameCustomer(data) {
     this.customerName.emit(data.target.value);
   }
-  
 
-  onChangePhone(data){
+
+  onChangePhone(data) {
     this.phoneCustomer.emit(data.target.value);
     //this.searchRequest.phone=data.target.value;
     //this.searchOrderRequest.emit(this.searchRequest);

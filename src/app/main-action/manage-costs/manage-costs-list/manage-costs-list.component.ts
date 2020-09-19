@@ -133,7 +133,6 @@ export class ManageCostsListComponent implements OnInit {
     });
   }
   deleteCost(cost: Cost) {
-
     let dialogRef = this.dialog.open(VerifyActionComponent, {
       panelClass: 'myapp-no-padding-dialog',
       width: '300px',
@@ -159,6 +158,5 @@ export class ManageCostsListComponent implements OnInit {
         );
       }
     });
-
   }
 }

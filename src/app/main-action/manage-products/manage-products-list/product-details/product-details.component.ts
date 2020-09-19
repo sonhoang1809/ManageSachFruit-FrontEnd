@@ -103,7 +103,7 @@ export class ProductDetailsComponent implements OnInit {
         },
         (error) => {
           this.generalService.closeWaitingPopup();
-          console.log(error);
+          //console.log(error);
           this.generalService.handleError(error);
         }
       );
@@ -121,7 +121,7 @@ export class ProductDetailsComponent implements OnInit {
         },
         (error) => {
           this.generalService.closeWaitingPopup();
-          console.log(error);
+          //console.log(error);
           this.generalService.handleError(error);
         }
       );

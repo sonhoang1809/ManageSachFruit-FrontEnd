@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./manage-categories.component.css']
 })
 export class ManageCategoriesComponent implements OnInit {
-
+  titleComponent = "Danh sách các loại sản phẩm";
   constructor() { }
 
   ngOnInit(): void {

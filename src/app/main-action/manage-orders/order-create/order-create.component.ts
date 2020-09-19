@@ -77,10 +77,10 @@ export class OrderCreateComponent implements OnInit {
     );
   }
   onSelectDistrict(data) {
-    console.log(data.value);
+    //console.log(data.value);
     this.address[2] = data.value.Title;
     this.inputFormControl.controls["address"].setValue(this.getAddress());
-    console.log(this.inputFormControl.controls["address"].value);
+    //console.log(this.inputFormControl.controls["address"].value);
     //this.specificAddress.emit(this.getAddress());
 
     this.listWard = null;
@@ -115,7 +115,7 @@ export class OrderCreateComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result != undefined){
-        console.log(result);
+        //console.log(result);
         this.addToProductsInOrder(result);
         this.calculateTotal();
       }
@@ -153,7 +153,7 @@ export class OrderCreateComponent implements OnInit {
   }
 
   onStoreOrder(data) {
-    console.log(data);
+    //console.log(data);
     if (this.productsInOrder.length == 0) {
       this.generalService.handleSpecificError({ title: 'Input is not correct!!', message: 'Không có sản phẩm nào trong order!! Không thể tạo' });
     }else if(!this.inputFormControl.valid){

@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     this.socialAuthService.authState.subscribe((user) => {
       this.user = user;
       
-      console.log(this.user);
+      //console.log(this.user);
     });
     //this.socialAuthService.initState.toPromise().then();
   }

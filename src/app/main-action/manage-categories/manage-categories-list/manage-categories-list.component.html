@@ -1,1 +1,102 @@
-<p>manage-categories-list works!</p>
+<div class="row">
+    <!-- product list  -->
+    <!-- ============================================================== -->
+    <div class="col-xl-9 col-lg-12 col-md-6 col-sm-12 col-12">
+        <mat-card class="card">
+            <mat-card-header class="product-sidebar-widget">
+                <mat-card-title>Danh sách sản phẩm</mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="card-body p-0">
+                <div class="table-responsive">
+                    <table matSort class="table" (matSortChange)="searchCategorySortBy($event)">
+                        <thead class="bg-light">
+                            <tr class="border-0">
+                                <th class="border-0" style="font-family: 'Montserrat', sans-serif;">No.</th>
+                                <th mat-sort-header="category_name" class="border-0"
+                                    style="font-family: 'Montserrat', sans-serif;">Tên loại sản phẩm</th>
+
+                                <th mat-sort-header="create_at" class="border-0"
+                                    style="font-family: 'Montserrat', sans-serif;">Ngày tạo</th>
+                                
+                                <th class="border-0"></th>
+                                <th class="border-0"></th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="categoryList==null">
+                            <tr>
+                                <td colspan="9" style="height: 430px;">
+                                    <mat-spinner style="margin-left:auto; 
+                                    margin-right:auto;" color="accent" diameter=30></mat-spinner>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="categoryList!=null">
+                            <tr *ngFor="let category of categoryList;index as i">
+                                <td>{{i+(pageInfo.info.page*pageInfo.info.limit)-(pageInfo.info.limit-1)}}</td>
+                                <td>{{category.categoryName}}</td>
+                                <td>{{generalHelper.getToStringTime(category.updateAt)}}</td>
+                                <td>
+                                    <button class="btn-outline-light" (click)='showDialogCategory(category);'
+                                        mat-raised-button>Chi tiết</button>
+                                </td>
+                                <td colspan="9">
+                                    <button class="btn-outline-light" (click)='deleteCategory(category);' mat-fab
+                                        color="white">
+                                        <mat-icon>delete_outline</mat-icon>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="9">
+                                    <button mat-raised-button class="btn-outline-light"
+                                        (click)='showDialogCategory(null);'
+                                        class="btn btn-outline-light float-right">Thêm loại sản phẩm
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <nav aria-label="Page navigation example" *ngIf="pageInfo.numberOfPage>0">
+            <ul class="pagination" *ngIf="pageInfo.info!=null">
+                <li *ngIf="pageInfo.isFirstPage==false" class="page-item">
+                    <button mat-raised-button class="page-link" (click)="searchByPage(pageInfo.info.page-1)">
+                        Previous
+                    </button>
+                </li>
+                <li *ngIf="pageInfo.isFirstPage==false" class="page-item">
+                    <button mat-raised-button class="page-link" (click)="searchByPage(pageInfo.info.page-1)">
+                        {{pageInfo.info.page-1}}
+                    </button>
+                </li>
+                <li class="page-item active">
+                    <button mat-raised-button class="page-link">
+                        {{pageInfo.info.page}}
+                    </button>
+                </li>
+                <li *ngIf="pageInfo.isLastPage==false" class="page-item">
+                    <button mat-raised-button class="page-link"
+                        (click)="searchByPage(pageInfo.info.page+1)">{{pageInfo.info.page+1}}</button>
+                </li>
+                <li *ngIf="pageInfo.isLastPage==false" class="page-item">
+                    <button mat-raised-button class="page-link"
+                        (click)="searchByPage(pageInfo.info.page+1)">Next</button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end recent orders  -->
+
+    <!-- filter search  -->
+    <!-- ============================================================== -->
+    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-12">
+        <app-manage-categories-filter (categoryName)="searchCategoryByName($event);"></app-manage-categories-filter>
+    </div>
+    <br>
+
+    <!-- end filter search  -->
+</div>

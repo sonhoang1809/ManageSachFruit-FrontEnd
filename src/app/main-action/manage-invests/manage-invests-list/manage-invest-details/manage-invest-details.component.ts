@@ -36,7 +36,7 @@ export class ManageInvestDetailsComponent implements OnInit {
       this.generalService.openWaitingPopup();
       this.investService.updateInvest(data, id).subscribe(
         (response) => {
-          console.log(response.data);
+          //console.log(response.data);
           this.generalService.closeWaitingPopup();
           this.generalService.handleMessage("Success", response.message);
           this.dialogRef.close(true);
@@ -45,7 +45,7 @@ export class ManageInvestDetailsComponent implements OnInit {
         },
         (error) => {
           this.generalService.closeWaitingPopup();
-          console.log(error);
+          //console.log(error);
           this.generalService.handleError(error);
         }
       );

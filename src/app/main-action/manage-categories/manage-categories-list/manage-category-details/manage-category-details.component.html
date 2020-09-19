@@ -1,1 +1,68 @@
-<p>manage-category-details works!</p>
+<div class="card" *ngIf="data!=null; else elseBlock">
+    <h3 class="card-header">Chi tiết sản phẩm</h3>
+    <form *ngIf="inputFormControl==null">
+        <div class="card-body">
+            <mat-spinner style="margin-left:auto; 
+                                margin-right:auto;" color="accent" diameter=30>
+            </mat-spinner>
+        </div>
+    </form>
+    <form *ngIf="inputFormControl!=null; elseNull" [formGroup]="inputFormControl"
+        (ngSubmit)="onUpdateProduct(inputFormControl.value,data.id);">
+        <div class="card-body">
+            <div class="row">
+                <mat-form-field appearance="outline" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                    <mat-label for="validationCustom01">Tên loại sản phẩm</mat-label>
+                    <input matInput type="text" formControlName="categoryName" required>
+                    <mat-hint align="end">tối đa 50 kí tự</mat-hint>
+                    <mat-error
+                        *ngIf="generalService.hasErrorInputValidation('categoryName','required',inputFormControl)">
+                        Tên sản phẩm <strong>không được trống</strong>
+                    </mat-error>
+                    <mat-error
+                        *ngIf="generalService.hasErrorInputValidation('categoryName','maxlength',inputFormControl)">
+                        Tên sản phẩm <strong>không được quá 50 ký tự</strong>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field *ngIf="data.createAt!=null" appearance="outline"
+                    class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                    <mat-label for="validationCustom05">Thời gian tạo</mat-label>
+                    <input matInput type="text" readonly value="{{generalService.getToStringTime(data.createAt)}}">
+                    <mat-hint align="end">Không chọn</mat-hint>
+                </mat-form-field>
+                <mat-form-field *ngIf="data.createAt!=null" appearance="outline"
+                    class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
+                    <mat-label for="validationCustom05">Thời gian cập nhật</mat-label>
+                    <input matInput type="text" readonly value="{{generalService.getToStringTime(data.updateAt)}}">
+                    <mat-hint align="end">Không chọn</mat-hint>
+                </mat-form-field>
+            </div>
+            <button mat-raised-button color="primary">Cập nhật</button>
+        </div>
+    </form>
+</div>
+<ng-template class="card" #elseBlock>
+    <h3 class="card-header">Thêm loại sản phẩm</h3>
+    <form [formGroup]="inputFormControl" (ngSubmit)="onStoreCategory(inputFormControl.value)">
+        <div class="card-body">
+            <div class="row">
+                <mat-form-field appearance="outline" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                    <mat-label for="validationCustom01">Tên sản phẩm</mat-label>
+                    <input matInput type="text" formControlName="categoryName" formControlName="categoryName" value=""
+                        required>
+                    <mat-hint align="end">tối đa 50 kí tự</mat-hint>
+                    <mat-error
+                        *ngIf="generalService.hasErrorInputValidation('categoryName','required',inputFormControl)">
+                        Tên loại sản phẩm <strong>không được trống</strong>
+                    </mat-error>
+                    <mat-error
+                        *ngIf="generalService.hasErrorInputValidation('categoryName','maxlength',inputFormControl)">
+                        Tên loại sản phẩm <strong>không được quá 50 ký tự</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <button mat-raised-button color="primary">Thêm mới một loại sản phẩm</button>
+        </div>
+    </form>
+</ng-template>
